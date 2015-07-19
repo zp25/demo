@@ -1,0 +1,106 @@
+.transform-wrapper {
+  font-size: 1.4rem;
+
+  .showpart {
+    width: 45rem;
+    height: 45rem;
+    float: left;
+    border: thin solid black;
+    .user-select(none);
+
+    #box-2d {
+      display: none;
+      width: 18rem;
+      height: 18rem;
+      background-color: rgba(142, 53, 87, 0.7);
+    }
+
+    // draw a 3d-box
+    #box-3d {
+      display: none;
+      width: 100%;
+      height: 100%;
+      .perspective(1000);
+      .perspective-origin(150% 150%);
+
+      .cube {
+        width: 18rem;
+        height: 18rem;
+        position: relative;
+        top: 32%;
+        left: 32%;
+        .transform-style(preserve-3d);
+
+        div {
+          width: 18rem;
+          height: 18rem;
+          position: absolute;
+          line-height: 18rem;
+          font-size: 2rem;
+          color: white;
+          text-align: center;
+
+          .transform-origin(50% 50%);
+          .backface-visibility(visible);
+        }
+        .front {
+          background-color: rgba(142, 53, 87, 0.7);
+          .translateZ(9rem);
+        }
+        .back {
+          background-color: rgba(51, 204, 204, 1);
+          .transform(rotateY(180deg) translateZ(9rem));
+        }
+        .top {
+          background-color: rgba(255, 204, 0, 0.7);
+          .transform(rotateX(90deg) translateZ(9rem));
+        }
+        .bottom {
+          background-color: rgba(0, 153, 51, 0.7);
+          .transform(rotateX(-90deg) translateZ(9rem));
+        }
+        .left {
+          background-color: rgba(0, 153, 51, 0.7);
+          .transform(rotateY(-90deg) translateZ(9rem));
+        }
+        .right {
+          background-color: rgba(255, 51, 0, 0.7);
+          .transform(rotateY(90deg) translateZ(9rem));
+        }
+      }
+    }
+  }
+
+  .controlpanel {
+    float: left;
+    margin-left: 2rem;
+
+    .controls {
+      display: none;
+      padding-top: 1rem;
+
+      ul {
+        display: table;
+
+        li {
+          display: table-row;
+          height: 3rem;
+
+          &>span {
+            display: table-cell;
+            width: 15rem;
+            vertical-align: bottom;
+
+            &:nth-child(1) {
+              vertical-align: middle;
+            }
+          }
+        }
+      }
+
+      form[name=form-3d] ul li>span:nth-child(1) {
+        width: 22rem;
+      }
+    }
+  }
+}
