@@ -1,17 +1,17 @@
 .transform-wrapper {
-  font-size: 1.4rem;
+  font-size: 14px;
 
   .showpart {
-    width: 45rem;
-    height: 45rem;
+    width: 450px;
+    height: 450px;
     float: left;
     border: thin solid black;
     .user-select(none);
 
     #box-2d {
       display: none;
-      width: 18rem;
-      height: 18rem;
+      width: 180px;
+      height: 180px;
       background-color: rgba(142, 53, 87, 0.7);
     }
 
@@ -24,19 +24,19 @@
       .perspective-origin(150% 150%);
 
       .cube {
-        width: 18rem;
-        height: 18rem;
+        width: 180px;
+        height: 180px;
         position: relative;
         top: 32%;
         left: 32%;
         .transform-style(preserve-3d);
 
         div {
-          width: 18rem;
-          height: 18rem;
+          width: 180px;
+          height: 180px;
           position: absolute;
-          line-height: 18rem;
-          font-size: 2rem;
+          line-height: 180px;
+          font-size: 20px;
           color: white;
           text-align: center;
 
@@ -45,27 +45,27 @@
         }
         .front {
           background-color: rgba(142, 53, 87, 0.7);
-          .translateZ(9rem);
+          .translateZ(90px);
         }
         .back {
           background-color: rgba(51, 204, 204, 1);
-          .transform(rotateY(180deg) translateZ(9rem));
+          .transform(rotateY(180deg) translateZ(90px));
         }
         .top {
           background-color: rgba(255, 204, 0, 0.7);
-          .transform(rotateX(90deg) translateZ(9rem));
+          .transform(rotateX(90deg) translateZ(90px));
         }
         .bottom {
           background-color: rgba(0, 153, 51, 0.7);
-          .transform(rotateX(-90deg) translateZ(9rem));
+          .transform(rotateX(-90deg) translateZ(90px));
         }
         .left {
           background-color: rgba(0, 153, 51, 0.7);
-          .transform(rotateY(-90deg) translateZ(9rem));
+          .transform(rotateY(-90deg) translateZ(90px));
         }
         .right {
           background-color: rgba(255, 51, 0, 0.7);
-          .transform(rotateY(90deg) translateZ(9rem));
+          .transform(rotateY(90deg) translateZ(90px));
         }
       }
     }
@@ -73,22 +73,22 @@
 
   .controlpanel {
     float: left;
-    margin-left: 2rem;
+    margin-left: 20px;
 
     .controls {
       display: none;
-      padding-top: 1rem;
+      padding-top: 10px;
 
       ul {
         display: table;
 
         li {
           display: table-row;
-          height: 3rem;
+          height: 30px;
 
           &>span {
             display: table-cell;
-            width: 15rem;
+            width: 150px;
             vertical-align: bottom;
 
             &:nth-child(1) {
@@ -99,7 +99,7 @@
       }
 
       form[name=form-3d] ul li>span:nth-child(1) {
-        width: 22rem;
+        width: 220px;
       }
     }
   }

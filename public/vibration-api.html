@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>HTML5 Demos - Canvas</title>
+  <title>HTML5 Demos - Vibration API</title>
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
@@ -19,10 +19,14 @@
 
   <main>
     <section class="demo-sections">
-      <canvas id="fpDoodle" width="590" height="550" style="background-color:#f5f5f5;">你的浏览器不支持canvas元素</canvas>
+      <p>SOS</p>
     </section>
   </main>
 
-  <script type="text/javascript" src="js/canvas.js"></script>
+  <script>
+    (function() {
+      window.navigator.vibrate([100,30,100,30,100,200,200,30,200,30,200,200,100,30,100,30,100]);
+    })();
+  </script>
 </body>
 </html>
