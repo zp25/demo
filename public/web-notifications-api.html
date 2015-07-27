@@ -44,6 +44,7 @@
 
       if (Notification.permision === 'granted') {
         var n = new Notification('Web Notifications API', opts);
+        setTimeout(n.close.bind(n), 5000);
 
         info.innerHTML = 'Permission Granted';
         data.innerHTML = n.data;
@@ -51,6 +52,7 @@
         Notification.requestPermission(function (result) {
           if (result === 'granted') {
             var n = new Notification('Web Notifications API', opts);
+            setTimeout(n.close.bind(n), 5000);
 
             info.innerHTML = 'Permission Granted';
             data.innerHTML = n.data;

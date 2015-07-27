@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <title>HTML5 Demos - Fullscreen API</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <style>
+    :-webkit-full-screen {
+      background-color: #f5f5f5;
+    }
+    :-moz-full-screen {
+      background-color: #f5f5f5;
+    }
+    :fullscreen {
+      background-color: #f5f5f5;
+    }
+
+    :-webkit-full-screen::-webkit-backdrop {  
+      background-color: blue;
+    }
+    :fullscreen::backdrop {
+      background-color: blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="header-wrapper">
+      <h1>DEMOs</h1>
+      <a href="/">导航页</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="demo-sections">
+      <p></p>
+      <p></p>
+
+      <div>
+        <button type="button" class="launch">进入全屏</button>
+        <button type="button" class="cancel">退出全屏</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function() {
+      var elemInfo = document.querySelector('p:nth-child(1)');
+      var enabledInfo = document.querySelector('p:nth-child(2)');
+
+      // Find the right method, call on correct element
+      function launchIntoFullscreen(elem) {
+        if(elem.requestFullscreen) {
+          elem.requestFullscreen();
+        } else if(elem.mozRequestFullScreen) {
+          elem.mozRequestFullScreen();
+        } else if(elem.webkitRequestFullscreen) {
+          elem.webkitRequestFullscreen();
+        }
+      }
+
+      // Whack fullscreen
+      function exitFullscreen() {
+        if(document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if(document.mozCancelFullScreen) {
+          document.mozCancelFullScreen();
+        } else if(document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+
+      // toggle fullscreen
+      document.querySelector('.launch').addEventListener('click', function (e) {
+        launchIntoFullscreen(document.documentElement);
+      }, false);
+
+      document.querySelector('.cancel').addEventListener('click', function (e) {
+        exitFullscreen();
+      }, false);
+
+      // fullscreen events
+      // document.addEventListener('fullscreenchange', function (e) {
+      //   elemInfo.innerHTML.(document.fullscreenElement);
+      //   enabledInfo.innerHTML(document.fullscreenEnabled);
+      // }, false);
+
+      document.addEventListener('fullscreenerror', function (e) {
+        console.log(e.message);
+      }, false);
+    })();
+  </script>
+</body>
+</html>
