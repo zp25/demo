@@ -4,18 +4,24 @@ var fs = require('fs');
 // var exphbs  = require('express-handlebars');
 var favicon = require('serve-favicon');
 var multer = require('multer');
+var compression = require('compression');
 
 var app = express();
 var port = process.env.PORT || 8080;
+var oneDay = 86400000;
 
 // app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // app.set('view engine', 'handlebars');
+
+// compress
+app.use(compression());
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
 
-app.use('/', express.static(__dirname + "/public/"));
+app.use(express.static(__dirname + "/public", { maxAge: oneDay }));
+app.use(express.static(__dirname + "/pages"));
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
