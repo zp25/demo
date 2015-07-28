@@ -156,8 +156,8 @@ $(function() {
       formData = new FormData();
       formData.append('fileField', file);
 
-      // progress bar
-      xhr.onprogress = function (e) {
+      // upload progress bar
+      xhr.upload.onprogress = function (e) {
         if (e.lengthComputable) {
           pg_val = Math.round(e.loaded/e.total*100);
 
