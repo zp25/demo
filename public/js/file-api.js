@@ -175,8 +175,6 @@ $(function() {
       };
 
       xhr.open('POST', 'uploads');
-      xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-      xhr.setRequestHeader("X-File-Name", file.name);
       xhr.send(formData);
     }
   }
