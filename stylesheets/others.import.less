@@ -39,6 +39,48 @@
   }
 }
 
+// drag and drop
+#drag-and-drop-container {
+  width: 790px;
+  height: 520px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-between;
+  margin: 0 auto;
+
+  li {
+    width: 250px;
+    height: 160px;
+    border: thin solid black;
+
+    .items {
+      display: block;
+      width: 250px;
+      height: 160px;
+      font-size: 20px;
+      line-height: 120px;
+      cursor: move;
+      .user-select(none);
+      -webkit-user-drag: element;
+      padding: 20px 50px;
+
+      &:hover:after {
+        content: ' (drag me)';
+      }
+    }
+
+    a:link,
+    a:visited,
+    a:hover,
+    a.active {
+      color: blue;
+      text-decoration: none;
+    }
+  }
+}
+
 // fade up from the bottom
 .bricks {
   display: flex;
