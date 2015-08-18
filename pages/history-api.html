@@ -1,97 +1,77 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - History API</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <style>
-    .history-btns {
-      margin: 5px 0 10px;
-    }
-  </style>
-</head>
+<style>
+  .history-btns {
+    margin: 5px 0 10px;
+  }
+</style>
 
-<body>
+<main>
+  <section class="demo-sections">
+    <p>页面载入时使用history.replaceState修改history记录</p>
+    <p>利用按钮1，2修改history记录；按钮3，4，5进行前进后退测试，在history细节中查看信息</p>
 
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
+    <p>点击按钮1后，将使用history.pushState加入一条history记录</p>
+    <button type="button" class="history-btns" id="push">按钮1</button>
+
+    <p>点击按钮2后，将使用history.replaceState修改当前history记录</p>
+    <button type="button" class="history-btns" id="replace">按钮2</button>
+    
+    <p>点击按钮3后，页面将后退到前一个history记录</p>
+    <button type="button" class="history-btns" id="back">按钮3</button>
+    
+    <p>点击按钮4后，页面将前进一个history记录</p>
+    <button type="button" class="history-btns" id="forward">按钮4</button>
+    
+    <p>点击按钮5后，页面将后退两个history记录</p>
+    <button type="button" class="history-btns" id="go">按钮5</button>
+
+    <p>根据history细节可以发现pushState和replaceState的区别</p>
+  </section>
+
+  <section class="demo-sections">
+    <h3>history细节</h3>
+
+    <div id="details">
     </div>
-  </header>
+  </section>
+</main>
 
-  <main>
-    <section class="demo-sections">
-      <p>页面载入时使用history.replaceState修改history记录</p>
-      <p>利用按钮1，2修改history记录；按钮3，4，5进行前进后退测试，在history细节中查看信息</p>
+<script>
+  (function() {
+    var details = document.getElementById('details');
 
-      <p>点击按钮1后，将使用history.pushState加入一条history记录</p>
-      <button type="button" class="history-btns" id="push">按钮1</button>
+    history.replaceState({ page:1 }, '', '/history-api.html?pageone');
 
-      <p>点击按钮2后，将使用history.replaceState修改当前history记录</p>
-      <button type="button" class="history-btns" id="replace">按钮2</button>
-      
-      <p>点击按钮3后，页面将后退到前一个history记录</p>
-      <button type="button" class="history-btns" id="back">按钮3</button>
-      
-      <p>点击按钮4后，页面将前进一个history记录</p>
-      <button type="button" class="history-btns" id="forward">按钮4</button>
-      
-      <p>点击按钮5后，页面将后退两个history记录</p>
-      <button type="button" class="history-btns" id="go">按钮5</button>
+    window.onpopstate = function(e) {
+      var p = document.createElement('p');
+      var t = document.createTextNode('location: ' + document.location + ' ; state: ' + JSON.stringify(e.state));
+      p.appendChild(t);
+      details.appendChild(p);
+    };
 
-      <p>根据history细节可以发现pushState和replaceState的区别</p>
-    </section>
+    document.getElementById('push').onclick = function(e) {
+      e.preventDefault();
+      history.pushState({ page: 2 }, '', '/history-api.html?pagetwo');
+    };
 
-    <section class="demo-sections">
-      <h3>history细节</h3>
+    document.getElementById('replace').onclick = function(e) {
+      e.preventDefault();
+      history.replaceState({ page: 3 }, '', '/history-api.html?pagethree');
+    };
 
-      <div id="details">
-      </div>
-    </section>
-  </main>
+    document.getElementById('back').onclick = function(e) {
+      e.preventDefault();
+      history.back();
+    };
 
-  <script>
-    (function() {
-      var details = document.getElementById('details');
+    document.getElementById('forward').onclick = function(e) {
+      e.preventDefault();
+      history.forward();
+    };
 
-      history.replaceState({ page:1 }, '', '/history-api.html?pageone');
+    document.getElementById('go').onclick = function(e) {
+      e.preventDefault();
+      history.go(-2);
+    };
 
-      window.onpopstate = function(e) {
-        var p = document.createElement('p');
-        var t = document.createTextNode('location: ' + document.location + ' ; state: ' + JSON.stringify(e.state));
-        p.appendChild(t);
-        details.appendChild(p);
-      };
-
-      document.getElementById('push').onclick = function(e) {
-        e.preventDefault();
-        history.pushState({ page: 2 }, '', '/history-api.html?pagetwo');
-      };
-
-      document.getElementById('replace').onclick = function(e) {
-        e.preventDefault();
-        history.replaceState({ page: 3 }, '', '/history-api.html?pagethree');
-      };
-
-      document.getElementById('back').onclick = function(e) {
-        e.preventDefault();
-        history.back();
-      };
-
-      document.getElementById('forward').onclick = function(e) {
-        e.preventDefault();
-        history.forward();
-      };
-
-      document.getElementById('go').onclick = function(e) {
-        e.preventDefault();
-        history.go(-2);
-      };
-
-    })();
-  </script>
-</body>
-</html>
+  })();
+</script>

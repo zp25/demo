@@ -1,88 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - GetUserMedia API</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <style>
-    video {
-      width: 450px;
-      height: 350px;
-    }
-  </style>
-</head>
+<main>
+  <section class="demo-sections">
+    
+    <p>使用FF36+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Browser_compatibility">compatibility table</a></p>
 
-<body>
-
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
+    <div>
+      <button type="button" class="snap">截图</button>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="demo-sections">
-      
-      <p>使用FF36+ <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia#Browser_compatibility">compatibility table</a></p>
+  <section class="demo-sections">
+    <video style="width: 450px; height: 350px;" autoplay></video>
+    <canvas width="450" height="350"></canvas>
+  </section>
+</main>
 
-      <div>
-        <button type="button" class="snap">截图</button>
-      </div>
-    </section>
+<script>
+  (function() {
+    if (!navigator.mediaDevices) {
+      console.log('Error! Use FF36+');
+      return;
+    }
 
-    <section class="demo-sections">
-      <video autoplay></video>
-      <canvas width="450" height="350"></canvas>
-    </section>
-  </main>
+    var video = document.querySelector('video');
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
 
-  <script>
-    (function() {
-      if (!navigator.mediaDevices) {
-        console.log('Error! Use FF36+');
-        return;
-      }
+    // list media devices
+    var devices = navigator.mediaDevices.enumerateDevices();
 
-      var video = document.querySelector('video');
-      var canvas = document.querySelector('canvas');
-      var ctx = canvas.getContext('2d');
-
-      // list media devices
-      var devices = navigator.mediaDevices.enumerateDevices();
-
-      devices.then(function(devices) {
-        devices.forEach(function(device) {
-          console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
-        });
-      }).catch(function(err) {
-        console.log(err.name + ": " + err.message);
+    devices.then(function(devices) {
+      devices.forEach(function(device) {
+        console.log(device.kind + ": " + device.label + " id = " + device.deviceId);
       });
+    }).catch(function(err) {
+      console.log(err.name + ": " + err.message);
+    });
 
-      // use
-      var p = navigator.mediaDevices.getUserMedia({ video: true });
+    // use
+    var p = navigator.mediaDevices.getUserMedia({ video: true });
 
-      p.then(function(stream) {
-        var imgURL = window.URL.createObjectURL(stream);
+    p.then(function(stream) {
+      var imgURL = window.URL.createObjectURL(stream);
 
-        video.src = imgURL;
+      video.src = imgURL;
 
-        video.onloadedmetadata = function(e) {
-          window.URL.revokeObjectURL(imgURL);
-        };
-      }).catch(function(err) {
-        console.log(err.name + ": " + err.message);
-      });
+      video.onloadedmetadata = function(e) {
+        window.URL.revokeObjectURL(imgURL);
+      };
+    }).catch(function(err) {
+      console.log(err.name + ": " + err.message);
+    });
 
-      // snap
-      document.querySelector('.snap').onclick = function(e) {
-        e.preventDefault();
+    // snap
+    document.querySelector('.snap').onclick = function(e) {
+      e.preventDefault();
 
-        ctx.drawImage(video, 0, 0, 450, 350);
-      }
-    })();
-  </script>
-</body>
-</html>
+      ctx.drawImage(video, 0, 0, 450, 350);
+    }
+  })();
+</script>

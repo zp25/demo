@@ -1,75 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - The Shapes of CSS</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <style>
-    #oval {
-      -webkit-border-radius: 100px / 50px;
-      -moz-border-radius: 100px / 50px;
-      border-radius: 100px / 50px;
-    }
-    #egg {
-      -webkit-border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      -moz-border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    }
-  </style>
-</head>
+<style>
+  #oval {
+    -webkit-border-radius: 100px / 50px;
+    -moz-border-radius: 100px / 50px;
+    border-radius: 100px / 50px;
+  }
+  #egg {
+    -webkit-border-radius: 50% / 60% 60% 40% 40%;
+    -moz-border-radius: 50% / 60% 60% 40% 40%;
+    border-radius: 50% / 60% 60% 40% 40%;
+  }
+</style>
 
-<body>
+<main>
+  <section class="demo-sections">
+    <a href="https://css-tricks.com/examples/ShapesOfCSS/">The Shapes of CSS - CSS Tricks</a>
+  </section>
 
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="demo-sections">
-      <a href="https://css-tricks.com/examples/ShapesOfCSS/">The Shapes of CSS - CSS Tricks</a>
-    </section>
-
-    <section class="demo-sections">
-      <div class="css-shapes">
-        <div id="rectangle" class="graphics"></div>
-        <pre>
+  <section class="demo-sections">
+    <div class="css-shapes">
+      <div id="rectangle" class="graphics"></div>
+      <pre>
 #rectangle {
   width: 200px;
   height: 100px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="circle" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="circle" class="graphics"></div>
+      <pre>
 #circle {
   width: 100px;
   height: 100px;
   border-radius: 50px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="oval" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="oval" class="graphics"></div>
+      <pre>
 #oval {
   width: 200px;
   height: 100px;
   border-radius: 100px / 50px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="triangles" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="triangles" class="graphics"></div>
+      <pre>
 #triangles {
   width:0;
   height:0;
@@ -77,12 +59,12 @@
   border-style:solid;
   border-width:50px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="triangle-up" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="triangle-up" class="graphics-triangle"></div>
+      <pre>
 #triangle-up {
   width: 0;
   height: 0;
@@ -90,12 +72,12 @@
   border-right: 50px solid transparent;
   border-bottom: 100px solid green;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="triangle-down" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="triangle-down" class="graphics-triangle"></div>
+      <pre>
 #triangle-down {
   width: 0;
   height: 0;
@@ -103,23 +85,24 @@
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="triangle-topleft" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="triangle-topleft" class="graphics-triangle"></div>
+      <pre>
 #triangle-topleft {
   width: 0;
   height: 0;
   border-top: 100px solid green;
   border-right: 100px solid transparent;
-}        </pre>
-      </div>
+}
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="trapezoid" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="trapezoid" class="graphics-triangle"></div>
+      <pre>
 #trapezoid {
   width: 200px;
   height: 0;
@@ -127,24 +110,24 @@
   border-left: 50px solid transparent;
   border-right: 50px solid transparent;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="parallelogram" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="parallelogram" class="graphics"></div>
+      <pre>
 #parallelogram {
   width: 150px;
   height: 100px;
   margin-left:20px;
   transform: skew(20deg);
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="star-six" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="star-six" class="graphics-triangle"></div>
+      <pre>
 #star-six {
   width: 0;
   height: 0;
@@ -164,12 +147,12 @@
   top: 30px;
   left: -50px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="star-five" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="star-five" class="graphics-triangle"></div>
+      <pre>
 #star-five {
   width: 0;
   height: 0;
@@ -204,12 +187,12 @@
   left: -105px;
   -webkit-transform: rotate(-70deg);
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="pentagon" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="pentagon" class="graphics-triangle"></div>
+      <pre>
 #pentagon {
   width: 86px;
   position: relative;
@@ -228,12 +211,12 @@
   border-style: solid;
   border-color: transparent transparent green;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="hexagon" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="hexagon" class="graphics"></div>
+      <pre>
 #octagon {
   width: 100px;
   height: 55px;
@@ -262,12 +245,12 @@
   border-right: 50px solid transparent;
   border-top: 25px solid green;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="octagon" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="octagon" class="graphics"></div>
+      <pre>
 #octagon {
   width: 100px;
   height: 100px;
@@ -296,12 +279,12 @@
   border-left: 29px solid #fff;
   border-right: 29px solid #fff;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="heart" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="heart" class="graphics-triangle"></div>
+      <pre>
 #heart {
   width: 100px;
   height: 90px;
@@ -324,12 +307,12 @@
   transform: rotate(45deg);
   transform-origin: 100% 100%;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="infinity" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="infinity" class="graphics-triangle"></div>
+      <pre>
 #infinity {
   position: relative;
   width: 212px;
@@ -352,12 +335,12 @@
   border-radius: 50px 50px 50px 0;
   transform: rotate(45deg);
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="diamond" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="diamond" class="graphics-triangle"></div>
+      <pre>
 #diamond {
   border-style: solid;
   border-color: transparent transparent green;
@@ -378,25 +361,25 @@
   border-color: green transparent transparent;
   border-width: 70px 50px 0 50px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="egg" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="egg" class="graphics"></div>
+      <pre>
 #egg {
   width: 126px; 
   height: 180px;
   display:block;
   background-color: green;
-  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  border-radius: 50% / 60% 60% 40% 40%;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="pacman" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="pacman" class="graphics-triangle"></div>
+      <pre>
 #pacman {
   width: 0px;
   height: 0px;
@@ -404,12 +387,12 @@
   border-right: 60px solid transparent;
   border-radius: 60px;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="talkbubble" class="graphics-triangle"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="talkbubble" class="graphics-triangle"></div>
+      <pre>
 #talkbubble {
   width: 120px; 
   height: 80px; 
@@ -428,12 +411,12 @@
   border-right: 26px solid green;
   border-bottom: 13px solid transparent;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="burst-12" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="burst-12" class="graphics"></div>
+      <pre>
 #burst-12 {
   width: 80px;
   height: 80px;
@@ -455,12 +438,12 @@
 #burst-12:after {
   transform: rotate(60deg);
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="burst-8" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="burst-8" class="graphics"></div>
+      <pre>
 #burst-8 {
   width: 80px;
   height: 80px;
@@ -479,12 +462,12 @@
   background: green;
   transform: rotate(135deg);
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="yin-yang" class="graphics"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="yin-yang" class="graphics"></div>
+      <pre>
 #yin-yang {
   width: 100px;
   height: 100px;
@@ -517,12 +500,12 @@
   border: 18px solid #fff;
   border-radius:100%;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="cone" class="graphics-triangles"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="cone" class="graphics-triangles"></div>
+      <pre>
 #cone {
   width: 0;
   height: 0;
@@ -531,12 +514,12 @@
   border-top: 100px solid green;
   border-radius: 50%;
 }
-        </pre>
-      </div>
+      </pre>
+    </div>
 
-      <div class="css-shapes">
-        <div id="space-invader" class="graphics-triangles"></div>
-        <pre>
+    <div class="css-shapes">
+      <div id="space-invader" class="graphics-triangles"></div>
+      <pre>
 #space-invader{
 
   box-shadow:
@@ -578,10 +561,7 @@
 
   margin: 50px 0 70px 65px;
 }
-        </pre>
-      </div>
-    </section>
-  </main>
-
-</body>
-</html>
+      </pre>
+    </div>
+  </section>
+</main>

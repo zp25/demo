@@ -1,52 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - File API</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
+<main>
+  <section class="demo-sections">
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" name="fileField" multiple accept="image/*" style="display: none;">
+      <a href="#?" id="fileSelect">选择图片</a>
+    </form>
+  </section>
 
-<body>
+  <section class="demo-sections file-control">
+    <div id="file-drop"></div>
 
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
+    <div id="file-list">
+      <h3>File list</h3>
+      <p>
+        文件总数：<span id="fileLength">0</span>
+        文件总大小：<span id="fileSize">0</span>
+      </p>
+      <p>
+        <a href="#?" id="fileUpload">上传图像</a>
+        <a href="#?" id="fileClear">清空列表</a>
+      </p>
+
+      <ul id="fileDetail"></ul>
     </div>
-  </header>
 
-  <main>
-    <section class="demo-sections">
-      <form method="post" enctype="multipart/form-data">
-        <input type="file" name="fileField" multiple accept="image/*" style="display: none;">
-        <a href="#?" id="fileSelect">选择图片</a>
-      </form>
-    </section>
+    <div class="cf"></div>
+  </section>
+</main>
 
-    <section class="demo-sections file-control">
-      <div id="file-drop"></div>
-
-      <div id="file-list">
-        <h3>File list</h3>
-        <p>
-          文件总数：<span id="fileLength">0</span>
-          文件总大小：<span id="fileSize">0</span>
-        </p>
-        <p>
-          <a href="#?" id="fileUpload">上传图像</a>
-          <a href="#?" id="fileClear">清空列表</a>
-        </p>
-
-        <ul id="fileDetail"></ul>
-      </div>
-
-      <div class="cf"></div>
-    </section>
-  </main>
-
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="js/file-api.js"></script>
-</body>
-</html>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/file-api.js"></script>

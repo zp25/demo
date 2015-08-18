@@ -1,12 +1,12 @@
 {
   "name": "demo",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Rens Demos",
   "main": "server.js",
   "scripts": {
     "less": "lessc --clean-css=\"--s1 --advanced --compatibility=ie8\" stylesheets/main.less > public/css/style.css",
     "less-dev": "lessc stylesheets/main.less > public/css/style.css",
-    "start": "nodemon server.js"
+    "start": "NODE_ENV=development nodemon server.js"
   },
   "author": "zp25",
   "license": "MIT",

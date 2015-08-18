@@ -1,148 +1,126 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - Flex</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
+<main>
+  <section class="demo-sections">
+    <a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html">Flex 布局教程：实例篇</a>
+  </section>
 
-<body>
-
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
+  <section class="demo-sections dice" id="dice-single">
+    <div class="box" id="top-left">
+      <span class="item"></span>
     </div>
-  </header>
+    <div class="box" id="top-center">
+      <span class="item"></span>
+    </div>
+    <div class="box" id="top-right">
+      <span class="item"></span>
+    </div>
+    <div class="box" id="mid-left">
+      <span class="item"></span>
+    </div>
+    <div class="box" id="mid-center">
+      <span class="item"></span>
+    </div>
+    <div class="box" id="bottom-right">
+      <span class="item"></span>
+    </div>
+  </section>
 
-  <main>
-    <section class="demo-sections">
-      <a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html">Flex 布局教程：实例篇</a>
-    </section>
+  <section class="demo-sections dice" id="dice-double">
+    <div class="box" id="d-top">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="d-left">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="d-center">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="d-right">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="d-cross">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="d-cross-big">
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+  </section>
 
-    <section class="demo-sections dice" id="dice-single">
-      <div class="box" id="top-left">
+  <section class="demo-sections dice" id="dice-multi">
+    <div class="box" id="m-cross">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="m-quarter">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="m-quarter-b">
+      <div class="row">
+        <span class="item"></span>
         <span class="item"></span>
       </div>
-      <div class="box" id="top-center">
+      <div class="row">
+        <span class="item"></span>
         <span class="item"></span>
       </div>
-      <div class="box" id="top-right">
+    </div>
+    <div class="box" id="m-six-a">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="m-six-b">
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+      <span class="item"></span>
+    </div>
+    <div class="box" id="m-six-c">
+      <div class="row">
+        <span class="item"></span>
+        <span class="item"></span>
         <span class="item"></span>
       </div>
-      <div class="box" id="mid-left">
+      <div class="row">
         <span class="item"></span>
       </div>
-      <div class="box" id="mid-center">
+      <div class="row">
+        <span class="item"></span>
         <span class="item"></span>
       </div>
-      <div class="box" id="bottom-right">
-        <span class="item"></span>
-      </div>
-    </section>
+    </div>      
+  </section>
 
-    <section class="demo-sections dice" id="dice-double">
-      <div class="box" id="d-top">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="d-left">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="d-center">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="d-right">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="d-cross">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="d-cross-big">
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-    </section>
+  <section class="demo-sections">
+    <h2>Holy Grail Layout</h2>
+    <p>header, footer和left, right是两个不同主轴方向的flex布局的两端固定大小item，body和center通过flex: 1;实现剩余部分填充</p>
+  </section>
 
-    <section class="demo-sections dice" id="dice-multi">
-      <div class="box" id="m-cross">
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
+  <section class="demo-sections holy-grail-layout">
+    <div class="content">
+      <div class="header">
       </div>
-      <div class="box" id="m-quarter">
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
+      <div class="body">
+        <div class="center"></div>
+        <div class="left"></div>
+        <div class="right"></div>
       </div>
-      <div class="box" id="m-quarter-b">
-        <div class="row">
-          <span class="item"></span>
-          <span class="item"></span>
-        </div>
-        <div class="row">
-          <span class="item"></span>
-          <span class="item"></span>
-        </div>
+      <div class="footer">
       </div>
-      <div class="box" id="m-six-a">
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="m-six-b">
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-        <span class="item"></span>
-      </div>
-      <div class="box" id="m-six-c">
-        <div class="row">
-          <span class="item"></span>
-          <span class="item"></span>
-          <span class="item"></span>
-        </div>
-        <div class="row">
-          <span class="item"></span>
-        </div>
-        <div class="row">
-          <span class="item"></span>
-          <span class="item"></span>
-        </div>
-      </div>      
-    </section>
-
-    <section class="demo-sections">
-      <h2>Holy Grail Layout</h2>
-      <p>header, footer和left, right是两个不同主轴方向的flex布局的两端固定大小item，body和center通过flex: 1;实现剩余部分填充</p>
-    </section>
-
-    <section class="demo-sections holy-grail-layout">
-      <div class="content">
-        <div class="header">
-        </div>
-        <div class="body">
-          <div class="center"></div>
-          <div class="left"></div>
-          <div class="right"></div>
-        </div>
-        <div class="footer">
-        </div>
-      </div>
-    </section>
-  </main>
-
-</body>
-</html>
+    </div>
+  </section>
+</main>

@@ -1,33 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-  <title>DEMOs - Vibration API</title>
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-</head>
+<main>
+  <section class="demo-sections">
+    <p>使用手机等支持震动的设备测试</p>
+    <p>SOS</p>
+  </section>
+</main>
 
-<body>
-
-  <header>
-    <div class="header-wrapper">
-      <h1>DEMOs</h1>
-      <a href="/">导航页</a>
-    </div>
-  </header>
-
-  <main>
-    <section class="demo-sections">
-      <p>使用手机等支持震动的设备测试</p>
-      <p>SOS</p>
-    </section>
-  </main>
-
-  <script>
-    (function() {
-      window.navigator.vibrate([100,30,100,30,100,200,200,30,200,30,200,200,100,30,100,30,100]);
-    })();
-  </script>
-</body>
-</html>
+<script>
+  (function() {
+    window.navigator.vibrate([100,30,100,30,100,200,200,30,200,30,200,200,100,30,100,30,100]);
+  })();
+</script>
