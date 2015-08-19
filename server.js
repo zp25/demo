@@ -20,7 +20,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 
-// use middleware
+// router
 app.use(compression());
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
