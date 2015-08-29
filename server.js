@@ -1,21 +1,19 @@
 var express = require('express');
-var http = require('http');
+// var http = require('http');
 var fs = require('fs');
 var exphbs  = require('express-handlebars');
 var favicon = require('serve-favicon');
 var multer = require('multer');
 var compression = require('compression');
+var errorHandler = require('errorhandler');
 
 var app = express();
-var port = process.env.PORT || 8080;
-var oneDay = 86400000;
 
-// check mode
-if (app.get('env') !== 'production') {
-  console.log('Development mode');
-}
+app.set('port', process.env.PORT || 8080);
+app.set('oneDay', 86400000);
 
-// view engine
+
+// template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
@@ -23,6 +21,8 @@ app.set('view engine', 'handlebars');
 // router
 app.use(compression());
 app.use(favicon(__dirname + '/public/favicon.ico'));
+
+app.use(express.static(__dirname + "/public", { maxAge: app.get('oneDay') }));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html');
@@ -38,13 +38,6 @@ app.get('/:page_name', function(req, res) {
     res.render('pages', { container: data });
   });
 });
-
-app.use(express.static(__dirname + "/public", { maxAge: oneDay }));
-
-app.use(function(err, req, res, next) {
-  res.status(404).send('Page Not Found');
-});
-
 
 // file upload
 var upload = multer({
@@ -66,7 +59,17 @@ app.post('/uploads', upload.single('fileField'), function (req, res, cb) {
 });
 
 
+// error handling middleware should be loaded after the loading the routes
+if (app.get('env') == 'development') {
+  console.log('Development mode');
+  app.use(errorHandler());
+}
+
+
 // engine start!
-var server = http.createServer(app).listen(port, function() {
-  console.log('Express server listening on port ' + port);
+// var server = http.createServer(app).listen(app.get('port'), function() {
+//   console.log('Express server listening on port ' + app.get('port'));
+// });
+app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + app.get('port'));
 });
