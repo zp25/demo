@@ -30,12 +30,6 @@ $(function() {
 
 
   // add File button
-  $('#fileSelect').on('click', function (e) {
-    e.preventDefault();
-
-    $fileField.click();
-  });
-
   $fileField.on('change', function (e) {
     e.preventDefault();
 
@@ -77,7 +71,7 @@ $(function() {
 
     // raw js
     for (var i=0; i<fileList.length; i++) {
-      imgURL = window.URL.createObjectURL(fileList[i]);      
+      imgURL = window.URL.createObjectURL(fileList[i]);
 
       li = document.createElement('li');
 
@@ -87,7 +81,7 @@ $(function() {
       img.src = imgURL;
       img.alt = fileList[i].name;
       img.onload = function(img) {
-        window.URL.revokeObjectURL(this.src);
+        window.URL.revokeObjectURL(imgURL);
       }
       span_img.appendChild(img);
 
