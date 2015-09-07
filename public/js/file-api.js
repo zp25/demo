@@ -80,10 +80,13 @@ $(function() {
       img = document.createElement('img');
       img.src = imgURL;
       img.alt = fileList[i].name;
-      img.onload = function(img) {
-        window.URL.revokeObjectURL(imgURL);
-      }
       span_img.appendChild(img);
+
+      (function(imgURL) {
+        img.onload = function(imgURL) {
+          window.URL.revokeObjectURL(imgURL);
+        };
+      })(imgURL);
 
       // file detail
       span_size = span_img.cloneNode(false);
