@@ -31,9 +31,8 @@ $(function() {
 
   // add File button
   $fileField.on('change', function (e) {
-    e.preventDefault();
-
     handleFile(this.files);
+    this.value = '';
   });
 
 
