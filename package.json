@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "less": "lessc --clean-css=\"--s1 --advanced --compatibility=ie8\" stylesheets/main.less > public/css/style.css",
-    "less-dev": "lessc stylesheets/main.less > public/css/style.css",
     "start": "NODE_ENV=development nodemon server.js"
   },
   "author": "zp25",
