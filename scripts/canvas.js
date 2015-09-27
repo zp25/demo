@@ -18,7 +18,7 @@
     },
 
     drawZ: function(ctx, color) {
-      color = color || '#5C8AD0'
+      color = color || '#5C8AD0';
 
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -225,7 +225,7 @@
     canvas.onclick = function() {
       // window.open('http://'+lct+'.rensidiaochaotian.com/');
       console.log('Open: http://' + lct + '.rensidiaochaotian.com/');
-    }
+    };
 
     canvas.style.cursor = 'pointer';
   };
@@ -244,6 +244,6 @@
     y = e.clientY - e.target.offsetTop;
 
     tetris.drawTransform(this, ctx, x, y);
-  }
+  };
 
 })();

@@ -9,7 +9,7 @@
 
   arr.forEach(function (item, index) {
     var box, el, t;
-    var id = 'li-' + ++index;
+    var id = 'li-' + (++index);
     var i = item - 1;
 
     box = document.getElementById(id);

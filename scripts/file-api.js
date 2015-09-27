@@ -11,7 +11,7 @@ $(function() {
   var $fileDetail = $('#fileDetail');
 
   var BOX = {
-    fileQueue: new Array(),
+    fileQueue: [],
     fileSize: 0,
     aMultiples: ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
   };
@@ -117,8 +117,8 @@ $(function() {
     }
 
     // totoal size
-    for (var i=0, nApprox=BOX.fileSize/1024; nApprox>1; nApprox/=1024, i++) {
-      fileSize = nApprox.toFixed(3) + " " + BOX.aMultiples[i];
+    for (var j=0, nApprox=BOX.fileSize/1024; nApprox>1; nApprox/=1024, j++) {
+      fileSize = nApprox.toFixed(3) + " " + BOX.aMultiples[j];
     }
 
     $fileLength.html(fileList.length);
