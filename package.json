@@ -6,7 +6,7 @@
   "scripts": {
     "gulp": "gulp",
     "start": "NODE_ENV=development nodemon server.js",
-    "postinstall": "gulp heroku"
+    "postinstall": "node heroku"
   },
   "author": "zp25",
   "license": "MIT",
