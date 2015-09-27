@@ -1,5 +1,4 @@
 var express = require('express');
-// var http = require('http');
 var fs = require('fs');
 var exphbs  = require('express-handlebars');
 var favicon = require('serve-favicon');
@@ -67,9 +66,6 @@ if (app.get('env') == 'development') {
 
 
 // engine start!
-// var server = http.createServer(app).listen(app.get('port'), function() {
-//   console.log('Express server listening on port ' + app.get('port'));
-// });
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
