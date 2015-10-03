@@ -1,3 +1,5 @@
+@import 'var.import.less';
+
 *,
 *:before,
 *:after {
@@ -90,7 +92,8 @@ main {
 
   section {
     width: 100%;
-    padding: 20px 0;
+    padding-top: @section-padding;
+    padding-bottom: @section-padding;
   }
 }
 

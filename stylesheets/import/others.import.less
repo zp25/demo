@@ -1,3 +1,5 @@
+@import 'var.import.less';
+
 // file api
 .file-select {
   .inputfile {
@@ -100,6 +102,19 @@
       color: blue;
       text-decoration: none;
     }
+  }
+}
+
+// iamge diffing
+.img-diff {
+  position: relative;
+
+  img:last-child {
+    position: absolute;
+    top: @section-padding;
+    left: 0;
+
+    .filter(invert(100%) opacity(50%));
   }
 }
 
