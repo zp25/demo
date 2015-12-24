@@ -4,12 +4,13 @@
 if (process.env.NODE_ENV === 'production') {
 
   var child_process = require('child_process');
+  var cmd = 'gulp --gulpfile gulpfile.production.js';
 
-  return child_process.exec('gulp heroku', function (error, stdout, stderr) {
+  return child_process.exec(cmd, function (err, stdout, stderr) {
     console.log('stdout: ' + stdout);
     console.log('stderr: ' + stderr);
-    if (error !== null) {
-      console.log('exec error: ' + error);
+    if (err !== null) {
+      console.log('exec error: ' + err);
     }
   });
 

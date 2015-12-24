@@ -1,0 +1,72 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;  // for some Androids
+}
+
+html, button, input, textarea, select {
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  /* Prevent font scaling in landscape while allowing user zoom */
+  -webkit-text-size-adjust: 100%;
+
+  body {
+    min-width: 600px;
+    font-size: $font;
+    line-height: $line-height;
+    color: $color;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+
+    h1 {
+      font-size: 34px;
+      line-height: 46px;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: $font-bolder;
+      line-height: 30px;
+      font-weight: bold;
+    }
+    h3 {
+      font-size: $font-bold;
+      line-height: 26px;
+      font-weight: bold;
+    }
+
+    p {
+      font-size: $font;
+      line-height: $line-height;
+    }
+    a {
+      font-size: $font;
+      line-height: $line-height;
+    }
+
+    ul {
+      li {
+        font-size: $font;
+        line-height: $line-height;
+      }
+    }
+
+    input[type=text], button, select, textarea {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0px;
+    }
+  }
+}
+
+/**
+ * 5 Responsive Design Pitfalls and How to Avoid Them
+ * http://www.sitepoint.com/5-responsive-design-pitfalls-and-how-to-avoid-them/
+ */

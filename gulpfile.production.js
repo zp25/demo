@@ -4,32 +4,23 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 
 var $ = gulpLoadPlugins();
 
-// Lint JavaScript
-function lint() {
-  return gulp.src(['app/pages/**/*.js'])
-    .pipe($.eslint())
-    .pipe($.eslint.format());
-}
-
 // 图片优化
 function images() {
   return gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       progressive: true,
       interlaced: true
-    })))
-    .pipe(gulp.dest('dist/public/images'))
-    .pipe($.size({title: 'images'}));
+    }))
+    .pipe(gulp.dest('dist/public/images'));
 }
 
 // 复制除html外其他根目录(app)文件
 function copy() {
   return gulp.src(['app/*', '!app/*.html'])
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'copy'}));
+    .pipe(gulp.dest('dist'));
 }
 
-// 样式和脚本，缓存结果到./tmp/减少重复量
+// 样式和脚本
 function sass() {
   var src = [
     'app/styles/main.scss',
@@ -37,30 +28,21 @@ function sass() {
   ];
 
   return gulp.src(src)
-    .pipe($.newer('.tmp/styles'))
     .pipe($.sourcemaps.init())
       .pipe($.sass({precision: 10})
         .on('error', $.sass.logError)
       )
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp/styles'))
       .pipe($.if('*.css', $.concat('main.min.css')))
       .pipe($.if('*.css', $.minifyCss()))
-      .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/public/styles'));
 }
 
 function scripts() {
   return gulp.src('app/pages/**/*.js')
-    .pipe($.newer('.tmp/scripts'))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest('.tmp/scripts'))
-      // .pipe($.concat('main.min.js'))
       .pipe($.uglify({preserveComments: 'some'}))
-      .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/public/scripts'));
 }
@@ -73,35 +55,18 @@ function html() {
 
   return gulp.src(src)
     .pipe($.if('*.html', $.minifyHtml()))
-    .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
     .pipe(gulp.dest('dist'));
-}
-
-function watch() {
-  gulp.watch('app/**/*.html', html);
-  gulp.watch('app/**/*.{scss,css}', sass);
-  gulp.watch('app/**/*.js', gulp.parallel(lint, scripts));
-  gulp.watch('app/images/**/*', images);
 }
 
 // Clean output directory
 function clean() {
-  return del(['.tmp', 'dist/*']);
+  return del(['dist/*']);
 }
-
-// tasks
-gulp.task(clean);
-
-// Clean cache
-gulp.task('clean:cache', function(cb) {
-  return $.cache.clearAll(cb);
-});
 
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
     clean, sass,
-    gulp.parallel(lint, html, scripts, images, copy),
-    watch
+    gulp.parallel(html, scripts, images, copy)
   )
 );

@@ -1,0 +1,18 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <p>下方有色区域将在hidden时消失，visible时通过动画效果缓慢显示</p>
+    <div class="page-visibility" style="width:100%; height:500px; background-color: blue;"></div>
+  </section>
+</main>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+  $(function() {
+    $(document).on('visibilitychange', function() {
+      if (document.hidden)
+        $('.page-visibility').hide();
+      else
+        $('.page-visibility').fadeIn(1000);
+    });
+  });
+</script>

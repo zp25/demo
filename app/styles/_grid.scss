@@ -1,0 +1,68 @@
+/**
+ * Grid
+ **/
+ @mixin blocks($size) {
+  @each $block in article, aside, div, footer, header, main, menu, nav, section {
+    & > #{$block} {
+      flex: 0 0 $size;
+    }
+  }
+}
+
+@mixin grids($size) {
+  @for $i from 1 through 12 {
+    &.flex__col--#{$size}#{$i} {
+      flex: 0 0 percentage($i / 12);
+    }
+  }
+}
+
+/**
+ * media query
+ * <= 600px, 85%
+ * <= 992px, 85%
+ * > 992px, 70%
+ **/
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  @include blocks(95%);
+}
+
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  .flex__col {
+    flex: 1 1 auto;
+
+    @include grids('s');
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .container {
+    @include blocks(85%);
+  }
+
+  .flex {
+    .flex__col {
+      @include grids('m');
+    }
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .container {
+    @include blocks(70%);
+  }
+
+  .flex {
+    .flex__col {
+      @include grids('l');
+    }
+  }
+}

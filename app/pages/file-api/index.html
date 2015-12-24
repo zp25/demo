@@ -1,0 +1,32 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <a href="http://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/">Styling &amp; Customizing File Inputs the Smart Way</a>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections file-select">
+    <form method="post" enctype="multipart/form-data">
+      <input type="file" id="fileInput" class="file-select__input" name="fileField" multiple accept="image/*">
+      <label for="fileInput">选择图片</label>
+    </form>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections file-control">
+    <div class="file-control__drop"></div>
+
+    <div class="file-control__list">
+      <h3>File list</h3>
+      <p>
+        文件总数：<span id="fileLength"></span>
+        文件总大小：<span id="fileSize"></span>
+      </p>
+      <p>
+        <a href="#?" id="upload">上传图像</a>
+        <a href="#?" id="clear">清空列表</a>
+      </p>
+
+      <ul id="fileDetail"></ul>
+    </div>
+  </section>
+</main>
+
+<script type="text/javascript" src="scripts/file-api/main.js"></script>

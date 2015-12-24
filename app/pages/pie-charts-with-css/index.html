@@ -1,0 +1,26 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <a href="http://www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/">Designing Flexible, Maintainable Pie Charts With CSS and SVG</a>
+    <p>0-50%和50%-100%处理有区别，利用动画的negative animation-delay和animation-play-state: paused可统一处理</p>
+  </section>
+
+  <style>
+    .pie:before {
+      border-radius: 0 100% 100% 0 / 50%;
+    }
+  </style>
+
+  <section class="flex__col flex__col--s12 sections">
+    <div class="pie pie-less" id="percent-30"></div>
+    <p>30%</p>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <div class="pie pie-more" id="percent-60"></div>
+    <p>60%</p>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <div class="pie pie-animate"></div>
+  </section>
+</main>

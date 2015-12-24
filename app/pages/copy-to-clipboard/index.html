@@ -1,0 +1,56 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <a href="http://www.sitepoint.com/javascript-copy-to-clipboard/">Roll Your Own Copy to Clipboard Feature in 20 Lines of JavaScript</a>
+    <br/>
+    <a href="https://zenorocha.github.io/clipboard.js/">clipboard.js</a>
+    <p>注意浏览器支持</p>
+  </section>
+
+  <style type="text/css">
+    input {
+      width: 320px;
+      font-size: 12px;
+      line-height: 18px;
+      border: 1px solid #c0c0c0;
+      padding: 2px;
+    }
+  </style>
+
+  <section class="flex__col flex__col--s12 sections">
+    <input type="text" id="copyme" value="http://rens-demo.herokuapp.com">
+    <button data-copytarget="#copyme">copy</button>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <input type="text" id="copyheroku" value="http://herokuapp.com">
+    <button data-copytarget="#copyheroku">copy</button>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <input type="text" placeholder="try paste here">
+  </section>
+
+  <script type="text/javascript">
+    (function() {
+      // 绑定事件到body，不用遍历button
+      document.body.addEventListener('click', copy, true);
+
+      function copy(e) {
+        var t = e.target,
+          c = t.dataset.copytarget,
+          inp = (c ? document.querySelector(c) : null);
+
+        if (inp && inp.select) {
+          inp.select();
+
+          try {
+            document.execCommand('copy');
+            inp.blur();
+          } catch(err) {
+            alert('please press Ctrl/Cmd+C to copy');
+          }
+        }
+      }
+    })();
+  </script>
+</main>

@@ -8,39 +8,45 @@ var errorHandler = require('errorhandler');
 
 var app = express();
 
-app.set('port', process.env.PORT || 8080);
+/** const */
+app.set('basePath', __dirname + '/dist');
+app.set('port', process.env.PORT || 8081);
 app.set('oneDay', 86400000);
 
-
-// template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+/** template engine */
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
-
-// router
+/** compression */
 app.use(compression());
-app.use(favicon(__dirname + '/public/favicon.ico'));
+/** favicon */
+app.use(favicon(app.get('basePath') + '/favicon.ico'));
 
-app.use(express.static(__dirname + "/public", { maxAge: app.get('oneDay') }));
+/** static */
+app.use(express.static(app.get('basePath') + "/public", {maxAge: app.get('oneDay')}));
 
+/** index */
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(app.get('basePath') + '/index.html');
 });
 
+/** router */
 app.get('/:page_name', function(req, res) {
-  fs.readFile(__dirname + '/pages/' + req.params.page_name, { encoding: 'utf8' }, function (err, data) {
+  var path = app.get('basePath') + '/' + req.params.page_name + '/index.html';
+
+  fs.readFile(path, {encoding: 'utf8'}, function(err, data) {
     if (err) {
       res.writeHead(404);
       return res.end('Page Not Found');
     }
 
-    res.render('pages', { container: data });
+    res.render('pages', {container: data});
   });
 });
 
-// file upload
+/** multer config */
 var upload = multer({
-  dest: __dirname + '/uploads/',
+  dest: app.get('basePath') + '/uploads/',
   limits: { fileSize: 1048576 },
   fileFilter: function(req, file, cb) {
     var regex = /^image\//;
@@ -53,19 +59,25 @@ var upload = multer({
   }
 });
 
-app.post('/uploads', upload.single('fileField'), function (req, res, cb) {
-  res.status(204).end();
+/** upload file */
+app.post('/uploads', upload.single('fileField'), function(req, res, cb) {
+  var file = {
+    originalname: req.file.originalname,
+    mimetype: req.file.mimetype,
+    filename: req.file.filename,
+    size: req.file.size
+  };
+
+  res.send(JSON.stringify(file));
 });
 
-
-// error handling middleware should be loaded after the loading the routes
-if (app.get('env') == 'development') {
+/** error handling middleware should be loaded after the loading the routes */
+if (app.get('env') === 'development') {
   console.log('Development mode');
   app.use(errorHandler());
 }
 
-
-// engine start!
+/** engine start! */
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
