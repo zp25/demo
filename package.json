@@ -8,6 +8,10 @@
     "start": "NODE_ENV=development nodemon server.js",
     "postinstall": "node heroku"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zp25/rens-demo.git"
+  },
   "author": "zp25",
   "license": "MIT",
   "dependencies": {
