@@ -1,78 +1,139 @@
-(function() {
-  var arr;
-  var txt;
-  var items;
-  var lists;
+/** @type {Array} 默认数据 */
+var Base = [
+  {
+    id: 1,
+    name: 'one'
+  },
+  {
+    id: 2,
+    name: 'two'
+  },
+  {
+    id: 3,
+    name: 'three'
+  },
+  {
+    id: 4,
+    name: 'four'
+  },
+  {
+    id: 5,
+    name: 'five'
+  },
+  {
+    id: 6,
+    name: 'six'
+  },
+  {
+    id: 7,
+    name: 'seven'
+  },
+  {
+    id: 8,
+    name: 'eight'
+  },
+  {
+    id: 9,
+    name: 'nine'
+  }
+];
 
-  // init set
-  arr = JSON.parse(localStorage.getItem('order')) ||
-    [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  txt = JSON.parse(localStorage.getItem('name')) ||
-    ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+/** OnLoad Event */
+window.addEventListener('load', function() {
+  buildItems();
+  attachEvents();
+}, false);
 
-  arr.forEach(function(item, index) {
-    var id = 'li-' + (++index);
-    var i = item - 1;
-    var box;
+/** update localstorage before unload */
+window.addEventListener('beforeunload', function() {
+  var items = document.querySelectorAll('.items');
+  var arr = [].slice.call(items).map(function(item) {
+    var data = {
+      id: item.dataset.id,
+      name: item.dataset.name
+    };
+
+    return data;
+  });
+
+  localStorage.setItem('data', JSON.stringify(arr));
+}, false);
+
+/**
+ * 新建可移动元素
+ */
+function buildItems() {
+  var data = JSON.parse(localStorage.getItem('data')) || Base;
+
+  data.forEach(function(item, index) {
+    var id = '#li-' + (++index);
+    var box = document.querySelector(id);
     var el;
     var t;
 
-    box = document.getElementById(id);
     el = document.createElement('a');
-    t = document.createTextNode(txt[i]);
-
-    el.id = 'item-' + item;
-    el.href = '#' + txt[i];
-    el.setAttribute('class', 'items');
+    el.classList.add('items');
     el.setAttribute('draggable', true);
-    el.dataset.order = item;
+
+    el.id = 'item-' + item.id;
+    el.href = '#' + item.name;
+    el.dataset.id = item.id;
+    el.dataset.name = item.name;
+
+    t = document.createTextNode(item.name);
 
     el.appendChild(t);
     box.appendChild(el);
   });
+}
 
-  // update localstorage before unload
-  window.addEventListener('beforeunload', function() {
-    var items = document.querySelectorAll('.items');
-    var newArr = [].slice.call(items).map(function(item) {
-      return item.dataset.order;
-    });
+/**
+ * 绑定事件
+ */
+function attachEvents() {
+  var lists = document.querySelectorAll('.list');
+  var items = document.querySelectorAll('.items');
 
-    localStorage.setItem('order', JSON.stringify(newArr));
-    localStorage.setItem('name', JSON.stringify(txt));
-  }, false);
+  // 容器
+  [].forEach.call(lists, function(li) {
+    li.addEventListener('dragenter', function(e) {
+      e.dataTransfer.dropEffect = 'move';
 
-  // drag and drop events
-  items = document.querySelectorAll('.items');
-  lists = document.querySelectorAll('li');
-
-  [].slice.call(lists).forEach(function(item) {
-    item.addEventListener('dragover', function(e) {
       e.preventDefault();
+      e.stopPropagation();
     }, false);
 
-    item.addEventListener('drop', function(e) {
-      var dt = e.dataTransfer;
-      var frag = document.createDocumentFragment();
-      var from = document.getElementById(dt.getData('from'));
-      var fromBox = from.parentNode;
+    li.addEventListener('dragover', function(e) {
+      e.dataTransfer.dropEffect = 'move';
 
       e.preventDefault();
+      e.stopPropagation();
+    }, false);
 
-      frag.appendChild(from);
+    li.addEventListener('drop', function(e) {
+      var df = document.createDocumentFragment();
+      var from = document.querySelector('#' + e.dataTransfer.getData('from'));
+      var fromBox = from.parentNode;
+
+      // move content
+      df.appendChild(from);
       fromBox.appendChild(e.target);
-      e.currentTarget.appendChild(frag);
+      e.currentTarget.appendChild(df);
+
+      e.preventDefault();
+      e.stopPropagation();
     }, false);
   });
 
-  [].slice.call(items).forEach(function(item) {
+  // 元素
+  [].forEach.call(items, function(item) {
     item.onclick = function(e) {
       e.preventDefault();
     };
 
     item.addEventListener('dragstart', function(e) {
-      var dt = e.dataTransfer;
-      dt.setData('from', e.target.id);
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('from', e.target.id);
     }, false);
   });
-})();
+}

@@ -1,15 +1,17 @@
-.transform-wrapper {
-  font-size: 14px;
+.transform {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 
   .showpart {
-    width: 450px;
-    height: 450px;
-    float: left;
-    border: thin solid black;
+    flex: 0 0 500px;
+    height: 500px;
+    border: 1px solid black;
+    -webkit-user-select: none;
     user-select: none;
+    margin-right: 20px;
 
     #box-2d {
-      display: none;
       width: 180px;
       height: 180px;
       background-color: rgba(142, 53, 87, 0.7);
@@ -17,10 +19,9 @@
 
     // draw a 3d-box
     #box-3d {
-      display: none;
       width: 100%;
       height: 100%;
-      perspective: 1000;
+      perspective: 1000px;
       perspective-origin: 150% 150%;
 
       .cube {
@@ -72,34 +73,30 @@
   }
 
   .controlpanel {
-    float: left;
-    margin-left: 20px;
+    flex: 0 1 600px;
 
     .controls {
-      display: none;
       padding-top: 10px;
 
       ul {
-        display: table;
+        width: 100%;
 
         li {
-          display: table-row;
+          width: 100%;
           height: 30px;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-start;
+          align-items: center;
 
-          &>span {
-            display: table-cell;
-            width: 150px;
-            vertical-align: bottom;
-
-            &:nth-child(1) {
-              vertical-align: middle;
-            }
+          & > span {
+            flex: 0 0 150px;
           }
         }
       }
 
       form[name=form-3d] ul li>span:nth-child(1) {
-        width: 220px;
+        flex: 0 0 220px;
       }
     }
   }

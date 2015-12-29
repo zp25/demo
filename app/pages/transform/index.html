@@ -1,8 +1,8 @@
 <main class="flex">
-  <section class="flex__col flex__col--s12 sections  transform-wrapper">
+  <section class="flex__col flex__col--s12 sections transform">
     <div class="showpart">
-      <div id="box-2d"></div>
-      <div id="box-3d">
+      <div id="box-2d" class="hidden"></div>
+      <div id="box-3d" class="hidden">
         <div class="cube">
           <div class="front">front</div>
           <div class="back">back</div>
@@ -13,80 +13,78 @@
         </div>
       </div>
     </div>
+  </section>
 
+  <section class="flex__col flex__col--s12 sections transform">
     <div class="controlpanel">
-      <select name="select-mode">
+      <select name="select-mode" id="select-mode" value="1">
         <option value="1">2D</option>
         <option value="2">3D Box</option>
       </select>
 
-      <div class="controls" id="control-2d">
+      <div id="control-2d" class="controls hidden">
         <h3>2D</h3>
         <form name="form-2d">
           <ul>
             <li>
-              <span>translateX(<span class="show">0px</span>):</span>
-              <span><input type="range" name="translateX" min="0" max="270" value="140" /></span>
+              <span>translateX(<span id="translateX"></span>):</span>
+              <input type="range" name="translateX" min="0" max="320" value="160" data-label="translateX">
             </li>
             <li>
-              <span>translateY(<span class="show">0px</span>):</span>
-              <span><input type="range" name="translateY" min="0" max="270" value="140" /></span>
+              <span>translateY(<span id="translateY"></span>):</span>
+              <input type="range" name="translateY" min="0" max="320" value="160" data-label="translateY">
             </li>
             <li>
-              <span>rotate(<span class="show">0deg</span>):</span>
-              <span><input type="range" name="rotate" min="-180" max="180" value="0" /></span>
+              <span>rotate(<span id="rotate"></span>):</span>
+              <input type="range" name="rotate" min="-180" max="180" value="0" data-label="rotate">
             </li>
             <li>
-              <span>scale(<span class="show">1</span>):</span>
-              <span><input type="range" name="scale" min="1" max="3" value="2" /></span>
+              <span>scale(<span id="scale"></span>):</span>
+              <input type="range" name="scale" min="1" max="3" value="2" data-label="scale">
             </li>
             <li>
-              <span>skewX(<span class="show">0deg</span>):</span>
-              <span><input type="range" name="skewX" min="-180" max="180" value="0" /></span>
+              <span>skewX(<span id="skewX"></span>):</span>
+              <input type="range" name="skewX" min="-180" max="180" value="0" data-label="skewX">
             </li>
             <li>
-              <span>skewY(<span class="show">0deg</span>):</span>
-              <span><input type="range" name="skewY" min="-180" max="180" value="0" /></span>
+              <span>skewY(<span id="skewY"></span>):</span>
+              <input type="range" name="skewY" min="-180" max="180" value="0" data-label="skewY">
             </li>
           </ul>
         </form>
       </div>
 
-      <div class="controls" id="control-3d">
+      <div id="control-3d" class="controls hidden">
         <h3>3D</h3>
         <form name="form-3d">
           <ul>
             <li>
-              <span>perspective:&nbsp;<span class="show">1000</span></span>
-              <span><input type="range" name="perspective" min="0" max="5000" value="1000" /></span>
+              <span>perspective:&nbsp;<span id="perspective"></span></span>
+              <input type="range" name="perspective" min="0" max="5000" value="1000" data-label="perspective">
             </li>
             <li>
-              <span>perspective-origin:&nbsp;<span class="show">150% 150%</span></span>
-              <span><input type="range" name="perspective-origin-x" min="-300" max="300" value="150" /></span>
-              <span><input type="range" name="perspective-origin-y" min="-300" max="300" value="150" /></span>
+              <span>perspective-origin:&nbsp;<span id="perspective-origin"></span></span>
+              <input type="range" name="perspective-origin-x" min="-300" max="300" value="150" data-label="perspective-origin">
+              <input type="range" name="perspective-origin-y" min="-300" max="300" value="150" data-label="perspective-origin">
             </li>
             <li>
-              <span>transform-style:&nbsp;<span class="show">preserve-3d</span></span>
-              <span>
-                <select name="transform-style">
-                  <option value="1">preserve-3d</option>
-                  <option value="2">flat</option>
-                </select>
-              </span>
+              <span>transform-style:&nbsp;<span id="transform-style"></span></span>
+              <select name="transform-style" data-label="transform-style" value="1">
+                <option value="1">preserve-3d</option>
+                <option value="2">flat</option>
+              </select>
             </li>
             <li>
-              <span>transform-origin:&nbsp;<span class="show">50% 50%</span></span>
-              <span><input type="range" name="transform-origin-x" min="-50" max="150" value="50" /></span>
-              <span><input type="range" name="transform-origin-y" min="0" max="100" value="50" /></span>
+              <span>transform-origin:&nbsp;<span id="transform-origin"></span></span>
+              <input type="range" name="transform-origin-x" min="-50" max="150" value="50" data-label="transform-origin">
+              <input type="range" name="transform-origin-y" min="0" max="100" value="50" data-label="transform-origin">
             </li>
             <li>
-              <span>backface-visibility:&nbsp;<span class="show">visible</span></span>
-              <span>
-                <select name="backface-visibility">
-                  <option value="1">visible</option>
-                  <option value="2">hidden</option>
-                </select>
-              </span>
+              <span>backface-visibility:&nbsp;<span id="backface-visibility"></span></span>
+              <select name="backface-visibility" data-label="backface-visibility" value="1">
+                <option value="1">visible</option>
+                <option value="2">hidden</option>
+              </select>
             </li>
           </ul>
         </form>

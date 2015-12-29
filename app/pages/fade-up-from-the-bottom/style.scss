@@ -1,0 +1,23 @@
+#fade-up-from-bottom {
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+
+    li {
+      width: 30%;
+      height: 220px;
+      background-color: blue;
+      opacity: 0;
+      transform: translate3d(0px, 50px, 0px);
+      backface-visibility: hidden;
+      transition: all 700ms ease-out;
+      margin-bottom: 20px;
+
+      &.in-view {
+        opacity: 1;
+        transform: translate3d(0px, 0, 0px);
+      }
+    }
+  }
+}

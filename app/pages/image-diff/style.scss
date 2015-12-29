@@ -1,0 +1,14 @@
+#img-diff {
+  position: relative;
+
+  img {
+    position: absolute;
+    top: 20px;
+    left: 0;
+
+    &:last-child {
+      -webkit-filter: invert(100%) opacity(50%);
+      filter: invert(100%) opacity(50%);
+    }
+  }
+}

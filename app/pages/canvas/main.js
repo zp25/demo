@@ -261,7 +261,7 @@ DrawTetris.prototype.drawTransform = function(canvas, ctx, x, y) {
   } else if ((x > 215 && x < 295 && y > 295 && y < 375) ||
              (x > 295 && x < 375 && y > 135 && y < 375)) {
     ctx.save();
-    ctx.translate(292, 128);
+    ctx.translate(292, 126);
     ctx.scale(s, s);
     this.drawJ(ctx);
     ctx.restore();

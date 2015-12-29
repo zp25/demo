@@ -10,9 +10,11 @@
     display: block;
     height: 100%;
     background-color: inherit;
+    border-radius: 0 100% 100% 0 / 50%;
     transform-origin: 0 50%;
     margin-left: 50%;
   }
+
   &.pie-more:before {
     background-color: gray;
   }
@@ -20,7 +22,7 @@
     animation: spin 3s linear infinite, bg 6s step-end infinite;
   }
 
-  &+p {
+  & + p {
     width: 100px;
     font-size: 14px;
     line-height: 32px;

@@ -24,7 +24,15 @@ function images() {
 
 // 复制除html外其他根目录(app)文件
 function copy() {
-  return gulp.src(['app/*', '!app/*.html'])
+  var src = [
+    'app/*',
+    '!app/*.html',
+    '!app/images',
+    '!app/pages',
+    '!app/styles'
+  ];
+
+  return gulp.src(src)
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'copy'}));
 }

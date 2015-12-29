@@ -1,29 +1,26 @@
-(function() {
-  var $elems = $('.elem');
-  var $window = $(window);
+/** Events */
+window.addEventListener('load', function() {
+  // init
+  checkIfInView();
+}, false);
 
-  /**
-   * main
-   */
-  function checkIfInView() {
-    var windowHeight = $window.height();
-    var windowTopPosition = $window.scrollTop();
-    var windowBottomPosition = (windowHeight + windowTopPosition);
+window.addEventListener('scroll', checkIfInView, false);
+window.addEventListener('resize', checkIfInView, false);
 
-    $.each($elems, function() {
-      var $elem = $(this);
-      // var elemHeight = $elem.outerHeight();
-      var elemTopPosition = $elem.offset().top;
-      // var elemBottomPosition = (elemTopPosition + elemHeight);
+/**
+ * 检查元素是否进入viewport
+ */
+function checkIfInView() {
+  var elems = document.querySelectorAll('.elem');
+  var windowHeight = window.innerHeight;
 
-      if (elemTopPosition <= windowBottomPosition) {
-        $elem.addClass('in-view');
-      } else {
-        $elem.removeClass('in-view');
-      }
-    });
-  }
+  [].forEach.call(elems, function(elem) {
+    var rectObject = elem.getBoundingClientRect();
 
-  $window.on('scroll resize', checkIfInView);
-  $window.trigger('scroll');
-})();
+    if (rectObject.top < windowHeight) {
+      elem.classList.add('in-view');
+    } else {
+      elem.classList.remove('in-view');
+    }
+  });
+}

@@ -1,23 +1,3 @@
-$(document).ready(function() {
-  $('form[name=form-2d]').change(function() {
-    setValue2D();
-  });
-  $('form[name=form-3d]').change(function() {
-    setValue3D();
-  });
-
-  $('select[name=select-mode]').change(function() {
-    if ($(this).val() === 1) {
-      init2D();
-    } else {
-      init3D();
-    }
-    // $(this).val() == 1 ? init2D() : init3D();
-  });
-
-  init2D();
-});
-
 /** @type {Object} Global Object */
 var Global = {
   units: {
@@ -34,6 +14,31 @@ var Global = {
     skewY: 'deg'
   }
 };
+
+$(function() {
+  var select = $('select[name=select-mode]');
+  var form2d = $('form[name=form-2d]');
+  var form3d = $('form[name=form-3d]');
+
+  select.on('change', switchMode);
+  form2d.on('change', setValue2D);
+  form3d.on('change', setValue3D);
+
+  // init
+  init2D();
+});
+
+/**
+ * 模式切换
+ * @param {Object} e 事件对象
+ */
+function switchMode(e) {
+  if (e.target.value === 1) {
+    init2D();
+  } else {
+    init3D();
+  }
+}
 
 /**
  * 初始化2D设置
@@ -52,119 +57,113 @@ function init3D() {
 }
 
 /**
- * 2D 3D模式更改
- * @param  {String} mode 当前模式
+ * 模式更改的样式设定
+ * @param {String} mode 当前模式
  */
 function changeMode(mode) {
+  var box2d = $('#box-2d');
+  var box3d = $('#box-3d');
+  var ctl2d = $('#control-2d');
+  var ctl3d = $('#control-3d');
+
   if (mode === '3d') {
-    $('.showpart').find('#box-2d').hide().next('#box-3d').show();
+    box2d.addClass('hidden');
+    ctl2d.addClass('hidden');
 
-    $('.controlpanel').find('#control-2d').hide().end()
-      .find('#control-3d').show();
+    box3d.removeClass('hidden');
+    ctl3d.removeClass('hidden');
   } else {
-    $('.showpart').find('#box-2d').show().next('#box-3d').hide();
+    box3d.addClass('hidden');
+    ctl3d.addClass('hidden');
 
-    $('.controlpanel').find('#control-2d').show().end()
-      .find('#control-3d').hide();
+    box2d.removeClass('hidden');
+    ctl2d.removeClass('hidden');
   }
 
   // save mode
-  $('select[name=select-mode]').data('val', mode);
+  $('#select-mode').data('mode', mode);
 }
 
 /**
- * 图像状态更改
+ * 设置2D值
  */
 function setValue2D() {
-  // var mode = $('select[name=select-mode]').data('val');
-  var $target = $('#box-2d');
-  var $form = $('form[name=form-2d]');
+  var input = $('form[name=form-2d]').find('input');
   var state = '';
-  var evalu;
-  var ename;
-  var eunit;
 
-  $form.find('input').each(function() {
-    evalu = $(this).val();
-    ename = $(this).attr('name');
-    eunit = Global.units[ename];
+  input.each(function() {
+    var val = $(this).val();
+    var name = $(this).attr('name');
+    var label = $(this).data('label');
+    var unit = Global.units[name];
 
-    if (ename === 'scale') {
-      evalu /= 2;
+    if (name === 'scale') {
+      val /= 2;
     }
 
-    // save
-    $(this).data('val', evalu);
-    $(this).data('unit', eunit);
+    state += (name + '(' + val + unit + ') ');
+
     // show
-    $(this).parents('li').find('.show').text(evalu + eunit);
-
-    state += ename + '(' + evalu + eunit + ') ';
+    $('#' + label).html(val + unit);
   });
 
-  $target.css({
-    transform: state
-  });
+  $('#box-2d').css('transform', state);
 }
 
 /**
  * 设置3D值
  */
 function setValue3D() {
-  var $target = $('#box-3d');
-  var $form = $('form[name=form-3d]');
-  var evalu;
-  var ename;
+  var t = $('#box-3d');
+  var cube = t.find('.cube');
+  var face = cube.children('div');
+  var input = $('form[name=form-3d]').find('input, select');
 
-  $form.find('input, select').each(function() {
-    evalu = $(this).val();
-    ename = $(this).attr('name');
+  input.each(function() {
+    var val = $(this).val();
+    var name = $(this).attr('name');
+    var label = $(this).data('label');
+    var vx = 0;
+    var vy = 0;
 
-    // save
-    $(this).data('val', evalu);
-
-    switch (ename) {
+    switch (name) {
       case 'perspective':
-        evalu += 'px';
-        $target.css(ename, evalu);
+        val += 'px';
+        t.css(label, val);
         break;
 
       case 'perspective-origin-x':
       case 'perspective-origin-y':
-        var pox = $('input[name=perspective-origin-x]').data('val');
-        var poy = $('input[name=perspective-origin-y]').data('val');
-        var poxv = pox ? pox : 150;
-        var poyv = pox ? poy : 150;
+        vx = $('input[name=perspective-origin-x]').val() || 150;
+        vy = $('input[name=perspective-origin-y]').val() || 150;
 
-        evalu = poxv + '% ' + poyv + '%';
-        $target.css('perspective-origin', evalu);
+        val = vx + '% ' + vy + '%';
+        t.css(label, val);
         break;
 
       case 'transform-style':
-        evalu = evalu === 1 ? 'preserve-3d' : 'flat';
-        $target.find('.cube').css(ename, evalu);
+        val = Number(val) === 1 ? 'preserve-3d' : 'flat';
+        cube.css(label, val);
         break;
 
       case 'transform-origin-x':
       case 'transform-origin-y':
-        var tox = $('input[name=transform-origin-x]').data('val');
-        var toy = $('input[name=transform-origin-y]').data('val');
-        var toxv = tox ? tox : 50;
-        var toyv = toy ? toy : 50;
+        vx = $('input[name=transform-origin-x]').val() || 50;
+        vy = $('input[name=transform-origin-y]').val() || 50;
 
-        evalu = toxv + '% ' + toyv + '%';
-        $target.find('.cube div').css('transform-origin', evalu);
+        val = vx + '% ' + vy + '%';
+        face.css(label, val);
         break;
 
       case 'backface-visibility':
-        evalu = evalu === 1 ? 'visible' : 'hidden';
-        $target.find('.cube div').css(ename, evalu);
+        val = Number(val) === 1 ? 'visible' : 'hidden';
+        face.css(label, val);
         break;
 
       default: break;
     }
 
     // show
-    $(this).parents('li').find('.show').text(evalu);
+    $('#' + label).html(val);
   });
 }
