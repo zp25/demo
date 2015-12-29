@@ -267,7 +267,6 @@ function upload(file, li, count) {
 
       // 计数
       Base.count++;
-      console.log(Base.count);
       if (Base.count === count) {
         Base.loading = false;
       }
@@ -303,9 +302,8 @@ function ajax(url, data, t) {
       if (e.lengthComputable) {
         pct = Math.round(e.loaded / e.total * 100);
 
-        progress.value = 0;
+        progress.value = pct;
         progress.innerHTML = pct + '%';
-        console.log(pct);
       }
     };
 
