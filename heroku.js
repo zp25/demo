@@ -4,7 +4,7 @@
 if (process.env.NODE_ENV === 'production') {
 
   var child_process = require('child_process');
-  var cmd = 'npm run gulp --gulpfile gulpfile.production.js';
+  var cmd = 'gulp --gulpfile gulpfile.production.js';
 
   return child_process.exec(cmd, function (err, stdout, stderr) {
     console.log('stdout: ' + stdout);
