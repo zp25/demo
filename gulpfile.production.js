@@ -41,7 +41,7 @@ function sass() {
         .on('error', $.sass.logError)
       )
       .pipe($.if('*.css', $.concat('main.min.css')))
-      .pipe($.if('*.css', $.minifyCss()))
+      .pipe($.if('*.css', $.cssnano()))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/public/styles'));
 }

@@ -53,7 +53,7 @@ function sass() {
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
       .pipe($.if('*.css', $.concat('main.min.css')))
-      .pipe($.if('*.css', $.minifyCss()))
+      .pipe($.if('*.css', $.cssnano()))
       .pipe($.size({title: 'styles'}))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/public/styles'));

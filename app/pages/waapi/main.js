@@ -82,7 +82,7 @@ function detail(state, startTime, currentTime) {
 
   base = state + '; ';
   start = 'startTime: ' + startTime + '; ';
-  current = 'currentTime: ' + currentTime + '; ';
+  current = 'currentTime: ' + currentTime;
 
   detail.innerHTML = base + start + current;
 }
