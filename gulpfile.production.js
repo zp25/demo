@@ -4,7 +4,7 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 
 var $ = gulpLoadPlugins();
 
-// 图片优化
+// Image Optimazation
 function images() {
   return gulp.src('app/images/**/*')
     .pipe($.imagemin({
@@ -14,7 +14,7 @@ function images() {
     .pipe(gulp.dest('dist/public/images'));
 }
 
-// 复制除html外其他根目录(app)文件
+// Copy
 function copy() {
   var src = [
     'app/*',
@@ -28,7 +28,7 @@ function copy() {
     .pipe(gulp.dest('dist'));
 }
 
-// 样式和脚本
+// Styles
 function sass() {
   var src = [
     'app/styles/main.scss',
@@ -46,6 +46,7 @@ function sass() {
     .pipe(gulp.dest('dist/public/styles'));
 }
 
+// Scripts
 function scripts() {
   return gulp.src('app/pages/**/*.js')
     .pipe($.sourcemaps.init())
@@ -55,6 +56,7 @@ function scripts() {
     .pipe(gulp.dest('dist/public/scripts'));
 }
 
+// HTML
 function html() {
   var src = [
     'app/index.html',

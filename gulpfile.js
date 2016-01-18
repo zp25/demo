@@ -11,7 +11,7 @@ function lint() {
     .pipe($.eslint.format());
 }
 
-// 图片优化
+// Image Optimazation
 function images() {
   return gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
@@ -22,7 +22,7 @@ function images() {
     .pipe($.size({title: 'images'}));
 }
 
-// 复制除html外其他根目录(app)文件
+// Copy
 function copy() {
   var src = [
     'app/*',
@@ -37,7 +37,7 @@ function copy() {
     .pipe($.size({title: 'copy'}));
 }
 
-// 样式和脚本，缓存结果到./tmp/减少重复量
+// Styles
 function sass() {
   var src = [
     'app/styles/main.scss',
@@ -59,6 +59,7 @@ function sass() {
     .pipe(gulp.dest('dist/public/styles'));
 }
 
+// Scripts
 function scripts() {
   return gulp.src('app/pages/**/*.js')
     .pipe($.newer('.tmp/scripts'))
@@ -73,6 +74,7 @@ function scripts() {
     .pipe(gulp.dest('dist/public/scripts'));
 }
 
+// HTML
 function html() {
   var src = [
     'app/index.html',
@@ -85,6 +87,7 @@ function html() {
     .pipe(gulp.dest('dist'));
 }
 
+// Watch
 function watch() {
   gulp.watch('app/**/*.html', html);
   gulp.watch('app/**/*.{scss,css}', sass);

@@ -1,7 +1,7 @@
 /**
  * Grid
  **/
- @mixin blocks($size) {
+@mixin blocks($size) {
   @each $block in article, aside, div, footer, header, main, menu, nav, section {
     & > #{$block} {
       flex: 0 0 $size;

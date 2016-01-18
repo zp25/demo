@@ -1,5 +1,6 @@
-var express = require('express');
 var fs = require('fs');
+var path = require('path');
+var express = require('express');
 var exphbs  = require('express-handlebars');
 var favicon = require('serve-favicon');
 var multer = require('multer');
@@ -8,8 +9,14 @@ var errorHandler = require('errorhandler');
 
 var app = express();
 
+var dist = path.resolve(__dirname, 'dist');
+
 /** const */
-app.set('basePath', __dirname + '/dist');
+app.set('dist', dist);
+app.set('ico', path.resolve(dist, 'favicon.ico'));
+app.set('upfile', path.resolve(dist, 'uploads'));
+app.set('public', path.resolve(dist, 'public'));
+app.set('index', path.resolve(dist, 'index.html'));
 app.set('port', process.env.PORT || 8081);
 app.set('oneDay', 86400000);
 
@@ -20,21 +27,21 @@ app.set('view engine', 'handlebars');
 /** compression */
 app.use(compression());
 /** favicon */
-app.use(favicon(app.get('basePath') + '/favicon.ico'));
+app.use(favicon(app.get('ico')));
 
 /** static */
-app.use(express.static(app.get('basePath') + "/public", {maxAge: app.get('oneDay')}));
+app.use(express.static(app.get('public'), {maxAge: app.get('oneDay')}));
 
 /** index */
 app.get('/', function(req, res) {
-  res.sendFile(app.get('basePath') + '/index.html');
+  res.sendFile(app.get('index'));
 });
 
 /** router */
 app.get('/:page_name', function(req, res) {
-  var path = app.get('basePath') + '/' + req.params.page_name + '/index.html';
+  var file = path.resolve(app.get('dist'), req.params.page_name, 'index.html');
 
-  fs.readFile(path, {encoding: 'utf8'}, function(err, data) {
+  fs.readFile(file, {encoding: 'utf8'}, function(err, data) {
     if (err) {
       res.writeHead(404);
       return res.end('Page Not Found');
@@ -46,7 +53,7 @@ app.get('/:page_name', function(req, res) {
 
 /** multer config */
 var upload = multer({
-  dest: app.get('basePath') + '/uploads/',
+  dest: app.get('upfile'),
   limits: { fileSize: 1048576 },
   fileFilter: function(req, file, cb) {
     var regex = /^image\//;
