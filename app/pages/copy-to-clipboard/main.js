@@ -1,5 +1,5 @@
 /** DOMContentLoaded Event */
-document.addEventListener('DOMComtentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
   // 绑定事件到body，不用遍历button
   document.body.addEventListener('click', handler, true);
 });
