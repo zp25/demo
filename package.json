@@ -1,7 +1,7 @@
 {
   "name": "demo",
   "version": "0.0.0",
-  "description": "Rens Demos",
+  "description": "zp25's demo",
   "main": "server.js",
   "scripts": {
     "gulp": "gulp",
