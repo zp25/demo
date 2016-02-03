@@ -1,0 +1,66 @@
+#mix-blend-mode {
+  $loadingTime: 10s;
+  $color: rgb(255, 0, 0);
+  $color-diff: rgb(0, 255, 255);
+  position: relative;
+  width: 200px;
+  height: 85px;
+  border: 1px solid $color;
+  background-color: white;
+  overflow: hidden;
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-color: $color;
+    animation: loading $loadingTime linear infinite;
+  }
+
+  .text {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: $color;
+
+    &:after {
+      content: '0%';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      font-size: 50px;
+      line-height: 85px;
+      color: $color-diff;
+      text-align: center;
+      animation: percentage $loadingTime linear infinite;
+      mix-blend-mode: difference;
+    }
+  }
+}
+
+#background-blend-mode {
+  width: 300px;
+  height: 300px;
+  background: url(../images/br.png), url(../images/tr.png);
+  background-blend-mode: screen;
+}
+
+@keyframes loading {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  } 100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes percentage {
+  @for $i from 1 through 100 {
+    $value: $i + '%';
+    #{$value} {
+      content: $value;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <a href="https://css-tricks.com/reverse-text-color-mix-blend-mode">Reverse Text Color Based on Background Color Automatically in CSS</a>
+    <br/>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode">background-blend-mode</a>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <h2>mix-blend-mode</h2>
+    <p>元素和其下方元素的合成效果，mix即所有元素成份都将受到影响</p>
+
+    <div id="mix-blend-mode">
+      <div class="bg"></div>
+      <div class="text"></div>
+    </div>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <h2>background-blend-mode</h2>
+    <p>元素各背景图片和颜色的合成效果</p>
+
+    <div id="background-blend-mode"></div>
+    <select id="background-blend-mode-select">
+        <option>normal</option>
+        <option>multiply</option>
+        <option selected>screen</option>
+        <option>overlay</option>
+        <option>darken</option>
+        <option>lighten</option>
+        <option>color-dodge</option>
+        <option>color-burn</option>
+        <option>hard-light</option>
+        <option>soft-light</option>
+        <option>difference</option>
+        <option>exclusion</option>
+        <option>hue</option>
+        <option>saturation</option>
+        <option>color</option>
+        <option>luminosity</option>
+    </select>
+  </section>
+</main>
+
+<script type="text/javascript" src="scripts/blend/main.js"></script>
