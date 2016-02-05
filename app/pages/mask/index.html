@@ -1,0 +1,31 @@
+<main class="flex">
+  <svg class="svg-defs">
+    <defs>
+      <linearGradient id="gradient">
+        <stop offset="0" stop-color="black"></stop>
+        <stop offset="0.2" stop-color="white"></stop>
+        <stop offset="0.8" stop-color="white"></stop>
+        <stop offset="1" stop-color="black"></stop>
+      </linearGradient>
+
+      <mask id="masking">
+        <rect x="0" y="0" width="450px" height="260px" fill="url(#gradient)" />
+      </mask>
+    </defs>
+  </svg>
+
+  <section class="flex__col flex__col--s12 sections">
+    <p>图片两边过度至模糊效果，mask控制两边渐变，底部filter: blur制作模糊效果</p>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <div id="mask">
+      <div id="mask__img">
+        <img src="images/mf.jpg">
+      </div>
+      <div id="mask__bg">
+        <img src="images/mf.jpg">
+      </div>
+    </div>
+  </section>
+</main>
