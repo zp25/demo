@@ -16,9 +16,14 @@ app.set('dist', dist);
 app.set('ico', path.resolve(dist, 'favicon.ico'));
 app.set('upfile', path.resolve(dist, 'uploads'));
 app.set('public', path.resolve(dist, 'public'));
-app.set('index', path.resolve(dist, 'index.html'));
 app.set('port', process.env.PORT || 8081);
 app.set('oneDay', 86400000);
+
+/** @type {Object} 需从根路径获取的资源 */
+var Root = {
+  '/': path.resolve(dist, 'index.html'),
+  '/sw.js': path.resolve(dist, 'sw.js')
+};
 
 /** template engine */
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
@@ -32,12 +37,13 @@ app.use(favicon(app.get('ico')));
 /** static */
 app.use(express.static(app.get('public'), {maxAge: app.get('oneDay')}));
 
-/** index */
-app.get('/', function(req, res) {
-  res.sendFile(app.get('index'));
+/** router */
+Object.keys(Root).forEach(function(key) {
+  app.get(key, function(req, res) {
+    res.sendFile(Root[key]);
+  });
 });
 
-/** router */
 app.get('/:page_name', function(req, res) {
   var file = path.resolve(app.get('dist'), req.params.page_name, 'index.html');
 

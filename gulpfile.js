@@ -6,7 +6,7 @@ var $ = gulpLoadPlugins();
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(['app/pages/**/*.js'])
+  return gulp.src(['app/pages/**/*.js', 'app/sw.js'])
     .pipe($.eslint())
     .pipe($.eslint.format());
 }
@@ -91,7 +91,8 @@ function html() {
 function watch() {
   gulp.watch('app/**/*.html', html);
   gulp.watch('app/**/*.{scss,css}', sass);
-  gulp.watch('app/**/*.js', gulp.parallel(lint, scripts));
+  gulp.watch(['app/**/*.js', '!app/sw.js'], gulp.parallel(lint, scripts));
+  gulp.watch('app/sw.js', gulp.parallel(lint, copy));
   gulp.watch('app/images/**/*', images);
 }
 

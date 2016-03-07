@@ -81,6 +81,27 @@ html {
 
 header {
   padding: 10px 0;
+
+  h1 {
+    &::after {
+      content: '';
+      font-size: 20px;
+      vertical-align: middle;
+    }
+
+    &.sw--done::after {
+      content: ' sw';
+      color: green;
+    }
+    &.sw--waiting::after {
+      content: ' sw';
+      color: orange;
+    }
+    &.sw--error::after {
+      content: ' sw';
+      color: red;
+    }
+  }
 }
 
 main {
