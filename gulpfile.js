@@ -39,6 +39,17 @@ function copy() {
 
 // Styles
 function sass() {
+  var AUTOPREFIXER_BROWSERS = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
   var src = [
     'app/styles/main.scss',
     'app/pages/**/*.scss'
@@ -50,6 +61,7 @@ function sass() {
       .pipe($.sass({precision: 10})
         .on('error', $.sass.logError)
       )
+      .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
       .pipe($.if('*.css', $.concat('main.min.css')))
@@ -67,7 +79,6 @@ function scripts() {
       .pipe($.babel())
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/scripts'))
-      // .pipe($.concat('main.min.js'))
       .pipe($.uglify({preserveComments: 'some'}))
       .pipe($.size({title: 'scripts'}))
     .pipe($.sourcemaps.write('.'))
@@ -82,7 +93,17 @@ function html() {
   ];
 
   return gulp.src(src)
-    .pipe($.if('*.html', $.minifyHtml()))
+    .pipe($.if('*.html', $.htmlmin({
+      removeComments: true,
+      collapseWhitespace: true,
+      collapseBooleanAttributes: true,
+      removeAttributeQuotes: true,
+      removeRedundantAttributes: true,
+      removeEmptyAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeOptionalTags: true
+    })))
     .pipe($.if('*.html', $.size({title: 'html', showFiles: true})))
     .pipe(gulp.dest('dist'));
 }
