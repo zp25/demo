@@ -39,12 +39,11 @@ function buildRequest(url) {
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CURRENT_CACHES.offline).then(function(cache) {
-      var cachePromises;
       var resource = Object.keys(OFFLINE_URL).map(function(key) {
         return OFFLINE_URL[key];
       });
 
-      cachePromises = resource.map(function(url) {
+      var cachePromises = resource.map(function(url) {
         return fetch(buildRequest(url)).then(function(response) {
           return cache.put(url, response);
         });
@@ -81,7 +80,7 @@ self.addEventListener('fetch', function(event) {
       (event.request.method === 'GET' &&
        event.request.headers.get('accept').indexOf('text/html') !== -1)) {
     event.respondWith(
-      // 获取资源
+      // html
       fetch(event.request).then(function(response) {
         if (response.ok) {
           return response;
@@ -96,13 +95,18 @@ self.addEventListener('fetch', function(event) {
     );
   } else {
     event.respondWith(
-      // 匹配Cache
-      caches.match(event.request).then(function(response) {
-        if (response) {
-          return response;
-        }
+      // 其它资源
+      fetch(buildRequest(event.request.url)).catch(function() {
+        caches.match(event.request).then(function(response) {
+          if (response) {
+            return response;
+          }
 
-        return fetch(buildRequest(event.request.url));
+          return new Response('Page Not Found', {
+            status: 404,
+            statusText: 'Not Found'
+          });
+        });
       })
     );
   }
