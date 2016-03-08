@@ -12,12 +12,14 @@ var app = express();
 var dist = path.resolve(__dirname, 'dist');
 
 /** const */
-app.set('dist', dist);
 app.set('ico', path.resolve(dist, 'favicon.ico'));
 app.set('upfile', path.resolve(dist, 'uploads'));
 app.set('public', path.resolve(dist, 'public'));
 app.set('port', process.env.PORT || 8081);
 app.set('oneDay', 86400000);
+
+var origin = app.get('env') === 'development' ?
+  ('http://localhost:' + app.get('port')) : 'https://demo.zp25.ninja';
 
 /** @type {Object} 需从根路径获取的资源 */
 var Root = {
@@ -45,7 +47,12 @@ Object.keys(Root).forEach(function(key) {
 });
 
 app.get('/:page_name', function(req, res) {
-  var file = path.resolve(app.get('dist'), req.params.page_name, 'index.html');
+  var file = path.resolve(dist, req.params.page_name, 'index.html');
+
+  if (req.path[req.path.length - 1] === '/') {
+    res.writeHead(404);
+    return res.end('Page Not Found');
+  }
 
   fs.readFile(file, {encoding: 'utf8'}, function(err, data) {
     if (err) {
@@ -53,7 +60,7 @@ app.get('/:page_name', function(req, res) {
       return res.end('Page Not Found');
     }
 
-    res.render('pages', {container: data});
+    res.render('pages', {container: data, origin: origin});
   });
 });
 

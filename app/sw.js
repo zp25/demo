@@ -1,5 +1,7 @@
 /** @type {Number} Cache版本 */
 var CACHE_VERSION = 1;
+
+/** @type {Object} 当前可用cacheName */
 var CURRENT_CACHES = {
   offline: 'offline-v' + CACHE_VERSION
 };
@@ -7,8 +9,8 @@ var CURRENT_CACHES = {
 /** @type {Array}  */
 var OFFLINE_URL = {
   offline: 'sw',
-  style: (self.location.origin + '/styles/main.min.css'),
-  image: (self.location.origin + '/images/zp.jpg')
+  style: new URL('styles/main.min.css', self.location.origin).href,
+  image: new URL('images/zp.jpg', self.location.origin).href
 };
 
 /**
@@ -79,13 +81,22 @@ self.addEventListener('fetch', function(event) {
       (event.request.method === 'GET' &&
        event.request.headers.get('accept').indexOf('text/html') !== -1)) {
     event.respondWith(
-      // 获取资源，否则使用Cache响应，offline页面
-      fetch(event.request).catch(function() {
+      // 获取资源
+      fetch(event.request).then(function(response) {
+        if (response.ok) {
+          return response;
+        }
+
+        // 若非网络问题fetch失败，例如404，使用Cache响应
+        return caches.match(OFFLINE_URL.offline);
+      }).catch(function() {
+        // 网络问题，例如offline，使用Cache响应
         return caches.match(OFFLINE_URL.offline);
       })
     );
   } else {
     event.respondWith(
+      // 匹配Cache
       caches.match(event.request).then(function(response) {
         if (response) {
           return response;

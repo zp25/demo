@@ -4,9 +4,24 @@
   </section>
 
   <section class="flex__col flex__col--s12 sections">
+    <h2>404&nbsp;or&nbsp;Offline</h2>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
     <figure>
-      <img src="images/zp.jpg" alt="zp">
       <figcaption>zp</figcaption>
     </figure>
   </section>
 </main>
+
+<script>
+  window.onload = function() {
+    var url = new URL('images/zp.jpg', window.location.origin);
+    var img = new Image();
+
+    img.src = url;
+    img.alt = 'zp';
+
+    document.querySelector('figure').appendChild(img);
+  };
+</script>
