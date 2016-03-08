@@ -1,5 +1,5 @@
 /** @type {Number} Cache版本 */
-var CACHE_VERSION = 1;
+var CACHE_VERSION = 1.1;
 
 /** @type {Object} 当前可用cacheName */
 var CURRENT_CACHES = {
