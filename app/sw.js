@@ -19,10 +19,9 @@ var OFFLINE_URL = {
  * @return {Request} Request Object
  */
 function buildRequest(url) {
-  var request = new Request(url, {cache: 'reload'});
+  var request = new Request(url, {cache: 'reload', mode: 'no-cors'});
   var bustedUrl;
 
-  // request.cache设置为reload，部分浏览器不支持，因此判断
   if ('cache' in request) {
     return request;
   }
@@ -32,7 +31,7 @@ function buildRequest(url) {
   bustedUrl.search +=
     (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now();
 
-  return new Request(bustedUrl);
+  return new Request(bustedUrl, {mode: 'no-cors'});
 }
 
 /** 安装，预先获取需缓存资源 */
@@ -73,21 +72,20 @@ self.addEventListener('activate', function(event) {
   );
 });
 
-/** 代理 */
+/** 代理，部分浏览器暂不支持navigation request */
 self.addEventListener('fetch', function(event) {
-  // 仅对navigation request作响应，部分浏览器不支持navigate值，通过accept头部处理
   if (event.request.mode === 'navigate' ||
       (event.request.method === 'GET' &&
        event.request.headers.get('accept').indexOf('text/html') !== -1)) {
     event.respondWith(
       // html
       fetch(event.request).then(function(response) {
-        if (response.ok) {
-          return response;
+        if (!response.ok) {
+          // 非网络问题fetch失败，例如404，使用Cache响应
+          throw new Error('Not Found');
         }
 
-        // 若非网络问题fetch失败，例如404，使用Cache响应
-        return caches.match(OFFLINE_URL.offline);
+        return response;
       }).catch(function() {
         // 网络问题，例如offline，使用Cache响应
         return caches.match(OFFLINE_URL.offline);
@@ -96,8 +94,14 @@ self.addEventListener('fetch', function(event) {
   } else {
     event.respondWith(
       // 其它资源
-      fetch(buildRequest(event.request.url)).catch(function() {
-        caches.match(event.request).then(function(response) {
+      fetch(buildRequest(event.request.url)).then(function(response) {
+        if (!response.ok) {
+          throw new Error('Not Found');
+        }
+
+        return response;
+      }).catch(function() {
+        return caches.match(event.request).then(function(response) {
           if (response) {
             return response;
           }
