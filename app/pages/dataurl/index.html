@@ -1,0 +1,20 @@
+<main class="flex">
+  <section class="flex__col flex__col--s12 sections">
+    <pre>uuencode [-m] [-o outfile] [infile] remotefile</pre>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections file-select">
+    <input type="file" id="fileInput" class="file-select__input" name="fileField" accept="image/jpeg,image/pjpeg,image/png">
+    <label for="fileInput">选择图片</label>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections file-control">
+    <div class="file-control__drop"></div>
+  </section>
+
+  <section class="flex__col flex__col--s12 sections">
+    <p id="dataurl" class="break" contentEditable="true"></p>
+  </section>
+</main>
+
+<script type="text/javascript" src="scripts/dataurl/main.js"></script>

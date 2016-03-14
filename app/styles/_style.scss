@@ -125,6 +125,10 @@ main {
   .hidden {
     display: none;
   }
+
+  .break {
+    word-break: break-all;
+  }
 }
 
 // global class
