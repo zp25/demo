@@ -112,7 +112,7 @@ function html() {
 function watch() {
   gulp.watch('app/**/*.html', html);
   gulp.watch('app/**/*.{scss,css}', sass);
-  gulp.watch(['app/**/*.js', '!app/sw.js'], gulp.parallel(lint, scripts));
+  gulp.watch(['app/pages/**/*.js', '!app/sw.js'], gulp.parallel(lint, scripts));
   gulp.watch('app/sw.js', gulp.parallel(lint, copy));
   gulp.watch('app/images/**/*', images);
 }
