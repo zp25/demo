@@ -1,5 +1,5 @@
 /** @type {Number} Cache版本 */
-var CACHE_VERSION = 1.1;
+var CACHE_VERSION = 1.2;
 
 /** @type {Object} 当前可用cacheName */
 var CURRENT_CACHES = {
@@ -74,9 +74,12 @@ self.addEventListener('activate', function(event) {
 
 /** 代理，部分浏览器暂不支持navigation request */
 self.addEventListener('fetch', function(event) {
-  if (event.request.mode === 'navigate' ||
-      (event.request.method === 'GET' &&
-       event.request.headers.get('accept').indexOf('text/html') !== -1)) {
+  if (event.request.method !== 'GET') {
+    event.respondWith(
+      fetch(event.request)
+    );
+  } else if (event.request.mode === 'navigate' ||
+      event.request.headers.get('accept').indexOf('text/html') !== -1) {
     event.respondWith(
       // html
       fetch(event.request).then(function(response) {
