@@ -4,5 +4,12 @@
     "browser": true,
     "jquery": true
   },
+  "rules": {
+    "no-console": 0,
+    "no-cond-assign": ["error", "except-parens"],
+    "no-param-reassign": [
+      "error", { "props": false }
+    ]
+  },
   "extends": "airbnb-base"
 }
