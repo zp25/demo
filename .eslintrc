@@ -2,7 +2,11 @@
   "root": true,
   "env": {
     "browser": true,
-    "jquery": true
+    "es6": true
+  },
+  "globals": {
+    "$": false,
+    "$$": false
   },
   "rules": {
     "no-console": 0,
