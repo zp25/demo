@@ -1,27 +1,15 @@
 /** worker对象 */
-var worker;
+let worker = null;
 
-/** DOMContentLoad Event */
-document.addEventListener('DOMContentLoaded', function() {
-  var input = document.querySelector('.file-select__input');
-  var dropbox = document.querySelector('.file-control__drop');
-  var url = new URL('scripts/dataurl/worker.js', window.location.origin);
+/**
+ * 添加图片处理
+ * @param {File} file 文件对象
+ */
+function handler(file) {
+  document.querySelector('#dataurl').innerHTML = 'loading...';
 
-  // select file
-  input.addEventListener('change', handleSelect, false);
-
-  // Drag & Drop
-  dropbox.addEventListener('dragenter', dragenter, false);
-  dropbox.addEventListener('dragover', dragover, false);
-  dropbox.addEventListener('dragleave', dragleave, false);
-  dropbox.addEventListener('drop', drop, false);
-
-  // worker
-  worker = new Worker(url);
-
-  worker.addEventListener('message', handleMsg, false);
-  worker.addEventListener('error', handleError, false);
-}, false);
+  worker.postMessage(file);
+}
 
 /**
  * 图片进入drop zone时触发的事件
@@ -78,16 +66,6 @@ function handleSelect(e) {
 }
 
 /**
- * 添加图片处理
- * @param {File} file 文件对象
- */
-function handler(file) {
-  document.querySelector('#dataurl').innerHTML = 'loading...';
-
-  worker.postMessage(file);
-}
-
-/**
  * [handleMsg description]
  * @param {Error} e 事件对象
  */
@@ -102,3 +80,25 @@ function handleMsg(e) {
 function handleError(e) {
   document.querySelector('#dataurl').innerHTML = e.message;
 }
+
+/** DOMContentLoad Event */
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.querySelector('.file-select__input');
+  const dropbox = document.querySelector('.file-control__drop');
+  const url = new URL('scripts/dataurl/worker.js', window.location.origin);
+
+  // select file
+  input.addEventListener('change', handleSelect, false);
+
+  // Drag & Drop
+  dropbox.addEventListener('dragenter', dragenter, false);
+  dropbox.addEventListener('dragover', dragover, false);
+  dropbox.addEventListener('dragleave', dragleave, false);
+  dropbox.addEventListener('drop', drop, false);
+
+  // worker
+  worker = new Worker(url);
+
+  worker.addEventListener('message', handleMsg, false);
+  worker.addEventListener('error', handleError, false);
+}, false);

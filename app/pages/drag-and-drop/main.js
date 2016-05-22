@@ -1,86 +1,64 @@
 /** @type {Array} 默认数据 */
-var Base = [
+const Base = [
   {
     id: 1,
-    name: 'one'
+    name: 'one',
   },
   {
     id: 2,
-    name: 'two'
+    name: 'two',
   },
   {
     id: 3,
-    name: 'three'
+    name: 'three',
   },
   {
     id: 4,
-    name: 'four'
+    name: 'four',
   },
   {
     id: 5,
-    name: 'five'
+    name: 'five',
   },
   {
     id: 6,
-    name: 'six'
+    name: 'six',
   },
   {
     id: 7,
-    name: 'seven'
+    name: 'seven',
   },
   {
     id: 8,
-    name: 'eight'
+    name: 'eight',
   },
   {
     id: 9,
-    name: 'nine'
-  }
+    name: 'nine',
+  },
 ];
-
-/** OnLoad Event */
-window.addEventListener('load', function() {
-  buildItems();
-  attachEvents();
-}, false);
-
-/** update localstorage before unload */
-window.addEventListener('beforeunload', function() {
-  var items = document.querySelectorAll('.items');
-  var arr = [].slice.call(items).map(function(item) {
-    var data = {
-      id: item.dataset.id,
-      name: item.dataset.name
-    };
-
-    return data;
-  });
-
-  localStorage.setItem('data', JSON.stringify(arr));
-}, false);
 
 /**
  * 新建可移动元素
  */
 function buildItems() {
-  var data = JSON.parse(localStorage.getItem('data')) || Base;
+  const data = JSON.parse(localStorage.getItem('data')) || Base;
 
-  data.forEach(function(item, index) {
-    var id = '#li-' + (++index);
-    var box = document.querySelector(id);
-    var el;
-    var t;
+  data.forEach((item, index) => {
+    const iid = index + 1;
+    const id = `#li-${iid}`;
+    const box = document.querySelector(id);
+    const el = document.createElement('a');
 
-    el = document.createElement('a');
     el.classList.add('items');
     el.setAttribute('draggable', true);
 
-    el.id = 'item-' + item.id;
-    el.href = '#' + item.name;
+    el.id = `item-${item.id}`;
+    el.href = `#${item.name}`;
     el.dataset.id = item.id;
     el.dataset.name = item.name;
 
-    t = document.createTextNode(item.name);
+    const t = document.createTextNode(item.name);
 
     el.appendChild(t);
     box.appendChild(el);
@@ -91,32 +69,29 @@ function buildItems() {
  * 绑定事件
  */
 function attachEvents() {
-  var lists = document.querySelectorAll('.list');
-  var items = document.querySelectorAll('.items');
-
   // 容器
-  [].forEach.call(lists, function(li) {
-    li.addEventListener('dragenter', function(e) {
+  Array.from(document.querySelectorAll('.list')).forEach(li => {
+    li.addEventListener('dragenter', e => {
       e.dataTransfer.dropEffect = 'move';
 
       e.preventDefault();
       e.stopPropagation();
     }, false);
 
-    li.addEventListener('dragover', function(e) {
+    li.addEventListener('dragover', e => {
       e.dataTransfer.dropEffect = 'move';
 
       e.preventDefault();
       e.stopPropagation();
     }, false);
 
-    li.addEventListener('drop', function(e) {
-      var df = document.createDocumentFragment();
-      var from = document.querySelector('#' + e.dataTransfer.getData('from'));
-      var fromBox = from.parentNode;
+    li.addEventListener('drop', e => {
+      const df = document.createDocumentFragment();
+      const f = document.querySelector(`#${e.dataTransfer.getData('from')}`);
+      const fromBox = f.parentNode;
 
       // move content
-      df.appendChild(from);
+      df.appendChild(f);
       fromBox.appendChild(e.target);
       e.currentTarget.appendChild(df);
 
@@ -126,14 +101,34 @@ function attachEvents() {
   });
 
   // 元素
-  [].forEach.call(items, function(item) {
-    item.onclick = function(e) {
+  Array.from(document.querySelectorAll('.items')).forEach(item => {
+    item.onclick = e => {
       e.preventDefault();
     };
 
-    item.addEventListener('dragstart', function(e) {
+    item.addEventListener('dragstart', e => {
       e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('from', e.target.id);
     }, false);
   });
 }
+
+/** OnLoad Event */
+window.addEventListener('load', () => {
+  buildItems();
+  attachEvents();
+}, false);
+
+/** update localstorage before unload */
+window.addEventListener('beforeunload', () => {
+  const arr = Array.from(document.querySelectorAll('.items')).map(item => {
+    const data = {
+      id: item.dataset.id,
+      name: item.dataset.name,
+    };
+
+    return data;
+  });
+
+  localStorage.setItem('data', JSON.stringify(arr));
+}, false);

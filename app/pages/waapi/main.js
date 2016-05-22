@@ -1,68 +1,18 @@
-/** DOMContentLoaded Event */
-document.addEventListener('DOMContentLoaded', function() {
-  var pause = document.querySelector('#pause');
-  var play = document.querySelector('#play');
-  var reverse = document.querySelector('#reverse');
-  var cancel = document.querySelector('#cancel');
-  var rate = document.querySelector('#rate');
-  var state = document.querySelector('#state');
-  var player;
-
-  // new animate
-  player = animation();
-
-  // events
-  pause.onclick = function() {
-    player.pause();
-  };
-
-  play.onclick = function() {
-    player.play();
-  };
-
-  reverse.onclick = function() {
-    player.reverse();
-  };
-
-  cancel.onclick = function() {
-    player.cancel();
-  };
-
-  rate.onchange = function(e) {
-    player.playbackRate = e.target.value;
-  };
-
-  // get current state
-  state.onclick = function() {
-    detail(player.playState, player.startTime, player.currentTime);
-  };
-}, false);
-
-/** OnLoad Event */
-window.addEventListener('load', function() {
-  var state = document.querySelector('#state');
-
-  // init state
-  state.click();
-}, false);
-
 /**
  * 设置动画
  * @return {[type]} [description]
  */
 function animation() {
-  var m = document.querySelector('#mover');
-  var keyframes;
-  var timing;
+  const m = document.querySelector('#mover');
 
-  keyframes = [
-    {motionOffset: 0},
-    {motionOffset: '100%'}
+  const keyframes = [
+    { motionOffset: 0 },
+    { motionOffset: '100%' },
   ];
 
-  timing = {
+  const timing = {
     duration: 12000,
-    iterations: Infinity
+    iterations: Infinity,
   };
 
   return m.animate(keyframes, timing);
@@ -75,14 +25,54 @@ function animation() {
  * @param  {Number} currentTime player.currentTime
  */
 function detail(state, startTime, currentTime) {
-  var detail = document.querySelector('#detail');
-  var base;
-  var start;
-  var current;
+  const d = document.querySelector('#detail');
 
-  base = state + '; ';
-  start = 'startTime: ' + startTime + '; ';
-  current = 'currentTime: ' + currentTime;
-
-  detail.innerHTML = base + start + current;
+  d.innerHTML = `${state}; startTime: ${startTime}; currentTime: ${currentTime}`;
 }
+
+/** DOMContentLoaded Event */
+document.addEventListener('DOMContentLoaded', () => {
+  const pause = document.querySelector('#pause');
+  const play = document.querySelector('#play');
+  const reverse = document.querySelector('#reverse');
+  const cancel = document.querySelector('#cancel');
+  const rate = document.querySelector('#rate');
+  const state = document.querySelector('#state');
+
+  // new animate
+  const player = animation();
+
+  // events
+  pause.onclick = () => {
+    player.pause();
+  };
+
+  play.onclick = () => {
+    player.play();
+  };
+
+  reverse.onclick = () => {
+    player.reverse();
+  };
+
+  cancel.onclick = () => {
+    player.cancel();
+  };
+
+  rate.onchange = e => {
+    player.playbackRate = e.target.value;
+  };
+
+  // get current state
+  state.onclick = () => {
+    detail(player.playState, player.startTime, player.currentTime);
+  };
+}, false);
+
+/** OnLoad Event */
+window.addEventListener('load', () => {
+  const state = document.querySelector('#state');
+
+  // init state
+  state.click();
+}, false);

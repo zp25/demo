@@ -1,5 +1,8 @@
+window.$ = document.querySelector.bind(document);
+window.$$ = document.querySelectorAll.bind(document);
+
 /** @type {Object} Global Object */
-var Global = {
+const Global = {
   units: {
     translateX: 'px',
     translateY: 'px',
@@ -11,33 +14,130 @@ var Global = {
     scale: '',
     scale3d: '',
     skewX: 'deg',
-    skewY: 'deg'
-  }
+    skewY: 'deg',
+  },
 };
 
-$(function() {
-  var select = $('select[name=select-mode]');
-  var form2d = $('form[name=form-2d]');
-  var form3d = $('form[name=form-3d]');
+/**
+ * 模式更改的样式设定
+ * @param {String} mode 当前模式
+ */
+function changeMode(mode) {
+  const box2d = $('#box-2d');
+  const box3d = $('#box-3d');
+  const ctl2d = $('#control-2d');
+  const ctl3d = $('#control-3d');
 
-  select.on('change', switchMode);
-  form2d.on('change', setValue2D);
-  form3d.on('change', setValue3D);
+  if (mode === '3d') {
+    box2d.classList.add('hidden');
+    ctl2d.classList.add('hidden');
 
-  // init
-  init2D();
-});
+    box3d.classList.remove('hidden');
+    ctl3d.classList.remove('hidden');
+  } else {
+    box3d.classList.add('hidden');
+    ctl3d.classList.add('hidden');
+
+    box2d.classList.remove('hidden');
+    ctl2d.classList.remove('hidden');
+  }
+
+  // save mode
+  $('#select-mode').dataset.mode = mode;
+}
 
 /**
- * 模式切换
- * @param {Object} e 事件对象
+ * 设置2D值
  */
-function switchMode(e) {
-  if (e.target.value === 1) {
-    init2D();
-  } else {
-    init3D();
-  }
+function setValue2D() {
+  const inputs = $('form[name=form-2d]').querySelectorAll('input');
+  let state = '';
+
+  Array.from(inputs).forEach(input => {
+    let val = input.value;
+    const name = input.getAttribute('name');
+    const label = input.dataset.label;
+    const unit = Global.units[name];
+
+    if (name === 'scale') {
+      val /= 2;
+    }
+
+    state += `${name}(${val + unit}) `;
+
+    // show
+    $(`#${label}`).innerHTML = val + unit;
+  });
+
+  $('#box-2d').style = `transform: ${state}`;
+}
+
+/**
+ * 修改3D box样式
+ */
+function boxStyle() {
+  const vp = $('input[name=perspective]').value;
+  const px = $('input[name=perspective-origin-x]').value || 150;
+  const py = $('input[name=perspective-origin-y]').value || 150;
+
+  const perspective = `perspective: ${vp}px`;
+  const origin = `perspective-origin: ${px}% ${py}%`;
+
+  $('#box-3d').style = `${perspective}; ${origin}`;
+
+  // $(`#${label}`).innerHTML = val;
+}
+
+/**
+ * 设置3D值
+ */
+function setValue3D() {
+  const t = $('#box-3d');
+  const cube = t.querySelector('.cube');
+  const faces = cube.querySelectorAll('div');
+  const inputs = $('form[name=form-3d]').querySelectorAll('input, select');
+
+  Array.from(inputs).forEach(input => {
+    const name = input.getAttribute('name');
+    const label = input.dataset.label;
+    let val = input.value;
+
+    switch (name) {
+      case 'perspective':
+      case 'perspective-origin-x':
+      case 'perspective-origin-y':
+        boxStyle();
+        break;
+
+      case 'transform-style': {
+        val = Number(val) === 1 ? 'preserve-3d' : 'flat';
+        cube.style = `${label}: ${val}`;
+        break;
+      }
+      case 'transform-origin-x':
+      case 'transform-origin-y': {
+        const tx = $('input[name=transform-origin-x]').value || 50;
+        const ty = $('input[name=transform-origin-y]').value || 50;
+
+        val = `${tx}% ${ty}%`;
+        Array.from(faces).forEach(face => {
+          face.style = `${label}: ${val}`;
+        });
+        break;
+      }
+      case 'backface-visibility': {
+        val = Number(val) === 1 ? 'visible' : 'hidden';
+        Array.from(faces).forEach(face => {
+          face.style = `${label}: ${val}`;
+        });
+        break;
+      }
+      default: break;
+    }
+
+    // show
+    $(`#${label}`).innerHTML = val;
+  });
 }
 
 /**
@@ -57,113 +157,23 @@ function init3D() {
 }
 
 /**
- * 模式更改的样式设定
- * @param {String} mode 当前模式
+ * 模式切换
+ * @param {Object} e 事件对象
  */
-function changeMode(mode) {
-  var box2d = $('#box-2d');
-  var box3d = $('#box-3d');
-  var ctl2d = $('#control-2d');
-  var ctl3d = $('#control-3d');
-
-  if (mode === '3d') {
-    box2d.addClass('hidden');
-    ctl2d.addClass('hidden');
-
-    box3d.removeClass('hidden');
-    ctl3d.removeClass('hidden');
+function switchMode(e) {
+  if (e.target.value === 1) {
+    init2D();
   } else {
-    box3d.addClass('hidden');
-    ctl3d.addClass('hidden');
-
-    box2d.removeClass('hidden');
-    ctl2d.removeClass('hidden');
+    init3D();
   }
-
-  // save mode
-  $('#select-mode').data('mode', mode);
 }
 
-/**
- * 设置2D值
- */
-function setValue2D() {
-  var input = $('form[name=form-2d]').find('input');
-  var state = '';
+/** DOMContentLoaded Event */
+document.addEventListener('DOMContentLoaded', () => {
+  $('select[name=select-mode]').addEventListener('change', switchMode, false);
+  $('form[name=form-2d]').addEventListener('change', setValue2D, false);
+  $('form[name=form-3d]').addEventListener('change', setValue3D, false);
 
-  input.each(function() {
-    var val = $(this).val();
-    var name = $(this).attr('name');
-    var label = $(this).data('label');
-    var unit = Global.units[name];
-
-    if (name === 'scale') {
-      val /= 2;
-    }
-
-    state += (name + '(' + val + unit + ') ');
-
-    // show
-    $('#' + label).html(val + unit);
-  });
-
-  $('#box-2d').css('transform', state);
-}
-
-/**
- * 设置3D值
- */
-function setValue3D() {
-  var t = $('#box-3d');
-  var cube = t.find('.cube');
-  var face = cube.children('div');
-  var input = $('form[name=form-3d]').find('input, select');
-
-  input.each(function() {
-    var val = $(this).val();
-    var name = $(this).attr('name');
-    var label = $(this).data('label');
-    var vx = 0;
-    var vy = 0;
-
-    switch (name) {
-      case 'perspective':
-        val += 'px';
-        t.css(label, val);
-        break;
-
-      case 'perspective-origin-x':
-      case 'perspective-origin-y':
-        vx = $('input[name=perspective-origin-x]').val() || 150;
-        vy = $('input[name=perspective-origin-y]').val() || 150;
-
-        val = vx + '% ' + vy + '%';
-        t.css(label, val);
-        break;
-
-      case 'transform-style':
-        val = Number(val) === 1 ? 'preserve-3d' : 'flat';
-        cube.css(label, val);
-        break;
-
-      case 'transform-origin-x':
-      case 'transform-origin-y':
-        vx = $('input[name=transform-origin-x]').val() || 50;
-        vy = $('input[name=transform-origin-y]').val() || 50;
-
-        val = vx + '% ' + vy + '%';
-        face.css(label, val);
-        break;
-
-      case 'backface-visibility':
-        val = Number(val) === 1 ? 'visible' : 'hidden';
-        face.css(label, val);
-        break;
-
-      default: break;
-    }
-
-    // show
-    $('#' + label).html(val);
-  });
-}
+  // init
+  init2D();
+}, false);

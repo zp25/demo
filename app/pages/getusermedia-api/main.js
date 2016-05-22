@@ -1,42 +1,41 @@
-(function() {
+(() => {
   if (!navigator.mediaDevices) {
     console.log('Error! Use FF36+');
     return;
   }
 
-  var video = document.querySelector('video');
-  var canvas = document.querySelector('canvas');
-  var ctx = canvas.getContext('2d');
+  const video = document.querySelector('video');
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
 
   // list media devices
-  var devices = navigator.mediaDevices.enumerateDevices();
+  navigator.mediaDevices.enumerateDevices().then(devices => {
+    devices.forEach(device => {
+      const info = `${device.kind}: ${device.label} id = ${device.deviceId}`;
 
-  devices.then(function(devices) {
-    devices.forEach(function(device) {
-      console.log(device.kind + ': ' + device.label + ' ' +
-        'id = ' + device.deviceId);
+      console.log(info);
     });
-  }).catch(function(err) {
-    console.log(err.name + ': ' + err.message);
+  }).catch(err => {
+    console.log(`${err.name}: ${err.message}`);
   });
 
   // use
-  var p = navigator.mediaDevices.getUserMedia({video: true});
+  const p = navigator.mediaDevices.getUserMedia({ video: true });
 
-  p.then(function(stream) {
-    var imgURL = window.URL.createObjectURL(stream);
+  p.then(stream => {
+    const imgURL = window.URL.createObjectURL(stream);
 
     video.src = imgURL;
 
-    video.onloadedmetadata = function() {
+    video.onloadedmetadata = () => {
       window.URL.revokeObjectURL(imgURL);
     };
-  }).catch(function(err) {
-    console.log(err.name + ': ' + err.message);
+  }).catch(err => {
+    console.log(`${err.name}: ${err.message}`);
   });
 
   // snap
-  document.querySelector('.snap').onclick = function(e) {
+  document.querySelector('.snap').onclick = e => {
     e.preventDefault();
 
     ctx.drawImage(video, 0, 0, 450, 350);

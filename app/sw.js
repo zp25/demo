@@ -3,14 +3,14 @@ var CACHE_VERSION = 1.2;
 
 /** @type {Object} 当前可用cacheName */
 var CURRENT_CACHES = {
-  offline: 'offline-v' + CACHE_VERSION
+  offline: 'offline-v' + CACHE_VERSION,
 };
 
 /** @type {Array}  */
 var OFFLINE_URL = {
   offline: 'sw',
   style: new URL('styles/main.min.css', self.location.origin).href,
-  image: new URL('images/zp.jpg', self.location.origin).href
+  image: new URL('images/zp.jpg', self.location.origin).href,
 };
 
 /**
@@ -19,7 +19,7 @@ var OFFLINE_URL = {
  * @return {Request} Request Object
  */
 function buildRequest(url) {
-  var request = new Request(url, {cache: 'reload', mode: 'no-cors'});
+  var request = new Request(url, { cache: 'reload', mode: 'no-cors' });
   var bustedUrl;
 
   if ('cache' in request) {
@@ -31,7 +31,7 @@ function buildRequest(url) {
   bustedUrl.search +=
     (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now();
 
-  return new Request(bustedUrl, {mode: 'no-cors'});
+  return new Request(bustedUrl, { mode: 'no-cors' });
 }
 
 /** 安装，预先获取需缓存资源 */
