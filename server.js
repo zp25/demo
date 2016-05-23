@@ -15,7 +15,7 @@ var dist = path.resolve(__dirname, 'dist');
 app.set('ico', path.resolve(dist, 'favicon.ico'));
 app.set('upfile', path.resolve(dist, 'uploads'));
 app.set('public', path.resolve(dist, 'public'));
-app.set('port', process.env.PORT || 8081);
+app.set('port', process.env.PORT || 8881);
 app.set('oneDay', 86400000);
 
 var origin = app.get('env') === 'development' ?
@@ -37,7 +37,7 @@ app.use(compression());
 app.use(favicon(app.get('ico')));
 
 /** static */
-app.use(express.static(app.get('public'), {maxAge: app.get('oneDay')}));
+app.use(express.static(app.get('public'), { maxAge: app.get('oneDay') }));
 
 /** router */
 Object.keys(Root).forEach(function(key) {
@@ -54,13 +54,13 @@ app.get('/:page_name', function(req, res) {
     return res.end('Page Not Found');
   }
 
-  fs.readFile(file, {encoding: 'utf8'}, function(err, data) {
+  fs.readFile(file, { encoding: 'utf8' }, function(err, data) {
     if (err) {
       res.writeHead(404);
       return res.end('Page Not Found');
     }
 
-    res.render('pages', {container: data, origin: origin});
+    res.render('pages', { container: data, origin: origin });
   });
 });
 
