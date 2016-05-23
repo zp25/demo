@@ -60,28 +60,28 @@
           <ul>
             <li>
               <span>perspective:&nbsp;<span id="perspective"></span></span>
-              <input type="range" name="perspective" min="0" max="5000" value="1000" data-label="perspective">
+              <input type="range" name="perspective" min="0" max="5000" value="1000" data-group="box" data-label="perspective">
             </li>
             <li>
               <span>perspective-origin:&nbsp;<span id="perspective-origin"></span></span>
-              <input type="range" name="perspective-origin-x" min="-300" max="300" value="150" data-label="perspective-origin">
-              <input type="range" name="perspective-origin-y" min="-300" max="300" value="150" data-label="perspective-origin">
+              <input type="range" name="perspective-origin-x" min="-300" max="300" value="150" data-group="box" data-label="perspective-origin">
+              <input type="range" name="perspective-origin-y" min="-300" max="300" value="150" data-group="box" data-label="perspective-origin">
             </li>
             <li>
               <span>transform-style:&nbsp;<span id="transform-style"></span></span>
-              <select name="transform-style" data-label="transform-style" value="1">
+              <select name="transform-style" value="1" data-group="cube" data-label="transform-style">
                 <option value="1">preserve-3d</option>
                 <option value="2">flat</option>
               </select>
             </li>
             <li>
               <span>transform-origin:&nbsp;<span id="transform-origin"></span></span>
-              <input type="range" name="transform-origin-x" min="-50" max="150" value="50" data-label="transform-origin">
-              <input type="range" name="transform-origin-y" min="0" max="100" value="50" data-label="transform-origin">
+              <input type="range" name="transform-origin-x" min="-50" max="150" value="50" data-group="face" data-label="transform-origin">
+              <input type="range" name="transform-origin-y" min="0" max="100" value="50" data-group="face" data-label="transform-origin">
             </li>
             <li>
               <span>backface-visibility:&nbsp;<span id="backface-visibility"></span></span>
-              <select name="backface-visibility" data-label="backface-visibility" value="1">
+              <select name="backface-visibility" data-label="backface-visibility" data-group="face" value="1">
                 <option value="1">visible</option>
                 <option value="2">hidden</option>
               </select>

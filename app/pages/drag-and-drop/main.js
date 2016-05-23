@@ -45,9 +45,7 @@ function buildItems() {
   const data = JSON.parse(localStorage.getItem('data')) || Base;
 
   data.forEach((item, index) => {
-    const iid = index + 1;
-    const id = `#li-${iid}`;
-    const box = document.querySelector(id);
+    const id = index + 1;
     const el = document.createElement('a');
 
     el.classList.add('items');
@@ -61,7 +59,7 @@ function buildItems() {
     const t = document.createTextNode(item.name);
 
     el.appendChild(t);
-    box.appendChild(el);
+    document.querySelector(`#li-${id}`).appendChild(el);
   });
 }
 
@@ -113,11 +111,11 @@ function attachEvents() {
   });
 }
 
-/** OnLoad Event */
-window.addEventListener('load', () => {
+/** Window OnLoad Event */
+window.onload = () => {
   buildItems();
   attachEvents();
-}, false);
+};
 
 /** update localstorage before unload */
 window.addEventListener('beforeunload', () => {

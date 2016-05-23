@@ -11,6 +11,16 @@ $line-height: $font + 10;
 // others
 $section-padding: 20px;
 
+/**
+ * mixins
+ */
+@mixin flexbox($direction:row, $wrap:nowrap, $justify-content:flex-start, $align-items:stretch) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
 *,
 *:before,
 *:after {
@@ -34,9 +44,7 @@ html {
     font-size: $font;
     color: $color;
     line-height: $line-height;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
+    @include flexbox(row, wrap, center);
 
     h1 {
       font-size: 34px;

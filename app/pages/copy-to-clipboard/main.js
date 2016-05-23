@@ -3,8 +3,7 @@
  * @param {Object} e 事件对象
  */
 function handler(e) {
-  const t = e.target;
-  const c = t.dataset.copytarget;
+  const c = e.target.dataset.copytarget;
   const inp = c ? document.querySelector(c) : null;
 
   if (inp && inp.select) {

@@ -118,7 +118,7 @@ class Tetris {
 
   /**
    * 绘制边框
-   * @param {Object} ctx context
+   * @param {Object} ctx canvas context
    */
   drawBorder(ctx) {
     ctx.lineWidth = 1;
@@ -138,7 +138,7 @@ class Tetris {
 
   /**
    * text样式
-   * @param {Object} ctx     canvas context
+   * @param {Object} ctx canvas context
    * @param {String} txt text内容
    * @param {Number} x   x轴偏移量
    * @param {Number} y   y轴偏移量
@@ -273,7 +273,7 @@ class DrawTetris extends Tetris {
 
 /** Onload Event */
 window.addEventListener('load', () => {
-  const canvas = document.getElementById('fpDoodle');
+  const canvas = document.querySelector('#fpDoodle');
   const ctx = canvas.getContext('2d');
   const tetris = new DrawTetris();
 

@@ -31,6 +31,20 @@ function initHint() {
 }
 
 /**
+ * 初始化
+ * @param {Object} e 事件对象
+ */
+function init(e) {
+  // 正在上传时阻止操作
+  if (!Base.loading) {
+    initHint();
+    initFiles();
+  }
+
+  e.preventDefault();
+}
+
+/**
  * ajax
  * @param {String} url  Upload URL
  * @param {Object} data File Object
@@ -98,9 +112,6 @@ function buildThumbnail(file) {
  */
 function handleFiles(files) {
   const unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  const t = document.querySelector('#fileDetail');
-  const hintLen = document.querySelector('#fileLength');
-  const hintSize = document.querySelector('#fileSize');
   const df = document.createDocumentFragment();
   // 文件总大小
   let size = 0;
@@ -140,15 +151,16 @@ function handleFiles(files) {
     Base.fileSize += files[i].size;
   }
 
-  t.appendChild(df);
+  // 添加图片预览信息
+  document.querySelector('#fileDetail').appendChild(df);
 
-  // totoal size
+  // 更新已选图片信息
   for (let j = 0, temp = Base.fileSize; temp > 1; temp /= 1024, j++) {
     size = temp.toFixed(3) + unit[j];
   }
 
-  hintLen.innerHTML = Base.fileQueue.length;
-  hintSize.innerHTML = size;
+  document.querySelector('#fileLength').innerHTML = Base.fileQueue.length;
+  document.querySelector('#fileSize').innerHTML = size;
 }
 
 /**
@@ -178,20 +190,6 @@ function upload(file, li, count) {
       console.log(err);
     });
   }
-}
-
-/**
- * 初始化
- * @param {Object} e 事件对象
- */
-function init(e) {
-  // 正在上传时阻止操作
-  if (!Base.loading) {
-    initHint();
-    initFiles();
-  }
-
-  e.preventDefault();
 }
 
 /**
@@ -305,8 +303,6 @@ document.addEventListener('DOMContentLoaded', () => {
 }, false);
 
 /** OnLoad Event */
-window.addEventListener('load', () => {
-  const clean = document.querySelector('#clear');
-
-  clean.click();
-}, false);
+window.onload = () => {
+  document.querySelector('#clear').click();
+};

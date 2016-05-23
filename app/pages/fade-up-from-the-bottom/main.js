@@ -2,12 +2,10 @@
  * 检查元素是否进入viewport
  */
 function checkIfInView() {
-  const windowHeight = window.innerHeight;
-
   Array.from(document.querySelectorAll('.elem')).forEach(elem => {
     const rectObject = elem.getBoundingClientRect();
 
-    if (rectObject.top < windowHeight) {
+    if (rectObject.top < window.innerHeight) {
       elem.classList.add('in-view');
     } else {
       elem.classList.remove('in-view');
@@ -15,11 +13,11 @@ function checkIfInView() {
   });
 }
 
-/** Events */
-window.addEventListener('load', () => {
+/** Window Onload Events */
+window.onload = () => {
   // init
   checkIfInView();
-}, false);
+};
 
 window.addEventListener('scroll', checkIfInView, false);
 window.addEventListener('resize', checkIfInView, false);

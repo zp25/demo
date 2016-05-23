@@ -1,4 +1,5 @@
-(() => {
+/** Window Onload Event */
+window.onload = () => {
   const info = document.querySelector('p:nth-child(1)');
   const data = document.querySelector('p:nth-child(2)');
   const opts = {
@@ -36,4 +37,4 @@
       }
     });
   }
-})();
+};

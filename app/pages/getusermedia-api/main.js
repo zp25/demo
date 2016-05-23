@@ -1,12 +1,14 @@
-(() => {
+/**
+ * 摄像头操作
+ * @return {[type]} [description]
+ */
+function getUserMedia() {
   if (!navigator.mediaDevices) {
     console.log('Error! Use FF36+');
     return;
   }
 
   const video = document.querySelector('video');
-  const canvas = document.querySelector('canvas');
-  const ctx = canvas.getContext('2d');
 
   // list media devices
   navigator.mediaDevices.enumerateDevices().then(devices => {
@@ -20,9 +22,7 @@
   });
 
   // use
-  const p = navigator.mediaDevices.getUserMedia({ video: true });
-
-  p.then(stream => {
+  navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
     const imgURL = window.URL.createObjectURL(stream);
 
     video.src = imgURL;
@@ -36,8 +36,16 @@
 
   // snap
   document.querySelector('.snap').onclick = e => {
-    e.preventDefault();
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
 
     ctx.drawImage(video, 0, 0, 450, 350);
+
+    e.preventDefault();
   };
-})();
+}
+
+/** Window Onload Event */
+window.onload = () => {
+  getUserMedia();
+};

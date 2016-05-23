@@ -2,20 +2,18 @@ window.$ = document.querySelector.bind(document);
 window.$$ = document.querySelectorAll.bind(document);
 
 /** @type {Object} Global Object */
-const Global = {
-  units: {
-    translateX: 'px',
-    translateY: 'px',
-    translateZ: 'px',
-    rotate: 'deg',
-    rotateX: 'deg',
-    rotateY: 'deg',
-    rotateZ: 'deg',
-    scale: '',
-    scale3d: '',
-    skewX: 'deg',
-    skewY: 'deg',
-  },
+const UNITS = {
+  translateX: 'px',
+  translateY: 'px',
+  translateZ: 'px',
+  rotate: 'deg',
+  rotateX: 'deg',
+  rotateY: 'deg',
+  rotateZ: 'deg',
+  scale: '',
+  scale3d: '',
+  skewX: 'deg',
+  skewY: 'deg',
 };
 
 /**
@@ -51,56 +49,76 @@ function changeMode(mode) {
  */
 function setValue2D() {
   const inputs = $('form[name=form-2d]').querySelectorAll('input');
-  let state = '';
+  const state = [];
 
   Array.from(inputs).forEach(input => {
-    let val = input.value;
     const name = input.getAttribute('name');
     const label = input.dataset.label;
-    const unit = Global.units[name];
+    const result = (name === 'scale' ? input.value / 2 : input.value) + UNITS[name];
 
-    if (name === 'scale') {
-      val /= 2;
-    }
-
-    state += `${name}(${val + unit}) `;
+    state.push(`${name}(${result})`);
 
     // show
-    $(`#${label}`).innerHTML = val + unit;
+    $(`#${label}`).innerHTML = result;
   });
 
-  $('#box-2d').style = `transform: ${state}`;
+  $('#box-2d').style = `transform: ${state.join(' ')}`;
 }
 
 /**
  * 修改3D box样式
  */
 function boxStyle() {
-  const vp = $('input[name=perspective]').value;
-  const px = $('input[name=perspective-origin-x]').value || 150;
-  const py = $('input[name=perspective-origin-y]').value || 150;
+  const inp = $('input[name=perspective]');
+  const inx = $('input[name=perspective-origin-x]');
+  const iny = $('input[name=perspective-origin-y]');
+  const vp = `${inp.value}px`;
+  const vo = `${inx.value || 150}% ${iny.value || 150}%`;
 
-  const perspective = `perspective: ${vp}px`;
-  const origin = `perspective-origin: ${px}% ${py}%`;
+  $(`#${inp.dataset.label}`).innerHTML = vp;
+  $(`#${inx.dataset.label}`).innerHTML = vo;
 
-  $('#box-3d').style = `${perspective}; ${origin}`;
+  $('#box-3d').style = `perspective: ${vp}; perspective-origin: ${vo};`;
+}
 
-  // $(`#${label}`).innerHTML = val;
+/**
+ * 修改3D box内部cube样式
+ */
+function cubeStyle() {
+  const input = $('select[name=transform-style]');
+  const result = Number(input.value) === 1 ? 'preserve-3d' : 'flat';
+
+  $(`#${input.dataset.label}`).innerHTML = result;
+
+  $('#box-3d .cube').style = `transform-style: ${result}`;
+}
+
+/**
+ * 修改3D box内部各面样式
+ */
+function faceStyle() {
+  const inx = $('input[name=transform-origin-x]');
+  const iny = $('input[name=transform-origin-y]');
+  const inb = $('select[name=backface-visibility]');
+  const vo = `${inx.value || 50}% ${iny.value || 50}%`;
+  const vb = Number(inb.value) === 1 ? 'visible' : 'hidden';
+
+  $(`#${inx.dataset.label}`).innerHTML = vo;
+  $(`#${inb.dataset.label}`).innerHTML = vb;
+
+  Array.from($$('#box-3d .cube div')).forEach(face => {
+    face.style = `transform-origin: ${vo}; backface-visibility: ${vb};`;
+  });
 }
 
 /**
  * 设置3D值
  */
 function setValue3D() {
-  const t = $('#box-3d');
-  const cube = t.querySelector('.cube');
-  const faces = cube.querySelectorAll('div');
   const inputs = $('form[name=form-3d]').querySelectorAll('input, select');
 
   Array.from(inputs).forEach(input => {
     const name = input.getAttribute('name');
-    const label = input.dataset.label;
-    let val = input.value;
 
     switch (name) {
       case 'perspective':
@@ -109,34 +127,18 @@ function setValue3D() {
         boxStyle();
         break;
 
-      case 'transform-style': {
-        val = Number(val) === 1 ? 'preserve-3d' : 'flat';
-        cube.style = `${label}: ${val}`;
+      case 'transform-style':
+        cubeStyle();
         break;
-      }
-      case 'transform-origin-x':
-      case 'transform-origin-y': {
-        const tx = $('input[name=transform-origin-x]').value || 50;
-        const ty = $('input[name=transform-origin-y]').value || 50;
 
-        val = `${tx}% ${ty}%`;
-        Array.from(faces).forEach(face => {
-          face.style = `${label}: ${val}`;
-        });
+      case 'transform-origin-x':
+      case 'transform-origin-y':
+      case 'backface-visibility':
+        faceStyle();
         break;
-      }
-      case 'backface-visibility': {
-        val = Number(val) === 1 ? 'visible' : 'hidden';
-        Array.from(faces).forEach(face => {
-          face.style = `${label}: ${val}`;
-        });
-        break;
-      }
+
       default: break;
     }
-
-    // show
-    $(`#${label}`).innerHTML = val;
   });
 }
 

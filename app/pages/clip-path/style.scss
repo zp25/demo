@@ -1,6 +1,8 @@
 $base: #a5e2f3;
 
 #clip-path {
+  overflow-x: hidden;
+
   ul {
     width: 500px;
     height: 500px;

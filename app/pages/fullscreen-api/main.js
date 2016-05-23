@@ -1,9 +1,3 @@
-/** window onload Event */
-window.addEventListener('load', () => {
-  // var elemInfo = document.querySelector('p:nth-child(1)');
-  // var enabledInfo = document.querySelector('p:nth-child(2)');
-}, false);
-
 /**
  * Find the right method, call on correct element
  * @param {Element} elem Element
@@ -31,17 +25,20 @@ function exitFullscreen() {
   }
 }
 
-/** toggle fullscreen */
-document.querySelector('.launch').addEventListener('click', e => {
-  launchIntoFullscreen(document.documentElement);
+/** DOMContentLoaded Event */
+document.addEventListener('DOMContentLoaded', () => {
+  /** toggle fullscreen */
+  document.querySelector('.launch').addEventListener('click', e => {
+    launchIntoFullscreen(document.documentElement);
 
-  e.preventDefault();
-}, false);
+    e.preventDefault();
+  }, false);
 
-document.querySelector('.cancel').addEventListener('click', e => {
-  exitFullscreen();
+  document.querySelector('.cancel').addEventListener('click', e => {
+    exitFullscreen();
 
-  e.preventDefault();
+    e.preventDefault();
+  }, false);
 }, false);
 
 // fullscreen events

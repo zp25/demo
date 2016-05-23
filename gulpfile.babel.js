@@ -15,7 +15,7 @@ const PATHS = {
     dest: 'dist',
   },
   styles: {
-    src: ['app/styles/main.scss', 'app/pages/**/*.scss'],
+    src: ['app/styles/**/*.{css,scss}', 'app/pages/**/*.scss'],
     tmp: '.tmp/styles',
     dest: 'dist/public/styles',
   },
