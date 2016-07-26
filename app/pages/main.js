@@ -17,8 +17,8 @@ if ('serviceWorker' in navigator) {
         t.classList.add('sw--done');
       }
     }
-  ).catch(error => {
-    console.log(error);
+  ).catch(err => {
+    console.log(err.message);
     document.querySelector('header h1').classList.add('sw--error');
   });
 }
