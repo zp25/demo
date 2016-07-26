@@ -174,7 +174,7 @@ class DrawTetris extends Tetris {
 
     ctx.save();
     ctx.translate(255, 495);
-    ctx.rotate(180 * Math.PI / 180);
+    ctx.rotate(Math.PI);  // (1 * PI)rad = 180deg
     ctx.scale(10, 10);
     this.drawT(ctx);
     ctx.restore();
@@ -224,7 +224,7 @@ class DrawTetris extends Tetris {
       ctx.save();
       ctx.translate(263, 500);
       ctx.save();
-      ctx.rotate(180 * Math.PI / 180);
+      ctx.rotate(Math.PI);  // (1 * PI)rad = 180deg
       ctx.scale(s, s);
       this.drawT(ctx);
       ctx.restore();

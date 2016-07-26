@@ -63,7 +63,7 @@ function ajax(url, data, t) {
     // upload progress bar
     xhr.upload.onprogress = e => {
       if (e.lengthComputable) {
-        const pct = Math.round(e.loaded / e.total * 100);
+        const pct = Math.round((e.loaded / e.total) * 100);
 
         progress.value = pct;
         progress.innerHTML = `${pct}%`;
