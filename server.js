@@ -1,34 +1,35 @@
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var exphbs  = require('express-handlebars');
-var favicon = require('serve-favicon');
-var multer = require('multer');
-var compression = require('compression');
-var errorHandler = require('errorhandler');
+const fs = require('fs');
+const path = require('path');
+const express = require('express');
+const exphbs  = require('express-handlebars');
+const favicon = require('serve-favicon');
+const multer = require('multer');
+const compression = require('compression');
+const errorHandler = require('errorhandler');
 
-var app = express();
+const app = express();
 
-var dist = path.resolve(__dirname, 'dist');
+const dist = path.resolve(__dirname, 'dist');
 
 /** const */
 app.set('ico', path.resolve(dist, 'favicon.ico'));
 app.set('upfile', path.resolve(dist, 'uploads'));
 app.set('public', path.resolve(dist, 'public'));
+
 app.set('port', process.env.PORT || 8881);
 app.set('oneDay', 86400000);
 
-var origin = app.get('env') === 'development' ?
-  ('http://localhost:' + app.get('port')) : 'https://demo.zp25.ninja';
+const origin = app.get('env') === 'development' ?
+  (`http://localhost:${app.get('port')}`) : 'https://demo.zp25.ninja';
 
 /** @type {Object} 需从根路径获取的资源 */
-var Root = {
+const Root = {
   '/': path.resolve(dist, 'index.html'),
   '/sw.js': path.resolve(dist, 'sw.js')
 };
 
 /** template engine */
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 /** compression */
@@ -40,21 +41,21 @@ app.use(favicon(app.get('ico')));
 app.use(express.static(app.get('public'), { maxAge: app.get('oneDay') }));
 
 /** router */
-Object.keys(Root).forEach(function(key) {
-  app.get(key, function(req, res) {
+Object.keys(Root).forEach(key => {
+  app.get(key, (req, res) => {
     res.sendFile(Root[key]);
   });
 });
 
-app.get('/:page_name', function(req, res) {
-  var file = path.resolve(dist, req.params.page_name, 'index.html');
+app.get('/:page_name', (req, res) => {
+  const file = path.resolve(dist, req.params.page_name, 'index.html');
 
   if (req.path[req.path.length - 1] === '/') {
     res.writeHead(404);
     return res.end('Page Not Found');
   }
 
-  fs.readFile(file, { encoding: 'utf8' }, function(err, data) {
+  fs.readFile(file, { encoding: 'utf8' }, (err, data) => {
     if (err) {
       res.writeHead(404);
       return res.end('Page Not Found');
@@ -65,11 +66,11 @@ app.get('/:page_name', function(req, res) {
 });
 
 /** multer config */
-var upload = multer({
+const upload = multer({
   dest: app.get('upfile'),
   limits: { fileSize: 1048576 },
-  fileFilter: function(req, file, cb) {
-    var regex = /^image\//;
+  fileFilter: (req, file, cb) => {
+    const regex = /^image\//;
 
     if (!regex.test(file.mimetype)) {
       cb(null, false);
@@ -80,12 +81,12 @@ var upload = multer({
 });
 
 /** upload file */
-app.post('/uploads', upload.single('fileField'), function(req, res, cb) {
-  var file = {
+app.post('/uploads', upload.single('fileField'), (req, res, cb) => {
+  const file = {
     originalname: req.file.originalname,
     mimetype: req.file.mimetype,
     filename: req.file.filename,
-    size: req.file.size
+    size: req.file.size,
   };
 
   res.send(JSON.stringify(file));
@@ -98,6 +99,6 @@ if (app.get('env') === 'development') {
 }
 
 /** engine start! */
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+app.listen(app.get('port'), () => {
+  console.log(`Express server listening on port ${app.get('port')}`);
 });
