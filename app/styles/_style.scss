@@ -1,29 +1,6 @@
-$color: #373737;
-
-// font-size(px): 12, 14, 16, 20, 34
-$font-light: 12px;
-$font: 14px;
-$font-bold: 16px;
-$font-bolder: 20px;
-
-$line-height: $font + 10;
-
-// others
-$section-padding: 20px;
-
-/**
- * mixins
- */
-@mixin flexbox($direction:row, $wrap:nowrap, $justify-content:flex-start, $align-items:stretch) {
-  display: flex;
-  flex-flow: $direction $wrap;
-  justify-content: $justify-content;
-  align-items: $align-items;
-}
-
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -webkit-tap-highlight-color: transparent;  // for some Androids
