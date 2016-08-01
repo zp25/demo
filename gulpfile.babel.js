@@ -133,7 +133,6 @@ function clean() {
 
 // tasks
 gulp.task(clean);
-gulp.task(scripts);
 
 // Clean cache
 gulp.task('clean:cache', cb => $.cache.clearAll(cb));
