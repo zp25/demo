@@ -9,7 +9,6 @@
     "$$": false
   },
   "rules": {
-    "no-console": 0,
     "no-cond-assign": ["error", "except-parens"],
     "no-param-reassign": [
       "error", { "props": false }
