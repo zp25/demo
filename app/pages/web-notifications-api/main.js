@@ -1,7 +1,7 @@
-/** Window Onload Event */
-window.onload = () => {
-  const info = document.querySelector('p:nth-child(1)');
-  const data = document.querySelector('p:nth-child(2)');
+/**
+ * 创建提醒
+ */
+function sendNotification() {
   const opts = {
     tag: 'First',
     lang: 'en-US',
@@ -11,30 +11,42 @@ window.onload = () => {
     icon: 'img/icon.png',
     silent: false,
   };
+  const notify = new Notification('Web Notifications API', opts);
+  setTimeout(notify.close.bind(notify), 5000);
 
-  info.innerHTML = '...';
-  data.innerHTML = '';
+  return notify;
+}
+
+/** Window Onload Event */
+window.onload = () => {
+  const info = document.querySelector('.info');
+  const data = document.querySelector('.data');
 
   if (Notification.permision === 'granted') {
-    const n = new Notification('Web Notifications API', opts);
-    setTimeout(n.close.bind(n), 5000);
+    const notify = sendNotification();
 
     info.innerHTML = 'Permission Granted';
-    data.innerHTML = n.data;
+    data.innerHTML = notify.data;
   } else if (Notification.permission === 'denied') {
     info.innerHTML = 'Permission Denied';
   } else {
-    Notification.requestPermission(result => {
-      if (result === 'granted') {
-        const n = new Notification('Web Notifications API', opts);
-        setTimeout(n.close.bind(n), 5000);
+    Notification.requestPermission().then(result => {
+      data.innerHTML = '';
 
-        info.innerHTML = 'Permission Granted';
-        data.innerHTML = n.data;
-      } else if (result === 'denied') {
+      if (result === 'denied') {
         info.innerHTML = 'Permission Denied';
-        data.innerHTML = '';
+        return;
       }
+
+      if (result === 'default') {
+        info.innerHTML = 'Permission Dismissed';
+        return;
+      }
+
+      const notify = sendNotification();
+
+      info.innerHTML = 'Permission Granted';
+      data.innerHTML = notify.data;
     });
   }
 };
