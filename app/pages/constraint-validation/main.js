@@ -18,6 +18,7 @@ class ConstraintValidation {
       // customValidity设置后将一直保存，需手动清理，然后重新执行验证
       if (e.target.validity.customError) {
         e.target.setCustomValidity('');
+        e.target.dispatchEvent(this.customValid);
       }
 
       e.target.checkValidity();
