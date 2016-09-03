@@ -6,6 +6,7 @@
   "scripts": {
     "gulp": "gulp",
     "start": "NODE_ENV=development nodemon --debug server.js",
+    "production": "gulp --gulpfile gulpfile-production.babel.js",
     "postinstall": "node heroku"
   },
   "repository": {
@@ -34,8 +35,10 @@
     "gulp-load-plugins": "^1.2.4",
     "gulp-postcss": "^6.1.1",
     "gulp-sass": "^2.3.2",
+    "gulp-sass-glob": "^1.0.6",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^2.0.0",
+    "gulp-webp": "^2.3.0",
     "multer": "^1.2.0",
     "nodemon": "^1.10.2",
     "serve-favicon": "^2.3.0"

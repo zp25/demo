@@ -11,22 +11,14 @@ const PATHS = {
       'app/index.html',
       'app/pages/**/*.html'
     ],
-    tmp: '.tmp',
     dest: 'dist',
   },
   styles: {
-    src: ['app/styles/**/*.{css,scss}', 'app/pages/**/*.scss'],
-    tmp: '.tmp/styles',
+    src: 'app/styles/**/*.{css,scss}',
     dest: 'dist/public/styles',
   },
   scripts: {
-    src: [
-      'app/pages/**/*.js',
-    ],
-    concat: [
-      'app/sw.js',
-    ],
-    tmp: '.tmp',
+    src: 'app/pages/**/*.js',
     dest: 'dist/public/scripts',
   },
   images: {
@@ -44,15 +36,26 @@ function lint() {
 }
 
 // Image Optimazation
+const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
+
 function images() {
   return gulp.src(PATHS.images.src)
     .pipe($.cache($.imagemin({
       progressive: true,
       interlaced: true,
       multipass: true,
-    })))
+    }), {
+      key: makeHashKey('images'),
+    }))
     .pipe(gulp.dest(PATHS.images.dest))
     .pipe($.size({ title: 'images' }));
+}
+
+function webp() {
+  return gulp.src(PATHS.images.src)
+    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+    .pipe(gulp.dest(PATHS.images.dest))
+    .pipe($.size({ title: 'webp' }));
 }
 
 // Copy
@@ -69,40 +72,34 @@ function sass() {
   ];
 
   return gulp.src(PATHS.styles.src)
-    .pipe($.newer(PATHS.styles.tmp))
+    .pipe($.newer(PATHS.styles.dest))
     .pipe($.sourcemaps.init())
+      .pipe($.sassGlob())
       .pipe($.sass({ precision: 10 })
         .on('error', $.sass.logError)
       )
-    .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.styles.tmp))
-      .pipe($.if('*.css', $.concat('main.min.css')))
       .pipe($.postcss(processors))
       .pipe($.size({ title: 'styles' }))
-    .pipe($.sourcemaps.write('.'))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest(PATHS.styles.dest));
 }
 
 // Scripts
 function scripts() {
   return gulp.src(PATHS.scripts.src)
-    .pipe($.newer(PATHS.scripts.tmp))
+    .pipe($.newer(PATHS.scripts.dest))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
+      .pipe($.size({ title: 'scripts', showFiles: true }))
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.scripts.tmp))
-      .pipe($.uglify())
-      .pipe($.size({ title: 'scripts' }))
-    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.scripts.dest));
 }
 
 // HTML
 function html() {
   return gulp.src(PATHS.html.src)
-    .pipe($.newer(PATHS.html.tmp))
-    .pipe(gulp.dest(PATHS.html.tmp))
-    .pipe($.if('*.html', $.htmlmin({
+    .pipe($.newer(PATHS.html.dest))
+    .pipe($.htmlmin({
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
@@ -112,8 +109,8 @@ function html() {
       removeRedundantAttributes: true,
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
-    })))
-    .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
+    }))
+    .pipe($.size({ title: 'html', showFiles: true }))
     .pipe(gulp.dest(PATHS.html.dest));
 }
 
@@ -122,13 +119,14 @@ function watch() {
   gulp.watch(PATHS.html.src, html);
   gulp.watch(PATHS.styles.src, sass);
   gulp.watch(PATHS.scripts.src, gulp.parallel(lint, scripts));
-  gulp.watch(PATHS.sw, gulp.parallel(lint, copy));
+  gulp.watch(PATHS.sw, copy);
   gulp.watch(PATHS.images.src, images);
 }
 
 // Clean output directory
 function clean() {
-  return del(['.tmp', 'dist/*']);
+  // return del(['.tmp', 'dist/*']);
+  return del(['dist/*']);
 }
 
 // tasks
@@ -141,7 +139,7 @@ gulp.task('clean:cache', cb => $.cache.clearAll(cb));
 gulp.task('default',
   gulp.series(
     clean, html,
-    gulp.parallel(lint, scripts, sass, images, copy),
+    gulp.parallel(lint, scripts, sass, images, webp, copy),
     watch
   )
 );

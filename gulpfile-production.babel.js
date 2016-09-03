@@ -15,7 +15,7 @@ const PATHS = {
     dest: 'dist',
   },
   styles: {
-    src: ['app/styles/main.scss', 'app/pages/**/*.scss'],
+    src: 'app/styles/**/*.{css,scss}',
     dest: 'dist/public/styles',
   },
   scripts: {
@@ -29,6 +29,8 @@ const PATHS = {
 };
 
 // Image Optimazation
+const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
+
 function images() {
   return gulp.src(PATHS.images.src)
     .pipe($.imagemin({
@@ -36,6 +38,12 @@ function images() {
       interlaced: true,
       multipass: true,
     }))
+    .pipe(gulp.dest(PATHS.images.dest));
+}
+
+function webp() {
+  return gulp.src(PATHS.images.src)
+    .pipe($.webp({ quality: 75 }))
     .pipe(gulp.dest(PATHS.images.dest));
 }
 
@@ -54,10 +62,10 @@ function sass() {
 
   return gulp.src(PATHS.styles.src)
     .pipe($.sourcemaps.init())
+      .pipe($.sassGlob())
       .pipe($.sass({ precision: 10 })
         .on('error', $.sass.logError)
       )
-      .pipe($.if('*.css', $.concat('main.min.css')))
       .pipe($.postcss(processors))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.styles.dest));
@@ -76,7 +84,7 @@ function scripts() {
 // HTML
 function html() {
   return gulp.src(PATHS.html.src)
-    .pipe($.if('*.html', $.htmlmin({
+    .pipe($.htmlmin({
       collapseWhitespace: true,
       collapseBooleanAttributes: true,
       removeAttributeQuotes: true,
@@ -86,7 +94,7 @@ function html() {
       removeRedundantAttributes: true,
       removeScriptTypeAttributes: true,
       removeStyleLinkTypeAttributes: true,
-    })))
+    }))
     .pipe(gulp.dest(PATHS.html.dest));
 }
 
@@ -99,6 +107,6 @@ function clean() {
 gulp.task('default',
   gulp.series(
     clean, html,
-    gulp.parallel(scripts, sass, images, copy)
+    gulp.parallel(scripts, sass, images, webp, copy)
   )
 );
