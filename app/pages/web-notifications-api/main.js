@@ -8,7 +8,7 @@ function sendNotification() {
     dir: 'ltr',
     body: 'Hello World',
     data: 'This is data',
-    icon: 'img/icon.png',
+    icon: 'favicon.ico',
     silent: false,
   };
   const notify = new Notification('Web Notifications API', opts);
