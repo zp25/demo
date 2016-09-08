@@ -155,7 +155,7 @@ function handleFiles(files) {
   document.querySelector('#fileDetail').appendChild(df);
 
   // 更新已选图片信息
-  for (let j = 0, temp = Base.fileSize; temp > 1; temp /= 1024, j++) {
+  for (let j = 0, temp = Base.fileSize; temp > 1; temp /= 1024, j += 1) {
     size = temp.toFixed(3) + unit[j];
   }
 
@@ -179,7 +179,7 @@ function upload(file, li, count) {
       console.log(data);
 
       // 计数
-      Base.count++;
+      Base.count += 1;
       if (Base.count === count) {
         Base.loading = false;
       }

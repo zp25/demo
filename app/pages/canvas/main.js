@@ -15,8 +15,8 @@ class Tetris {
     ctx.lineTo(0, 16);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
@@ -36,8 +36,8 @@ class Tetris {
     ctx.lineTo(0, 8);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
@@ -57,8 +57,8 @@ class Tetris {
     ctx.lineTo(0, 8);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
@@ -74,8 +74,8 @@ class Tetris {
     ctx.lineTo(0, 32);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
@@ -93,8 +93,8 @@ class Tetris {
     ctx.lineTo(0, 16);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
@@ -112,15 +112,15 @@ class Tetris {
     ctx.lineTo(0, 24);
     ctx.closePath();
 
-    this.drawBorder(ctx);
-    this.drawBackground(ctx, color);
+    this.constructor.drawBorder(ctx);
+    this.constructor.drawBackground(ctx, color);
   }
 
   /**
    * 绘制边框
    * @param {Object} ctx canvas context
    */
-  drawBorder(ctx) {
+  static drawBorder(ctx) {
     ctx.lineWidth = 1;
     ctx.strokeStyle = '#fff';
     ctx.stroke();
@@ -131,7 +131,7 @@ class Tetris {
    * @param {Object} ctx     canvas context
    * @param {String} bgcolor 背景颜色
    */
-  drawBackground(ctx, bgcolor) {
+  static drawBackground(ctx, bgcolor) {
     ctx.fillStyle = bgcolor;
     ctx.fill();
   }
@@ -143,7 +143,7 @@ class Tetris {
    * @param {Number} x   x轴偏移量
    * @param {Number} y   y轴偏移量
    */
-  setText(ctx, txt, x, y) {
+  static setText(ctx, txt, x, y) {
     ctx.font = '25px "Helvetica Neue", Helvetica, Arial, sans-serif';
     ctx.fillStyle = '#dfdfdf';
     ctx.fillText(txt, x, y);
@@ -209,7 +209,7 @@ class DrawTetris extends Tetris {
       this.drawO(ctx);
       ctx.restore();
 
-      this.tetrisAct(canvas, 'www');
+      this.constructor.tetrisAct(canvas, 'www');
     } else if ((x > 335 && x < 495 && y > 15 && y < 95) ||
                (x > 415 && x < 575 && y > 95 && y < 175)) {
       ctx.save();
@@ -218,7 +218,7 @@ class DrawTetris extends Tetris {
       this.drawZ(ctx);
       ctx.restore();
 
-      this.tetrisAct(canvas, 'lxl');
+      this.constructor.tetrisAct(canvas, 'lxl');
     } else if ((x > 95 && x < 175 && y > 335 && y < 415) ||
                (x > 15 && x < 255 && y > 415 && y < 495)) {
       ctx.save();
@@ -230,7 +230,7 @@ class DrawTetris extends Tetris {
       ctx.restore();
       ctx.restore();
 
-      this.tetrisAct(canvas, 'xia');
+      this.constructor.tetrisAct(canvas, 'xia');
     } else if (x > 415 && x < 495 && y > 215 && y < 535) {
       ctx.save();
       ctx.translate(413, 205);
@@ -238,7 +238,7 @@ class DrawTetris extends Tetris {
       this.drawI(ctx);
       ctx.restore();
 
-      this.tetrisAct(canvas, 'zp');
+      this.constructor.tetrisAct(canvas, 'zp');
     } else if ((x > 215 && x < 295 && y > 295 && y < 375) ||
                (x > 295 && x < 375 && y > 135 && y < 375)) {
       ctx.save();
@@ -247,7 +247,7 @@ class DrawTetris extends Tetris {
       this.drawJ(ctx);
       ctx.restore();
 
-      this.tetrisAct(canvas, 'dii');
+      this.constructor.tetrisAct(canvas, 'dii');
     } else {
       ctx.clearRect(0, 0, 590, 550);
       this.drawAll(ctx);
@@ -262,7 +262,7 @@ class DrawTetris extends Tetris {
    * @param {Object} canvas canvas objec
    * @param {String} lct 方块名称
    */
-  tetrisAct(canvas, lct) {
+  static tetrisAct(canvas, lct) {
     canvas.onclick = () => {
       window.open(`http://${lct}.rensidiaochaotian.com/`);
     };

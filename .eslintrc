@@ -12,6 +12,9 @@
     "no-cond-assign": ["error", "except-parens"],
     "no-param-reassign": [
       "error", { "props": false }
+    ],
+    "no-plusplus": [
+      "error", { "allowForLoopAfterthoughts": true }
     ]
   },
   "extends": "airbnb-base"
