@@ -30,7 +30,7 @@ const PATHS = {
 
 // Lint JavaScript
 function lint() {
-  return gulp.src(PATHS.scripts.src)
+  return gulp.src([PATHS.scripts.src].concat([PATHS.sw]))
     .pipe($.eslint())
     .pipe($.eslint.format());
 }
@@ -119,7 +119,7 @@ function watch() {
   gulp.watch(PATHS.html.src, html);
   gulp.watch(PATHS.styles.src, sass);
   gulp.watch(PATHS.scripts.src, gulp.parallel(lint, scripts));
-  gulp.watch(PATHS.sw, copy);
+  gulp.watch(PATHS.sw, gulp.parallel(lint, copy));
   gulp.watch(PATHS.images.src, images);
 }
 
