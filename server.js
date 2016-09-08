@@ -61,7 +61,11 @@ app.get('/:page_name', (req, res) => {
       return res.end('Page Not Found');
     }
 
-    res.render('pages', { container: data, origin: origin });
+    res.render('pages', {
+      container: data,
+      origin: origin,
+      pathname: req.params.page_name,
+    });
   });
 });
 
