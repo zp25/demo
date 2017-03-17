@@ -6,18 +6,22 @@ const favicon = require('serve-favicon');
 const multer = require('multer');
 const compression = require('compression');
 const errorHandler = require('errorhandler');
+const helmet = require('helmet');
 
 const app = express();
 
 const dist = path.resolve(__dirname, 'dist');
 
 /** const */
-app.set('ico', path.resolve(dist, 'favicon.ico'));
+app.set('ico', path.resolve(dist, 'public/images/favicon.png'));
 app.set('upfile', path.resolve(dist, 'uploads'));
 app.set('public', path.resolve(dist, 'public'));
 
 app.set('port', process.env.PORT || 8881);
-app.set('oneDay', 86400000);
+
+app.set('oneDay', 24 * 3600);
+app.set('oneWeek', 7 * app.get('oneDay'));
+app.set('halfYear', 180 * app.get('oneDay'));
 
 const origin = app.get('env') === 'development' ?
   (`http://localhost:${app.get('port')}`) : 'https://demo.zp25.ninja';
@@ -25,12 +29,36 @@ const origin = app.get('env') === 'development' ?
 /** @type {Object} 需从根路径获取的资源 */
 const Root = {
   '/': path.resolve(dist, 'index.html'),
-  '/sw.js': path.resolve(dist, 'sw.js')
+  '/sw.js': path.resolve(dist, 'sw.js'),
+  '/manifest.json': path.resolve(dist, 'manifest.json'),
 };
 
 /** template engine */
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
+
+/** Use Helmet */
+app.disable('x-powered-by');
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      objectSrc: ["'none'"],
+      frameAncestors: ["'none'"],
+    },
+    browserSniff: false,
+  },
+  frameguard: {
+    action: 'deny',
+  },
+  hsts: {
+    maxAge: app.get('halfYear'),
+    includeSubDomains: true,
+  },
+  referrerPolicy: {
+    policy: 'origin-when-cross-origin',
+  },
+}));
 
 /** compression */
 app.use(compression());
@@ -38,10 +66,10 @@ app.use(compression());
 app.use(favicon(app.get('ico')));
 
 /** static */
-app.use(express.static(app.get('public'), { maxAge: app.get('oneDay') }));
+app.use(express.static(app.get('public'), { maxAge: app.get('oneWeek') }));
 
 /** router */
-Object.keys(Root).forEach(key => {
+Object.keys(Root).forEach((key) => {
   app.get(key, (req, res) => {
     res.sendFile(Root[key]);
   });

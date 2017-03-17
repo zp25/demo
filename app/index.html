@@ -3,12 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white">
   <meta name="format-detection" content="telephone=no">
+  <meta name="format-detection" content="email=no">
   <title>DEMO | zp25</title>
-  <link rel="icon" href="favicon.ico" sizes="16x16" type="image/x-icon">
+  <!-- app icon -->
+  <link rel="apple-touch-icon" sizes="120x120" href="images/icon@iphone.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/icon@iphone-plus.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/icon@ipad.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="images/icon@ipad-pro.png">
+  <!-- favicon -->
+  <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
+  <!-- manifest -->
+  <link rel="manifest" href="/manifest.json">
+  <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="styles/main.css">
   <link rel="stylesheet" type="text/css" href="styles/pages.css">
   <link rel="canonical" href="https://demo.zp25.ninja">
+  <script defer src="scripts/main.js"></script>
 </head>
 
 <body class="container">
@@ -60,22 +74,20 @@
       <h2>其它</h2>
 
       <ul>
-        <li><a href='text' style="display: none;">Text</a></li>
-        <li><a href='charts-with-css' style="display: none;">Making Charts with CSS</a></li>
-        <li><a href='bg' style="display: none;">Loading Background Images</a></li>
+        <li><a href='text' class="next">Text</a></li>
+        <li><a href='charts-with-css' class="next">Making Charts with CSS</a></li>
+        <li><a href='bg' class="next">Loading Background Images</a></li>
         <li><a href='dataurl'>Data URL</a></li>
         <li><a href='fade-up-from-the-bottom'>Fade up from the bottom</a></li>
         <li><a href='color'>Color</a></li>
         <li><a href='emoji-toggles'>Emoji Toggles</a></li>
         <li><a href='copy-to-clipboard'>Copy to Clipboard</a></li>
-        <li><a href='wavescroll' style="display: none;">Wavescroll</a></li>
+        <li><a href='wavescroll' class="next">Wavescroll</a></li>
         <li><a href='molten-leading'>Molten Leading in CSS</a></li>
         <li><a href='full-width'>Full Width Containers in Limited Width Parents</a></li>
         <li><a href='parallax'>Parallax</a></li>
       </ul>
     </section>
   </main>
-
-  <script src="scripts/main.js"></script>
 </body>
 </html>
