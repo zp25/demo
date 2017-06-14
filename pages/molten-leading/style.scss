@@ -1,0 +1,32 @@
+// min-font + (max-font - min-font) * ((current-width − min-width)/(max-width − min-width))
+// min-line-height + (max-line-height − min-line-height) * ((current-width − min-width)/(max-width − min-width))
+
+#molten-leading {
+  --ml-min-font: 12;
+  --ml-max-font: 24;
+  --ml-min-lh: 1.4;
+  --ml-max-lh: 1.8;
+
+  p {
+    font-size: calc(var(--ml-min-font) * 1px);
+    line-height: var(--ml-min-lh);
+  }
+
+  @media (min-width: 400px) and (max-width: 800px) {
+    & p {
+      font-size: calc(
+        (var(--ml-min-font) * 1px) + (var(--ml-max-font) - var(--ml-min-font)) * ((100vw - 400px) / (800 - 400))
+      );
+      line-height: calc(
+        var(--ml-min-lh) + (var(--ml-max-lh) - var(--ml-min-lh)) * ((100vw - 400px) / (800 - 400))
+      );
+    }
+  }
+
+  @media (min-width: 801px) {
+    & p {
+      font-size: calc(var(--ml-max-font) * 1px);
+      line-height: var(--ml-max-lh);
+    }
+  }
+}

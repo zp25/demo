@@ -1,0 +1,451 @@
+.css-shapes {
+  margin-bottom: torem(20px);
+
+  .graphics {
+    background-color: color(green);
+    margin-bottom: torem(10px);
+  }
+  .graphics-triangle {
+    margin-bottom: torem(10px);
+  }
+
+  #rectangle {
+    width: torem(200px);
+    height: torem(100px);
+  }
+  #circle {
+    width: torem(100px);
+    height: torem(100px);
+    border-radius: 100%;
+  }
+  #oval {
+    width: torem(200px);
+    height: torem(100px);
+    border-radius: 100%;
+  }
+
+  // triangles
+  #triangles {
+    width: 0;
+    height: 0;
+    border-color: color(red) color(green) color(blue) color(orange);
+    border-style: solid;
+    border-width: torem(50px);
+  }
+
+  #triangle-up {
+    width: 0;
+    height: 0;
+    border-right: torem(50px) solid transparent;
+    border-bottom: torem(100px) solid color(green);
+    border-left: torem(50px) solid transparent;
+  }
+  #triangle-down {
+    width: 0;
+    height: 0;
+    border-top: torem(100px) solid color(green);
+    border-right: torem(50px) solid transparent;
+    border-left: torem(50px) solid transparent;
+  }
+
+  #triangle-topleft {
+    width: 0;
+    height: 0;
+    border-top: torem(100px) solid color(green);
+    border-right: torem(100px) solid transparent;
+  }
+
+  // polygon
+  #trapezoid {
+    width: torem(200px);
+    height: 0;
+    border-right: torem(50px) solid transparent;
+    border-bottom: torem(100px) solid color(green);
+    border-left: torem(50px) solid transparent;
+  }
+
+  #parallelogram {
+    width: torem(150px);
+    height: torem(100px);
+    margin-left: torem(20px);
+    transform: skew(20deg);
+  }
+
+  // stars
+  #star-six {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-right: torem(50px) solid transparent;
+    border-bottom: torem(100px) solid color(green);
+    border-left: torem(50px) solid transparent;
+    margin-bottom: torem(40px);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: torem(30px);
+      left: torem(-50px);
+      width: 0;
+      height: 0;
+      border-top: torem(100px) solid color(green);
+      border-right: torem(50px) solid transparent;
+      border-left: torem(50px) solid transparent;
+    }
+  }
+
+  #star-five {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-right: torem(100px) solid transparent;
+    border-bottom: torem(70px) solid color(green);
+    border-left: torem(100px) solid transparent;
+    transform: rotate(35deg);
+    margin: torem(60px) 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: torem(-45px);
+      left: torem(-65px);
+      width: 0;
+      height: 0;
+      border-right: torem(30px) solid transparent;
+      border-bottom: torem(80px) solid color(green);
+      border-left: torem(30px) solid transparent;
+      transform: rotate(-35deg);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: torem(3px);
+      left: torem(-105px);
+      width: 0;
+      height: 0;
+      border-right: torem(100px) solid transparent;
+      border-bottom: torem(70px) solid color(green);
+      border-left: torem(100px) solid transparent;
+      transform: rotate(-70deg);
+    }
+  }
+
+  // polygon
+  #pentagon {
+    position: relative;
+    width: torem(86px);
+    border-width: torem(50px) torem(18px) 0;
+    border-style: solid;
+    border-color: color(green) transparent;
+    margin-top: torem(40px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: torem(-85px);
+      left: torem(-18px);
+      width: 0;
+      height: 0;
+      border-width: 0 torem(43px) torem(35px);
+      border-style: solid;
+      border-color: transparent transparent color(green);
+    }
+  }
+
+  #hexagon {
+    position: relative;
+    width: torem(100px);
+    height: torem(55px);
+    background: color(green);
+    margin: torem(35px) 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: torem(-25px);
+      left: 0;
+      width: 0;
+      height: 0;
+      border-right: torem(50px) solid transparent;
+      border-bottom: torem(25px) solid color(green);
+      border-left: torem(50px) solid transparent;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: torem(-25px);
+      left: 0;
+      width: 0;
+      height: 0;
+      border-top: torem(25px) solid color(green);
+      border-right: torem(50px) solid transparent;
+      border-left: torem(50px) solid transparent;
+    }
+  }
+
+  #octagon {
+    position: relative;
+    width: torem(100px);
+    height: torem(100px);
+    background: color(green);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: torem(100px);
+      height: 0;
+      border-right: torem(29px) solid color(white);
+      border-bottom: torem(29px) solid color(green);
+      border-left: torem(29px) solid color(white);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: torem(100px);
+      height: 0;
+      border-top: torem(29px) solid color(green);
+      border-right: torem(29px) solid color(white);
+      border-left: torem(29px) solid color(white);
+    }
+  }
+
+  // irregular shape
+  #heart {
+    width: torem(100px);
+    height: torem(90px);
+    position: relative;
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      left: torem(50px);
+      top: 0;
+      width: torem(50px);
+      height: torem(80px);
+      background: color(green);
+      border-radius: torem(50px) torem(50px) 0 0;
+      transform-origin: 0 100%;
+      transform: rotate(-45deg);
+    }
+    &::after {
+      left: 0;
+      transform-origin: 100% 100%;
+      transform: rotate(45deg);
+    }
+  }
+
+  #infinity {
+    position: relative;
+    width: torem(212px);
+    height: torem(100px);
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: torem(100px);
+      height: torem(100px);
+      border: torem(20px) solid color(green);
+      border-radius: torem(50px) torem(50px) 0 torem(50px);
+      transform: rotate(-45deg);
+    }
+    &::after {
+      left: auto;
+      right: 0;
+      border-radius: torem(50px) torem(50px) torem(50px) 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  #diamond {
+    position: relative;
+    width: torem(100px);
+    height: 0;
+    border-width: 0 torem(25px) torem(25px);
+    border-style: solid;
+    border-color: transparent transparent color(green);
+    margin-bottom: torem(80px);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: torem(25px);
+      left: torem(-25px);
+      width: 0;
+      height: 0;
+      border-width: torem(70px) torem(50px) 0 torem(50px);
+      border-style: solid;
+      border-color: color(green) transparent transparent;
+    }
+  }
+
+  #egg {
+    width: torem(80px);
+    height: torem(120px);
+    background-color: color(green);
+    border-radius: 50% / 60% 60% 40% 40%;
+  }
+
+  #pacman {
+    width: 0px;
+    height: 0px;
+    border: torem(60px) solid color(green);
+    border-right: torem(60px) solid transparent;
+    border-radius: 100%;
+  }
+
+  #talkbubble {
+    width: torem(120px);
+    height: torem(80px);
+    background: green;
+    position: relative;
+    border-radius: torem(10px);
+    margin-left: torem(26px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: torem(26px);
+      right: 100%;
+      width: 0;
+      height: 0;
+      border-top: torem(13px) solid transparent;
+      border-right: torem(26px) solid color(green);
+      border-bottom: torem(13px) solid transparent;
+    }
+  }
+
+  #burst-12 {
+    position: relative;
+    width: torem(80px);
+    height: torem(80px);
+    margin-bottom: torem(20px);
+    margin-left: torem(15px);
+
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: color(green);
+    }
+    &::before {
+      transform: rotate(30deg);
+    }
+    &::after {
+      transform: rotate(60deg);
+    }
+  }
+
+  #burst-8 {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    background: color(green);
+    transform: rotate(20deg);
+    margin-bottom: torem(20px);
+    margin-left: torem(15px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: color(green);
+      transform: rotate(135deg);
+    }
+  }
+
+  #yin-yang {
+    position: relative;
+    width: torem(100px);
+    height: torem(100px);
+    background: color(white);
+    border-width: torem(2px) torem(2px) torem(50px);
+    border-style: solid;
+    border-color: color(green);
+    border-radius: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: torem(48px);
+      height: torem(48px);
+      background: color(white);
+      border: torem(18px) solid color(green);
+      border-radius: 100%;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: torem(48px);
+      height: torem(48px);
+      background: color(green);
+      border: torem(18px) solid color(white);
+      border-radius:100%;
+    }
+  }
+
+  #cone {
+    width: 0;
+    height: 0;
+    border-top: torem(100px) solid color(green);
+    border-right: torem(70px) solid transparent;
+    border-left: torem(70px) solid transparent;
+    border-radius: 50%;
+  }
+
+  #space-invader {
+    box-shadow:
+      0 0 0 1em color(green),
+      0 1em 0 1em color(green),
+      -2.5em 1.5em 0 .5em color(green),
+      2.5em 1.5em 0 .5em color(green),
+      -3em -3em 0 0 color(green),
+      3em -3em 0 0 color(green),
+      -2em -2em 0 0 color(green),
+      2em -2em 0 0 color(green),
+      -3em -1em 0 0 color(green),
+      -2em -1em 0 0 color(green),
+      2em -1em 0 0 color(green),
+      3em -1em 0 0 color(green),
+      -4em 0 0 0 color(green),
+      -3em 0 0 0 color(green),
+      3em 0 0 0 color(green),
+      4em 0 0 0 color(green),
+      -5em 1em 0 0 color(green),
+      -4em 1em 0 0 color(green),
+      4em 1em 0 0 color(green),
+      5em 1em 0 0 color(green),
+      -5em 2em 0 0 color(green),
+      5em 2em 0 0 color(green),
+      -5em 3em 0 0 color(green),
+      -3em 3em 0 0 color(green),
+      3em 3em 0 0 color(green),
+      5em 3em 0 0 color(green),
+      -2em 4em 0 0 color(green),
+      -1em 4em 0 0 color(green),
+      1em 4em 0 0 color(green),
+      2em 4em 0 0 color(green);
+
+    background: color(green);
+    width: 1em;
+    height: 1em;
+    overflow: hidden;
+
+    margin: torem(60px) 0 torem(70px) torem(70px);
+  }
+}

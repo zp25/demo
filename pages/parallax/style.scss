@@ -1,0 +1,56 @@
+@import '../../app/styles/global';
+
+#parallax {
+  @include flexbox(column);
+
+  .first {
+    background-image: url(../images/paisley.png);
+  }
+  .second {
+    background-image: url(../images/weather.png);
+  }
+  .third {
+    background-image: url(../images/swirl_pattern.png);
+  }
+
+  .banner {
+    flex: 0 0 auto;
+    height: torem(320px);
+
+    // parallax
+    background-attachment: fixed;
+
+    h2 {
+      text-align: center;
+      line-height: torem(320px);
+    }
+
+    // Zooming Background Images
+    &.banner--list {
+      @include flexbox(row, nowrap, space-around, center);
+      padding: 0;
+      margin: 0;
+
+      li {
+        flex: 0 0 auto;
+        width: 30%;
+        height: torem(200px);
+        overflow: hidden;
+
+        h2 {
+          line-height: torem(200px);
+          transition: transform .5s;
+          cursor: normal;
+        }
+
+        &:hover {
+          h2 {
+            transform: scale(1.2);
+            filter: brightness(0.5);
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}

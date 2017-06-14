@@ -1,0 +1,50 @@
+.pie {
+  width: torem(120px);
+  height: torem(120px);
+  background-color: color(green);
+  background-image: linear-gradient(to right, transparent 50%, color(gray) 0);
+  border-radius: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: inherit;
+    border-radius: 0 100% 100% 0 / 50%;
+    transform-origin: 0 50%;
+    margin-left: 50%;
+  }
+
+  &.pie-more::before {
+    background-color: color(gray);
+  }
+  &.pie-animate::before {
+    animation: spin 3s linear infinite, bg 6s step-end infinite;
+  }
+
+  & + p {
+    width: torem(120px);
+    font-size: fontSize();
+    text-align: center;
+  }
+}
+
+#percent-30::before {
+  transform: rotate(108deg);
+}
+
+#percent-60::before {
+  transform: rotate(36deg);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes bg {
+  50% {
+    background: color(gray);
+  }
+}

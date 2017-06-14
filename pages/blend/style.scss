@@ -1,0 +1,73 @@
+@import '../../app/styles/global';
+
+#mix-blend-mode {
+  --blend-color: rgb(255, 0, 0);
+  --blend-color-diff: rgb(0, 255, 255);
+
+  position: relative;
+  width: torem(200px);
+  height: torem(85px);
+  background-color: color(white);
+  border: 1px solid color(red);
+  margin: torem(5px) 0;
+  overflow: hidden;
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background-color: var(--blend-color);
+    animation: loading 10s linear infinite;
+  }
+
+  .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--blend-color);
+
+    &::after {
+      content: '0%';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--blend-color-diff);
+      font-size: torem(50px);
+      line-height: torem(85px);
+      text-align: center;
+      animation: percentage 10s linear infinite;
+      mix-blend-mode: difference;
+    }
+  }
+}
+
+#background-blend-mode {
+  --blend-background-blend-mode: screen;
+
+  width: torem(300px);
+  height: torem(300px);
+  background-image: url(../images/br.png), url(../images/tr.png);
+  background-size: cover;
+  background-blend-mode: var(--blend-background-blend-mode);
+  margin: torem(5px) 0;
+}
+
+@keyframes loading {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  } 100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes percentage {
+  @for $i from 1 through 100 {
+    $value: $i + '%';
+    #{$value} {
+      content: $value;
+    }
+  }
+}

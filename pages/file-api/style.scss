@@ -1,0 +1,29 @@
+@import '../../app/styles/global';
+
+#file-api {
+  .btn {
+    display: inline;
+    border: none;
+    color: color(green);
+    font-size: fontSize();
+    line-height: 1.5;
+    text-decoration: underline;
+    background-color: color(white);
+    cursor: pointer;
+  }
+
+  .detail {
+    @include flexbox(row, wrap, flex-start, flex-start);
+    align-content: flex-start;
+
+    .item {
+      flex: 0 0 auto;
+      width: torem(60px);
+      height: torem(60px);
+      object-fit: cover;
+      object-position: center center;
+      margin: torem(5px);
+      overflow: hidden;
+    }
+  }
+}

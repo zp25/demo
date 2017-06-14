@@ -1,0 +1,22 @@
+@import '../../app/styles/global';
+
+#fade-up-from-bottom {
+  @include flexbox(row, wrap, space-between, flex-start);
+
+  .elem {
+    flex: 0 0 auto;
+    width: 30%;
+    height: torem(200px);
+    background-color: color(blue);
+    opacity: 0;
+    transform: translate3d(0, torem(50px), 0);
+    backface-visibility: hidden;
+    transition: all 700ms ease-out;
+    margin-bottom: torem(20px);
+
+    &.inView {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

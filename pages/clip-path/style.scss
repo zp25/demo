@@ -1,0 +1,49 @@
+#clip-path {
+  position: relative;
+  width: 85vw;
+  height: 85vw;
+  max-width: torem(500px);
+  height: torem(500px);
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    -webkit-clip-path: polygon(50% 50%, 100% 50%, 75% 6.6%);
+    clip-path: url(#sector);
+
+    .anchor {
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      &::after {
+        content: attr(data-button);
+        position: absolute;
+        right: 15%;
+        top: 30%;
+        transform: rotate(60deg);
+
+        color: darken(#a5e2f3, 60%);
+        font-size: fontSize(bolder);
+      }
+    }
+
+    @for $i from 0 through 5 {
+      &.item-#{$i + 1} {
+        background-color: darken(#a5e2f3, $i * 7%);
+        transform: rotate($i * -60deg);
+      }
+    }
+
+    &:hover {
+      background-color: color(gold);
+    }
+  }
+}

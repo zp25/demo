@@ -1,0 +1,191 @@
+@import '../../app/styles/global';
+
+#showpart {
+  width: 90vw;
+  height: 90vw;
+  max-width: torem(500px);
+  max-height: torem(500px);
+  @include flexbox(row, nowrap, center, center);
+  border: 1px solid color(black);
+
+  .box {
+    color: color(white);
+    font-size: fontSize(bolder);
+
+    &.box--2d {
+      --transform-translate-x: 0px;
+      --transform-translate-y: 0px;
+      --transform-rotate: 0deg;
+      --transform-scale: 1;
+      --transform-skew-x: 0deg;
+      --transform-skew-y: 0deg;
+
+      display: none;
+      background-color: color(blue);
+      transform:
+        translateX(var(--transform-translate-x))
+        translateY(var(--transform-translate-y))
+        rotate(var(--transform-rotate))
+        scale(var(--transform-scale), var(--transform-scale))
+        skewX(var(--transform-skew-x))
+        skewY(var(--transform-skew-y));
+
+      &.box--active {
+        width: 32vw;
+        height: 32vw;
+        max-width: torem(180px);
+        max-height: torem(180px);
+        @include flexbox(row, nowrap, center, center);
+      }
+    }
+
+    &.box--3d {
+      --transform-perspective: 1000px;
+      --transform-perspective-origin-x: 150%;
+      --transform-perspective-origin-y: 150%;
+      --transform-transform-style: preserve-3d;
+      --transform-transform-origin-x: 50%;
+      --transform-transform-origin-y: 50%;
+      --transform-backface-visibility: visible;
+
+      display: none;
+      perspective: var(--transform-perspective);
+      perspective-origin:
+        var(--transform-perspective-origin-x)
+        var(--transform-perspective-origin-y);
+
+      &.box--active {
+        width: 100%;
+        height: 100%;
+        @include flexbox(row, nowrap, center, center);
+      }
+
+      .cube {
+        --transform-width: torem(160px);
+        --transform-half-width: torem(80px);
+
+        position: relative;
+        width: var(--transform-width);
+        height: var(--transform-width);
+        transform-style: var(--transform-transform-style);
+
+        .face {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          @include flexbox(row, nowrap, center, center);
+          transform-origin:
+            var(--transform-transform-origin-x)
+            var(--transform-transform-origin-y);
+          backface-visibility: var(--transform-backface-visibility);
+        }
+
+        .front {
+          background-color: rgba(142, 53, 87, 0.7);
+          transform: translateZ(var(--transform-half-width));
+        }
+        .back {
+          background-color: rgba(51, 204, 204, 0.7);
+          transform: rotateY(180deg) translateZ(var(--transform-half-width));
+        }
+        .top {
+          background-color: rgba(255, 204, 0, 0.7);
+          transform: rotateX(90deg) translateZ(var(--transform-half-width));
+        }
+        .bottom {
+          background-color: rgba(0, 153, 51, 0.7);
+          transform: rotateX(-90deg) translateZ(var(--transform-half-width));
+        }
+        .left {
+          background-color: rgba(221, 17, 68, 0.7);
+          transform: rotateY(-90deg) translateZ(var(--transform-half-width));
+        }
+        .right {
+          background-color: rgba(255, 51, 0, 0.7);
+          transform: rotateY(90deg) translateZ(var(--transform-half-width));
+        }
+      }
+    }
+  }
+}
+
+.transform {
+  .form {
+    display: none;
+
+    &.form--active {
+      @include flexbox(column);
+    }
+
+    .inputArea {
+      flex: 0 0 torem(32px);
+      @include flexbox(row, nowrap, flex-start, center);
+
+      .label {
+        flex: 0 0 auto;
+        min-width: torem(150px);
+
+        // 2d
+        &.label--translateX {
+          &::after {
+            content: 'translateX(' attr(data-value) 'px)';
+          }
+        }
+        &.label--translateY {
+          &::after {
+            content: 'translateY(' attr(data-value) 'px)';
+          }
+        }
+        &.label--rotate {
+          &::after {
+            content: 'rotate(' attr(data-value) 'deg)';
+          }
+        }
+        &.label--scale {
+          &::after {
+            content: 'scale(' attr(data-value) ')';
+          }
+        }
+        &.label--skewX {
+          &::after {
+            content: 'skewX(' attr(data-value) 'deg)';
+          }
+        }
+        &.label--skewY {
+          &::after {
+            content: 'skewY(' attr(data-value) 'deg)';
+          }
+        }
+
+        // 3d
+        &.label--perspective {
+          &::after {
+            content: 'perspective: ' attr(data-value);
+          }
+        }
+        &.label--perspective-origin {
+          &::after {
+            content: 'perspective-origin: ' attr(data-value-x) '% ' attr(data-value-y) '%';
+          }
+        }
+        &.label--transform-style {
+          &::after {
+            content: 'transform-style: ' attr(data-value);
+          }
+        }
+        &.label--transform-origin {
+          &::after {
+            content: 'transform-origin: ' attr(data-value-x) '% ' attr(data-value-y) '%';
+          }
+        }
+        &.label--backface-visibility {
+          &::after {
+            content: 'backface-visibility: ' attr(data-value);
+          }
+        }
+      }
+    }
+  }
+}

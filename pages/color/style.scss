@@ -1,0 +1,116 @@
+@import '../../app/styles/global';
+
+#color-kudos {
+  @include flexbox(row, wrap, space-between, flex-start);
+  align-content: flex-start;
+
+  .box {
+    flex: 0 0 22%;
+    height: torem(130px);
+    font-size: fontSize(light);
+    padding: torem(5px);
+    margin-bottom: torem(10px);
+
+    .holder {
+      width: torem(22px);
+      height: torem(22px);
+    }
+
+    &:nth-child(1) {
+      background-color: rgb(112, 175, 26);
+    }
+    &:nth-child(2) {
+      background-color: rgb(0, 173, 239);
+    }
+    &:nth-child(3) {
+      color: color(white);
+      background-color: rgb(166, 20, 93);
+    }
+    &:nth-child(4) {
+      background-color: rgb(255, 102, 52);
+    }
+
+    /* kudos90 boxes */
+    &:nth-child(5) {
+      background-color: rgb(255, 235, 205);
+      border: solid 1px rgb(205, 0, 0);
+    }
+    &:nth-child(6) {
+      background-color: rgb(239, 247, 224);
+      border: solid 1px rgb(151, 192, 61);
+    }
+    &:nth-child(7) {
+      background-color: rgb(245, 245, 245);
+      border: solid 1px rgb(204, 204, 204);
+    }
+    &:nth-child(8) {
+      background-color: rgb(255, 244, 202);
+      border: solid 1px rgb(248, 147, 29);
+    }
+
+    /* kudos90 gray */
+    &:nth-child(9) {
+      background-color: rgb(245, 245, 245);
+    }
+    &:nth-child(10) {
+      background-color: rgb(232, 232, 232);
+    }
+    &:nth-child(11) {
+      background-color: rgb(223, 223, 223);
+    }
+    &:nth-child(12) {
+      background-color: rgb(169, 169, 169);
+    }
+    &:nth-child(13) {
+      color: rgb(119, 119, 119);
+      background-color: rgb(245, 245, 245);
+
+      .holder {
+        background-color: rgb(119, 119, 119);
+      }
+    }
+
+    /* kudos90 others */
+    &:nth-child(14) {
+      background-color: rgb(112, 193, 99);
+    }
+    &:nth-child(15) {
+      background-color: rgb(255, 205, 0);
+    }
+    &:nth-child(16) {
+      color: rgb(73, 138, 242);
+      background-color: rgb(245, 245, 245);
+
+      .holder {
+        background-color: rgb(73, 138, 242);
+      }
+    }
+    &:nth-child(17) {
+      color: rgb(0, 94, 172);
+      background-color: rgb(245, 245, 245);
+
+      .holder {
+        background-color: rgb(0, 94, 172);
+      }
+    }
+    &:nth-child(18) {
+      color: color(white);
+      background-color: rgb(0, 94, 172);
+
+      border-top: 1px solid #B8D4E8;
+      border-right: 1px solid #114680;
+      border-bottom: 1px solid #114680;
+      border-left: 1px solid #B8D4E8;
+    }
+
+    /* mask & black-bg */
+    &:nth-child(19) {
+      color: color(white);
+      background-color: rgb(45, 45, 45);
+    }
+    &:nth-child(20) {
+      color: color(white);
+      background-color: rgb(30, 30, 30);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.getusermedia {
+  .video {
+    width: 90vw;
+    height: 67.5vw;
+    max-width: torem(600px);
+    max-height: torem(450px);
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: block;
+    font-size: fontSize();
+    line-height: 1.5;
+    padding: 0 torem(10px);
+    margin-bottom: torem(10px);
+  }
+}

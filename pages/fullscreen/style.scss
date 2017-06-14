@@ -1,0 +1,31 @@
+:-webkit-full-screen {
+  background-color: color(grey-bg);
+}
+
+:-moz-full-screen {
+  background-color: color(grey-bg)
+}
+
+:fullscreen {
+  background-color: color(grey-bg)
+}
+
+:-webkit-full-screen::-webkit-backdrop {
+  background-color: color(blue);
+}
+
+:fullscreen::backdrop {
+  background-color: color(blue);
+}
+
+#fullscreen {
+  .btn {
+    font-size: fontSize();
+    line-height: 1.5;
+    padding: 0 torem(10px);
+  }
+
+  .info {
+    padding-top: torem(10px);
+  }
+}

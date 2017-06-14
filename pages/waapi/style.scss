@@ -1,0 +1,28 @@
+.waapi {
+  .mover {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: color(blue);
+
+    offset-path: path("M10,10 H310 V210 H10 L10,10");
+    offset-distance: 0;
+    offset-rotation: auto;
+  }
+
+  .path {
+    width: 320px;
+    height: 220px;
+  }
+
+  .ctrl {
+    padding-top: torem(15px);
+  }
+
+  .btn {
+    font-size: fontSize();
+    line-height: 1.5;
+    padding: 0 torem(6px);
+  }
+}

@@ -1,0 +1,91 @@
+$height: 20px;
+
+.emoji-toggles {
+  position: relative;
+  width: torem(60px);
+  margin: torem($height) torem(60px);
+
+  .well {
+    display: block;
+    height: torem($height);
+    background-color: color(grey-bg);
+    border-radius: torem(10px);
+    cursor: pointer;
+  }
+
+  .toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+
+    ~.emoji::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: fontSize(40px);
+      line-height: torem($height);
+      transition: 0.2s;
+    }
+
+    &:checked {
+      ~.emoji::before {
+        content: '';
+        left: 100%;
+        margin-left: -1em;
+      }
+    }
+
+    ~.well {
+      white-space: nowrap;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        margin-right: torem(5px);
+      }
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        margin-left: torem(5px);
+      }
+    }
+  }
+}
+
+@mixin emojiType($leftEmoji, $rightEmoji, $leftLabel, $rightLabel) {
+  .toggle {
+    ~.emoji::before {
+      content: $leftEmoji;
+    }
+
+    &:checked {
+      ~.emoji::before {
+        content: $rightEmoji;
+      }
+    }
+
+    ~.well {
+      &::before {
+        content: $leftLabel;
+      }
+      &::after {
+        content: $rightLabel;
+      }
+    }
+  }
+}
+
+.emoji-monkey {
+  @include emojiType("\01F638", '\01F63F', 'Happy', 'Sad');
+}

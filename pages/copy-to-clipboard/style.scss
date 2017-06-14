@@ -1,0 +1,19 @@
+.copy-to-clipboard {
+  margin-bottom: torem(20px);
+
+  .input {
+    width: torem(260px);
+    font-size: fontSize(light);
+    line-height: 1.5;
+    border: 1px solid color(grey-border);
+    padding: torem(5px) torem(2px);
+  }
+
+  .btn {
+    height: torem(30px);
+    border: 1px solid color(grey-border);
+    padding: 0 torem(3px);
+    margin-left: torem(10px);
+    cursor: pointer;
+  }
+}
