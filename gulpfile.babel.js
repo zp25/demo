@@ -1,38 +1,25 @@
+import path from 'path';
 import gulp from 'gulp';
-import del from 'del';
+import rimraf from 'rimraf';
 import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import {
+  AUTOPREFIXER_CONFIG,
+  HTMLMINIFIER,
+  PATHS,
+} from './constants';
 
 const $ = gulpLoadPlugins();
-const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
-const PATHS = {
-  html: {
-    src: [
-      'app/index.html',
-      'app/pages/**/*.html'
-    ],
-    dest: 'dist',
-  },
-  styles: {
-    src: 'app/styles/**/*.{css,scss}',
-    dest: 'dist/public/styles',
-  },
-  scripts: {
-    src: 'app/pages/**/*.js',
-    dest: 'dist/public/scripts',
-  },
-  images: {
-    src: 'app/images/**/*',
-    dest: 'dist/public/images',
-  },
-  sw: 'app/sw.js',
-};
+const BS = browserSync.create();
 
 // Lint JavaScript
 function lint() {
-  return gulp.src([PATHS.scripts.src].concat([PATHS.sw]))
+  return gulp.src(PATHS.scripts.lint)
     .pipe($.eslint())
-    .pipe($.eslint.format());
+    .pipe($.eslint.format())
+    .pipe($.if(!BS.active, $.eslint.failOnError()))
 }
 
 // Image Optimazation
@@ -51,6 +38,13 @@ function images() {
     .pipe($.size({ title: 'images' }));
 }
 
+function tmpWebp() {
+  return gulp.src(PATHS.images.src)
+    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+    .pipe(gulp.dest(PATHS.images.tmp))
+    .pipe(BS.stream({ once: true }));
+}
+
 function webp() {
   return gulp.src(PATHS.images.src)
     .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
@@ -60,86 +54,153 @@ function webp() {
 
 // Copy
 function copy() {
-  return gulp.src(['app/*', '!app/*.html'])
+  return gulp.src(PATHS.copy)
     .pipe(gulp.dest('dist'))
     .pipe($.size({ title: 'copy' }));
 }
 
 // Styles
-function sass() {
+function tmpSass() {
   const processors = [
     autoprefixer(AUTOPREFIXER_CONFIG)
   ];
 
   return gulp.src(PATHS.styles.src)
-    .pipe($.newer(PATHS.styles.dest))
+    .pipe($.newer(PATHS.styles.tmp))
     .pipe($.sourcemaps.init())
       .pipe($.sassGlob())
-      .pipe($.sass({ precision: 10 })
+      .pipe(
+        $.sass({
+          includePaths: ['node_modules/normalize.css'],
+          precision: 10,
+        })
+        .on('error', $.sass.logError)
+      )
+      .pipe($.postcss(processors))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest(PATHS.styles.tmp))
+    .pipe(BS.stream({ once: true }));
+}
+
+function sass() {
+  const processors = [
+    autoprefixer(AUTOPREFIXER_CONFIG),
+    cssnano()
+  ];
+
+  return gulp.src(PATHS.styles.src)
+    .pipe($.sourcemaps.init())
+      .pipe($.sassGlob())
+      .pipe(
+        $.sass({
+          includePaths: ['node_modules/normalize.css'],
+          precision: 10,
+        })
         .on('error', $.sass.logError)
       )
       .pipe($.postcss(processors))
       .pipe($.size({ title: 'styles' }))
-    .pipe($.sourcemaps.write())
+    .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(PATHS.styles.dest));
 }
 
 // Scripts
-function scripts() {
+const renameFilter = (file) => {
+  const dirArr = file.dirname.split('/');
+
+  return dirArr[dirArr.length - 2] === 'pages';
+};
+
+const rename = (path) => {
+  path.basename = path.dirname;
+  path.dirname = '.';
+};
+
+function tmpScript() {
   return gulp.src(PATHS.scripts.src)
-    .pipe($.newer(PATHS.scripts.dest))
+    .pipe($.newer(PATHS.scripts.tmp))
     .pipe($.sourcemaps.init())
       .pipe($.babel())
-      .pipe($.size({ title: 'scripts', showFiles: true }))
     .pipe($.sourcemaps.write())
+    .pipe($.if(renameFilter, $.rename(rename)))
+    .pipe(gulp.dest(PATHS.scripts.tmp))
+    .pipe(BS.stream({ once: true }));
+}
+
+function script() {
+  return gulp.src(PATHS.scripts.src)
+    .pipe($.sourcemaps.init())
+      .pipe($.babel())
+      .pipe($.uglify({
+        // preserveComments: 'license',
+        compress: {
+          global_defs: {
+            'DEV': false,
+          },
+        },
+      }))
+      .pipe($.size({ title: 'scripts' }))
+    .pipe($.sourcemaps.write('.'))
+    .pipe($.if(renameFilter, $.rename(rename)))
     .pipe(gulp.dest(PATHS.scripts.dest));
 }
 
 // HTML
 function html() {
+  const processors = [
+    cssnano()
+  ];
+
   return gulp.src(PATHS.html.src)
-    .pipe($.newer(PATHS.html.dest))
-    .pipe($.htmlmin({
-      collapseWhitespace: true,
-      collapseBooleanAttributes: true,
-      removeAttributeQuotes: true,
-      removeComments: true,
-      removeEmptyAttributes: true,
-      removeOptionalTags: true,
-      removeRedundantAttributes: true,
-      removeScriptTypeAttributes: true,
-      removeStyleLinkTypeAttributes: true,
-    }))
-    .pipe($.size({ title: 'html', showFiles: true }))
+    .pipe($.useref({ searchPath: PATHS.assets }))
+    .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
+    .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
+    .pipe($.if('*.css', $.postcss(processors)))
     .pipe(gulp.dest(PATHS.html.dest));
 }
 
-// Watch
-function watch() {
-  gulp.watch(PATHS.html.src, html);
-  gulp.watch(PATHS.styles.src, sass);
-  gulp.watch(PATHS.scripts.src, gulp.parallel(lint, scripts));
-  gulp.watch(PATHS.sw, gulp.parallel(lint, copy));
-  gulp.watch(PATHS.images.src, images);
+// Serve
+function serve() {
+  BS.init({
+    notify: false,
+    logPrefix: 'demo',
+    server: {
+      baseDir: PATHS.assets,
+    },
+    port: 3000,
+  });
+
+  gulp.watch(PATHS.html.src).on('change', BS.reload);
+  gulp.watch(PATHS.images.src, tmpWebp);
+
+  gulp.watch(PATHS.styles.src.concat(PATHS.styles.watch), tmpSass);
+
+  gulp.watch(PATHS.scripts.lint, lint);
+  gulp.watch(PATHS.scripts.src, tmpScript);
 }
 
 // Clean output directory
-function clean() {
-  // return del(['.tmp', 'dist/*']);
-  return del(['dist/*']);
-}
+const clean = (done) => {
+  rimraf(`{${PATHS.clean.join(',')}}`, done);
+};
 
-// tasks
-gulp.task(clean);
-
-// Clean cache
-gulp.task('clean:cache', cb => $.cache.clearAll(cb));
+// Tasks
+gulp.task('clean:all', clean);
+gulp.task('clean:cache', done => $.cache.clearAll(done));
 
 // Build production files, the default task
 gulp.task('default',
   gulp.series(
-    clean, html,
-    gulp.parallel(lint, scripts, sass, images, webp, copy),
-    watch
+    'clean:all', lint,
+    gulp.parallel(script, sass, images, webp, copy),
+    html,
+  )
+);
+
+// run scripts, sass first and run browserSync before watch
+gulp.task('serve',
+  gulp.series(
+    gulp.parallel(tmpScript, tmpSass, tmpWebp),
+    serve,
   )
 );
