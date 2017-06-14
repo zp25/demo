@@ -1,4 +1,4 @@
-const CACHE_VERSION = 2.1;
+const CACHE_VERSION = 2.2;
 const CURRENT_CACHES = {
   offline: `offline-v${CACHE_VERSION}`,
 };
@@ -8,7 +8,12 @@ const pageNotFound = '/404.html';
 // 默认缓存
 const OFFLINE_URL = [
   pageNotFound,
+  '/',
+  'index.html',
   '/styles/main.css',
+  '/styles/pages.css',
+  '/scripts/main.js',
+  '/manifest.json',
   '/images/zp.jpg',
 ];
 
