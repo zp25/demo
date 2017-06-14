@@ -7,3 +7,5 @@ yarn-error.log
 app/*.html
 app/html/
 .env
+
+!pages/node_modules/
