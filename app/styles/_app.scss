@@ -17,20 +17,21 @@ header {
     &::after {
       content: '';
       font-size: fontSize(bolder);
+      font-weight: normal;
       vertical-align: middle;
     }
 
     &.sw--done::after {
       content: ' sw';
-      color: green;
+      color: color(green);
     }
     &.sw--waiting::after {
       content: ' sw';
-      color: orange;
+      color: color(orange);
     }
     &.sw--error::after {
       content: ' sw';
-      color: red;
+      color: color(red);
     }
     &.sw--no-support::after {
       content: ' No support';
