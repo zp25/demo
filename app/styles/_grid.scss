@@ -4,14 +4,14 @@
 @mixin blocks($size) {
   @each $block in article, aside, div, footer, header, main, menu, nav, section {
     & > #{$block} {
-      flex: 0 0 $size;
+      width: $size;
     }
   }
 }
 
 @mixin grids($size) {
   @for $i from 1 through 12 {
-    &.flex__col--#{$size}#{$i} {
+    &.col--#{$size}#{$i} {
       flex: 0 0 percentage($i / 12);
     }
   }
@@ -19,21 +19,19 @@
 
 /**
  * media query
- * <= 600px, 85%
+ * <= 600px, 95%
  * <= 992px, 85%
  * > 992px, 70%
  **/
 .container {
-  @include flexbox(row, wrap, center);
+  @include flexbox(column, nowrap, flex-start, center);
   @include blocks(95%);
 }
 
 .flex {
-  @include flexbox(row, wrap, flex-start);
+  @include flexbox(row, wrap);
 
-  .flex__col {
-    flex: 1 1 auto;
-
+  .col {
     @include grids('s');
   }
 }
@@ -44,7 +42,7 @@
   }
 
   .flex {
-    .flex__col {
+    .col {
       @include grids('m');
     }
   }
@@ -56,7 +54,7 @@
   }
 
   .flex {
-    .flex__col {
+    .col {
       @include grids('l');
     }
   }

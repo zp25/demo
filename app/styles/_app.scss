@@ -1,0 +1,101 @@
+/**
+ * 5 Responsive Design Pitfalls and How to Avoid Them
+ * http://www.sitepoint.com/5-responsive-design-pitfalls-and-how-to-avoid-them/
+ */
+
+#app {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+header {
+  padding: torem(10px) 0;
+
+  h1 {
+    font-size: fontSize(34px);
+
+    &::after {
+      content: '';
+      font-size: fontSize(bolder);
+      vertical-align: middle;
+    }
+
+    &.sw--done::after {
+      content: ' sw';
+      color: green;
+    }
+    &.sw--waiting::after {
+      content: ' sw';
+      color: orange;
+    }
+    &.sw--error::after {
+      content: ' sw';
+      color: red;
+    }
+    &.sw--no-support::after {
+      content: ' No support';
+    }
+  }
+}
+
+main {
+  .section {
+    padding: torem(20px) 0;
+  }
+
+  .code {
+    padding: torem(20px) 0;
+    overflow: hidden;
+  }
+
+  .nav {
+    @include flexbox(column, nowrap, flex-start, flex-start);
+  }
+}
+
+// global class
+.svg-defs {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.file-select {
+  .file-select__input {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+
+    & + label {
+      color: color(blue);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    &:focus + label {
+      outline: 1px dotted color(black);
+      outline: -webkit-focus-ring-color auto torem(5px);
+    }
+  }
+}
+
+.file-control {
+  .file-control__drop {
+    width: 90vw;
+    height: 90vw;
+    max-width: torem(280px);
+    max-height: torem(280px);
+    border: torem(5px) dashed color(grey-border);
+
+    &.file-control__drop--hover {
+      border-color: color(green);
+    }
+  }
+}
+
+.break-all {
+  word-break: break-all;
+}
