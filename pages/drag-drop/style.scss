@@ -1,5 +1,3 @@
-@import '../../app/styles/global';
-
 #drag-and-drop {
   @include flexbox(row, wrap, space-between, flex-start);
   align-content: flex-start;

@@ -8,11 +8,13 @@
   -webkit-overflow-scrolling: touch;
 }
 
-header {
+.header {
+  @include flexbox(column, nowrap, flex-start, flex-start);
   padding: torem(10px) 0;
 
   h1 {
     font-size: fontSize(34px);
+    margin: 0;
 
     &::after {
       content: '';
@@ -37,11 +39,19 @@ header {
       content: ' No support';
     }
   }
+
+  p {
+    margin: 0;
+  }
 }
 
 main {
   .section {
     padding: torem(20px) 0;
+
+    .subject {
+      margin: 0;
+    }
   }
 
   .code {

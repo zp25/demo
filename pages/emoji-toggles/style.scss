@@ -1,13 +1,13 @@
-$height: 20px;
-
 .emoji-toggles {
+  --emoji-toggles-height: torem(20px);
+
   position: relative;
   width: torem(60px);
-  margin: torem($height) torem(60px);
+  margin: var(--emoji-toggles-height) torem(60px);
 
   .well {
     display: block;
-    height: torem($height);
+    height: var(--emoji-toggles-height);
     background-color: color(grey-bg);
     border-radius: torem(10px);
     cursor: pointer;
@@ -32,7 +32,7 @@ $height: 20px;
       left: 0;
       top: 0;
       font-size: fontSize(40px);
-      line-height: torem($height);
+      line-height: var(--emoji-toggles-height);
       transition: 0.2s;
     }
 

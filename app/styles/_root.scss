@@ -7,9 +7,9 @@
 }
 
 // http://www.outlinenone.com/
-:focus {
-  outline: none;
-}
+// :focus {
+//   outline: none;
+// }
 
 html, button, input, textarea, select {
   padding: 0;
@@ -17,10 +17,6 @@ html, button, input, textarea, select {
   // 文本平滑属性
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, p, a {
-  margin: 0;
 }
 
 ul, ol {
@@ -48,6 +44,8 @@ pre {
   border: 1px solid color(grey-border);
   background-color: color(grey-bg-dark);
   padding: torem(5px);
+  margin-top: 0;
+  margin-bottom: torem(14px);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -71,6 +69,19 @@ html {
     font-size: fontSize();
     line-height: 1.5;
   }
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// http://www.cssmojo.com/latest_new_clearfix_so_far/
+.cf::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 
 // iphone5

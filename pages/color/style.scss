@@ -1,5 +1,3 @@
-@import '../../app/styles/global';
-
 #color-kudos {
   @include flexbox(row, wrap, space-between, flex-start);
   align-content: flex-start;

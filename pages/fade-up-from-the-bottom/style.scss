@@ -1,5 +1,3 @@
-@import '../../app/styles/global';
-
 #fade-up-from-bottom {
   @include flexbox(row, wrap, space-between, flex-start);
 
