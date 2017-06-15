@@ -256,23 +256,6 @@
       ],
       "style": "scroll-snap-points/style.scss",
       "file": "scroll-snap-points.html"
-    },
-    {
-      "draft": true,
-      "name": "Scroll Indicator",
-      "template": "scroll-indicator/index.js",
-      "link": [
-        {
-          "title": "Fun with Viewport Units",
-          "href": "https://css-tricks.com/fun-viewport-units/"
-        },
-        {
-          "title": "Scroll Indicator",
-          "href": "https://codepen.io/MadeByMike/pen/ZOrEmr"
-        }
-      ],
-      "style": "scroll-indicator/style.scss",
-      "file": "scroll-indicator.html"
     }
   ],
   "more": [
@@ -381,6 +364,22 @@
       ],
       "style": "parallax/style.scss",
       "file": "parallax.html"
+    },
+    {
+      "name": "Scroll Indicator",
+      "template": "scroll-indicator/index.js",
+      "link": [
+        {
+          "title": "Fun with Viewport Units",
+          "href": "https://css-tricks.com/fun-viewport-units/"
+        },
+        {
+          "title": "Scroll Indicator",
+          "href": "https://codepen.io/MadeByMike/pen/ZOrEmr"
+        }
+      ],
+      "style": "scroll-indicator/style.scss",
+      "file": "scroll-indicator.html"
     },
     {
       "draft": true,
