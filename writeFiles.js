@@ -50,6 +50,7 @@ const writeFiles = () => {
 
 /**
  * 新建文件夹
+ * @see {@link https://stackoverflow.com/a/21196961/3388271}
  */
 const ensureExists = (path, mask, cb) => {
   if (typeof mask === 'function') {

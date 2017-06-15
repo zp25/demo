@@ -5,7 +5,6 @@ import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import {
-  AUTOPREFIXER_CONFIG,
   HTMLMINIFIER,
   PATHS,
 } from './constants';
@@ -61,7 +60,7 @@ function copy() {
 // Styles
 function tmpSass() {
   const processors = [
-    autoprefixer(AUTOPREFIXER_CONFIG)
+    autoprefixer(),
   ];
 
   return gulp.src(PATHS.styles.src)
@@ -83,8 +82,8 @@ function tmpSass() {
 
 function sass() {
   const processors = [
-    autoprefixer(AUTOPREFIXER_CONFIG),
-    cssnano()
+    autoprefixer(),
+    cssnano(),
   ];
 
   return gulp.src(PATHS.styles.src)
@@ -145,18 +144,13 @@ function script() {
 }
 
 // HTML
-function html() {
-  const processors = [
-    cssnano()
-  ];
-
-  return gulp.src(PATHS.html.src)
-    .pipe($.useref({ searchPath: PATHS.assets }))
-    .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
-    .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
-    .pipe($.if('*.css', $.postcss(processors)))
-    .pipe(gulp.dest(PATHS.html.dest));
-}
+const html = () => gulp.src(PATHS.html.src)
+  .pipe($.useref({
+    searchPath: PATHS.assets,
+  }))
+  .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
+  .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
+  .pipe(gulp.dest(PATHS.html.dest));
 
 // Serve
 function serve() {

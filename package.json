@@ -4,7 +4,7 @@
   "description": "zp25's demo",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node heroku",
+    "postinstall": "node deploy.js",
     "start": "gulp serve",
     "writeFiles": "node writeFiles.js",
     "gulp": "gulp",
@@ -65,5 +65,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11"
+  ]
 }

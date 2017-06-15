@@ -1,5 +1,3 @@
-const AUTOPREFIXER_CONFIG = { browsers: ['last 2 versions'] };
-
 const HTMLMINIFIER = {
   collapseWhitespace: true,
   collapseBooleanAttributes: true,
@@ -54,7 +52,6 @@ const PATHS = {
 };
 
 export {
-  AUTOPREFIXER_CONFIG,
   HTMLMINIFIER,
   PATHS,
 };
