@@ -19,7 +19,15 @@ module.exports = templater `
 
           <div class="inputArea">
             <label class="label" for="password">Password</label>
-            <input type="password" id="password" class="input" pattern="[a-zA-Z0-9_#@]{6,18}" required>
+            <input
+              type="password"
+              id="password"
+              class="input"
+              maxlength="18"
+              pattern="[a-zA-Z0-9_#@]{6,18}"
+              title="输入6到18位数字、字母或_ # @符号"
+              required
+            >
             <span class="helper"></span>
           </div>
 

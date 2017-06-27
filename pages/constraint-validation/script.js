@@ -41,6 +41,9 @@ function invalid(e) {
   const input = e.target;
   const inputType = input.getAttribute('type');
 
+  const inputArea = input.closest('.inputArea');
+  const helper = inputArea.querySelector('.helper');
+
   // 自定义相对valueMissing更明确的提示
   if (input.validity.valueMissing) {
     if (inputType === 'email') {
@@ -50,10 +53,13 @@ function invalid(e) {
     }
   }
 
-  const inputArea = input.closest('.inputArea');
-  const helper = inputArea.querySelector('.helper');
+  // 相对patternMismatch更明确的提示
+  if (input.validity.patternMismatch && inputType === 'password') {
+    helper.innerHTML = `${input.validationMessage.slice(0, -1)}：${input.title}`;
+  } else {
+    helper.innerHTML = input.validationMessage;
+  }
 
-  helper.innerHTML = input.validationMessage;
   inputArea.classList.add('invalid');
 }
 

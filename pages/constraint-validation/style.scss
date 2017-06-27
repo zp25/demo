@@ -51,6 +51,10 @@
       border-bottom: 1px solid var(--color-main);
       padding: 0;
       margin-bottom: torem(8px);
+
+      &:focus {
+        outline: none;
+      }
     }
 
     .helper {
