@@ -1,0 +1,22 @@
+ul, ol {
+  padding-left: torem(40px);
+  margin: torem(10px) 0;
+}
+
+pre {
+  font-size: fontSize(light);
+  border: 1px solid color(grey-border);
+  background-color: color(grey-bg-dark);
+  padding: torem(5px);
+  margin-top: 0;
+  margin-bottom: torem(14px);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// 大屏
+@media only screen and (min-width: 600px) {
+  html {
+    font-size: 100px !important;
+  }
+}

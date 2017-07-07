@@ -26,6 +26,10 @@ const PATHS = {
     ],
     tmp: '.tmp/styles',
     dest: 'dist/styles',
+    includePaths: [
+      'node_modules/normalize.css',
+      'node_modules/zp-ui',
+    ],
   },
   scripts: {
     lint: [

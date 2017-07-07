@@ -1,6 +1,11 @@
 @import 'normalize';
-@import 'global';
 
-@import 'root';
+@import 'color.map';
+
+@import 'styles/func';
+@import 'styles/root';
+@import 'styles/global';
+
+@import 'reset';
 @import 'grid';
 @import 'app';
