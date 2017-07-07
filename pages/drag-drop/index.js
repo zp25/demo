@@ -3,8 +3,7 @@ const templater = require('templater'); // eslint-disable-line import/no-extrane
 const { header, link, style, script } = require('../public');
 
 const list = () => {
-  let arr = new Array(9);
-  arr.fill(0);
+  let arr = [...new Array(9).keys()];
   arr = arr.map((d, index) => index + 1);
 
   return arr.reduce((prev, d) => `${prev}<li class="box box--${d}"></li>`, '');

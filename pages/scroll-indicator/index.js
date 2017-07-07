@@ -15,8 +15,7 @@ const lorem = {
 };
 
 const list = (len = 5) => {
-  const arr = new Array(len);
-  arr.fill(0);
+  const arr = [...new Array(len).keys()];
 
   const li = arr.reduce(prev => `${prev}<li>${loremIpsum(lorem.words)}</li>`, '');
 
@@ -24,8 +23,7 @@ const list = (len = 5) => {
 };
 
 const section = (len = 8) => {
-  const arr = new Array(len);
-  arr.fill(0);
+  const arr = [...new Array(len).keys()];
 
   return arr.reduce((prev, d, index) => (
     index === 2 ? prev + list() : `${prev}<p>${loremIpsum(lorem.sentences)}</p>`
@@ -33,8 +31,7 @@ const section = (len = 8) => {
 };
 
 const fakeArticle = () => {
-  const arr = new Array(3);
-  arr.fill(0);
+  const arr = [...new Array(3).keys()];
 
   return arr.reduce(prev => prev + section(), '');
 };
