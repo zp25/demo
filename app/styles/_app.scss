@@ -4,6 +4,7 @@
  */
 
 #app {
+  font-size: fontSize();
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
