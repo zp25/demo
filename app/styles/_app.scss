@@ -4,6 +4,7 @@
  */
 
 #app {
+  color: color(text);
   font-size: fontSize();
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -88,7 +89,7 @@ main {
     }
 
     &:focus + label {
-      outline: 1px dotted color(black);
+      outline: 1px dotted color(text);
       outline: -webkit-focus-ring-color auto torem(5px);
     }
   }
@@ -100,7 +101,7 @@ main {
     height: 90vw;
     max-width: torem(280px);
     max-height: torem(280px);
-    border: torem(5px) dashed color(grey-border);
+    border: torem(5px) dashed color(border);
 
     &.file-control__drop--hover {
       border-color: color(green);
