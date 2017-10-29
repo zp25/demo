@@ -28,7 +28,7 @@ const swControl = () => {
    * @param {Event} e 事件对象
    */
   const stateChange = (e) => {
-    const state = e.target.state;
+    const { state } = e.target;
 
     if (state === 'activated') {
       style('done');

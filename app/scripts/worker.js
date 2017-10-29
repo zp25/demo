@@ -17,7 +17,7 @@ function buildDataURL(file) {
 
 postMessage('web worker ACTIVATED');
 
-self.addEventListener('message', (e) => {
+window.self.addEventListener('message', (e) => {
   buildDataURL(e.data).then((data) => {
     postMessage(data);
   });
