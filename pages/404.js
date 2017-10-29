@@ -1,8 +1,8 @@
-const templater = require('templater'); // eslint-disable-line import/no-extraneous-dependencies
+const { templater } = require('zp-lib');
 const header = require('./public/header');
 const link = require('./public/link');
 
-module.exports = templater `
+module.exports = templater`
   <div id="app" class="container">
     ${header}
 

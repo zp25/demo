@@ -2,18 +2,18 @@
  * 点击处理
  */
 function handleHistory(e) {
-  const trigger = e.target.dataset.trigger;
+  const { trigger } = e.target.dataset;
 
   if (trigger === 'push') {
-    history.pushState({ page: 2 }, '', '/history.html?pagetwo');
+    window.history.pushState({ page: 2 }, '', '/history.html?pagetwo');
   } else if (trigger === 'replace') {
-    history.replaceState({ page: 3 }, '', '/history.html?pagethree');
+    window.history.replaceState({ page: 3 }, '', '/history.html?pagethree');
   } else if (trigger === 'back') {
-    history.back();
+    window.history.back();
   } else if (trigger === 'forward') {
-    history.forward();
+    window.history.forward();
   } else if (trigger === 'go') {
-    history.go(-2);
+    window.history.go(-2);
   }
 
   e.preventDefault();
@@ -34,5 +34,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.onload = () => {
-  history.replaceState({ page: 1 }, '', '/history.html?pageone');
+  window.history.replaceState({ page: 1 }, '', '/history.html?pageone');
 };

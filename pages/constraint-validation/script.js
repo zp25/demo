@@ -9,7 +9,7 @@ function focus(e) {
  * 表单失去焦点
  */
 function blur(e) {
-  const value = e.target.value;
+  const { value } = e.target;
 
   if (!value) {
     e.target.closest('.inputArea').classList.remove('focus');

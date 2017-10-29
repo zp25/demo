@@ -1,4 +1,4 @@
-const templater = require('templater'); // eslint-disable-line import/no-extraneous-dependencies
+const { templater } = require('zp-lib');
 
 const list = param => param.filter(d => !d.draft).reduce((prev, d) => (
   `${prev}<li><a href="${d.file}">${d.name}</a></li>`
@@ -13,7 +13,7 @@ css.displayName = 'css';
 const more = param => list(param);
 more.displayName = 'more';
 
-module.exports = templater `
+module.exports = templater`
   <div id="app" class="container">
     <header class="header">
       <h1>DEMOs</h1>

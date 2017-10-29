@@ -77,7 +77,7 @@ function changeMode(mode) {
  * 设置2D值
  */
 function setValue2D(e) {
-  const target = e.target;
+  const { target } = e;
 
   const label = target.getAttribute('id');
 
@@ -93,8 +93,8 @@ function setValue2D(e) {
  * 设置3D值
  */
 function setValue3D(e) {
-  const target = e.target;
-  const group = target.dataset.group;
+  const { target } = e;
+  const { group } = target.dataset;
 
   let suffix = '';
   let label = target.getAttribute('id');
@@ -116,7 +116,7 @@ function setValue3D(e) {
  * 模式切换
  */
 function switchMode(e) {
-  const value = e.target.value;
+  const { value } = e.target;
 
   changeMode(value);
 }

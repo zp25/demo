@@ -1,4 +1,4 @@
-const templater = require('templater'); // eslint-disable-line import/no-extraneous-dependencies
+const { templater } = require('zp-lib');
 const loremIpsum = require('lorem-ipsum');
 
 const { header, link, style, script } = require('../public');
@@ -36,7 +36,7 @@ const fakeArticle = () => {
   return arr.reduce(prev => prev + section(), '');
 };
 
-module.exports = templater `
+module.exports = templater`
   <div id="app" class="container container--scroll-indicator">
     ${header}
 

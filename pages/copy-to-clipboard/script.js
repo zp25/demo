@@ -2,7 +2,7 @@
  * 点击事件处理函数
  */
 function handler(e) {
-  const copytarget = e.target.dataset.copytarget;
+  const { copytarget } = e.target.dataset;
   const inp = copytarget ? document.querySelector(`#${copytarget}`) : null;
 
   if (inp && inp.select) {
