@@ -12,50 +12,50 @@ import {
 const $ = gulpLoadPlugins();
 const BS = browserSync.create();
 
-// Lint JavaScript
-function lint() {
-  return gulp.src(PATHS.scripts.lint)
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.if(!BS.active, $.eslint.failOnError()))
-}
+// Lint
+const lint = () => gulp.src(PATHS.scripts.src)
+  .pipe($.eslint())
+  .pipe($.eslint.format())
+  .pipe($.if(!BS.active, $.eslint.failOnError()));
+
+const stylelint = () => gulp.src(PATHS.styles.src)
+  .pipe($.stylelint({
+    failAfterError: false,
+    reporters: [
+      {
+        formatter: 'verbose',
+        console: true,
+      },
+    ],
+    syntax: 'scss',
+  }));
 
 // Image Optimazation
 const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
 
-function images() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.imagemin({
-      progressive: true,
-      interlaced: true,
-      multipass: true,
-    }), {
-      key: makeHashKey('images'),
-    }))
-    .pipe(gulp.dest(PATHS.images.dest))
-    .pipe($.size({ title: 'images' }));
-}
+const images = () => gulp.src(PATHS.images.src)
+  .pipe($.imagemin({
+    progressive: true,
+    interlaced: true,
+    multipass: true,
+  }))
+  .pipe(gulp.dest(PATHS.images.dest))
+  .pipe($.size({ title: 'images' }));
 
-function tmpWebp() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-    .pipe(gulp.dest(PATHS.images.tmp))
-    .pipe(BS.stream({ once: true }));
-}
+const tmpWebp = () => gulp.src(PATHS.images.src)
+  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+  .pipe(gulp.dest(PATHS.images.tmp))
+  .pipe(BS.stream({ once: true }));
 
-function webp() {
-  return gulp.src(PATHS.images.src)
-    .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-    .pipe(gulp.dest(PATHS.images.dest))
-    .pipe($.size({ title: 'webp' }));
-}
+const webp = () => gulp.src(PATHS.images.src)
+  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
+  .pipe(gulp.dest(PATHS.images.dest))
+  .pipe($.size({ title: 'webp' }));
 
 // Copy
-function copy() {
-  return gulp.src(PATHS.copy)
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({ title: 'copy' }));
-}
+const copy = () => gulp.src(PATHS.copy)
+  .pipe(gulp.dest('dist'))
+  .pipe($.size({ title: 'copy' }));
 
 // Styles
 function tmpSass() {
@@ -114,34 +114,30 @@ const rename = (path) => {
   path.dirname = '.';
 };
 
-function tmpScript() {
-  return gulp.src(PATHS.scripts.src)
-    .pipe($.newer(PATHS.scripts.tmp))
-    .pipe($.sourcemaps.init())
-      .pipe($.babel())
-    .pipe($.sourcemaps.write())
-    .pipe($.if(renameFilter, $.rename(rename)))
-    .pipe(gulp.dest(PATHS.scripts.tmp))
-    .pipe(BS.stream({ once: true }));
-}
+const tmpScript = () => gulp.src(PATHS.scripts.src)
+  .pipe($.newer(PATHS.scripts.tmp))
+  .pipe($.sourcemaps.init())
+    .pipe($.babel())
+  .pipe($.sourcemaps.write())
+  .pipe($.if(renameFilter, $.rename(rename)))
+  .pipe(gulp.dest(PATHS.scripts.tmp))
+  .pipe(BS.stream({ once: true }));
 
-function script() {
-  return gulp.src(PATHS.scripts.src)
-    .pipe($.sourcemaps.init())
-      .pipe($.babel())
-      .pipe($.uglify({
-        // preserveComments: 'license',
-        compress: {
-          global_defs: {
-            'DEV': false,
-          },
+const script = () => gulp.src(PATHS.scripts.src)
+  .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.uglify({
+      // preserveComments: 'license',
+      compress: {
+        global_defs: {
+          'DEV': false,
         },
-      }))
-      .pipe($.size({ title: 'scripts' }))
-    .pipe($.sourcemaps.write('.'))
-    .pipe($.if(renameFilter, $.rename(rename)))
-    .pipe(gulp.dest(PATHS.scripts.dest));
-}
+      },
+    }))
+    .pipe($.size({ title: 'scripts' }))
+  .pipe($.sourcemaps.write('.'))
+  .pipe($.if(renameFilter, $.rename(rename)))
+  .pipe(gulp.dest(PATHS.scripts.dest));
 
 // HTML
 const html = () => gulp.src(PATHS.html.src)
@@ -166,7 +162,7 @@ function serve() {
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.images.src, tmpWebp);
 
-  gulp.watch(PATHS.styles.src.concat(PATHS.styles.watch), tmpSass);
+  gulp.watch(PATHS.styles.src.concat(PATHS.styles.watch), gulp.parallel(stylelint, tmpSass));
 
   gulp.watch(PATHS.scripts.lint, lint);
   gulp.watch(PATHS.scripts.src, tmpScript);
@@ -185,7 +181,7 @@ gulp.task('clean:cache', done => $.cache.clearAll(done));
 gulp.task('default',
   gulp.series(
     'clean:all', lint,
-    gulp.parallel(script, sass, images, webp, copy),
+    gulp.parallel(script, stylelint, sass, images, webp, copy),
     html,
   )
 );
