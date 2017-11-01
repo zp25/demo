@@ -18,6 +18,7 @@
   &.pie-more::before {
     background-color: color(gray);
   }
+
   &.pie-animate::before {
     animation: spin 3s linear infinite, bg 6s step-end infinite;
   }

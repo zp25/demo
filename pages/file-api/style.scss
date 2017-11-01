@@ -12,6 +12,7 @@
 
   .detail {
     @include flexbox(row, wrap, flex-start, flex-start);
+
     align-content: flex-start;
 
     .item {

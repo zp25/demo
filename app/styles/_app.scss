@@ -12,6 +12,7 @@
 
 .header {
   @include flexbox(column, nowrap, flex-start, flex-start);
+
   padding: torem(10px) 0;
 
   h1 {
@@ -29,14 +30,17 @@
       content: ' sw';
       color: color(green);
     }
+
     &.sw--waiting::after {
       content: ' sw';
       color: color(orange);
     }
+
     &.sw--error::after {
       content: ' sw';
       color: color(red);
     }
+
     &.sw--no-support::after {
       content: ' No support';
     }

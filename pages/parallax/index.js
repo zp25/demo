@@ -15,9 +15,9 @@ module.exports = templater`
         </div>
 
         <ul class="banner banner--list">
-          <li><h2 class="first">first</h2></li>
-          <li><h2 class="second">second</h2></li>
-          <li><h2 class="third">third</h2></li>
+          <li class="item"><h2 class="first">first</h2></li>
+          <li class="item"><h2 class="second">second</h2></li>
+          <li class="item"><h2 class="third">third</h2></li>
         </ul>
 
         <div class="banner second">

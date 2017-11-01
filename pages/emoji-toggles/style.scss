@@ -26,7 +26,7 @@
     z-index: 100;
     cursor: pointer;
 
-    ~.emoji::before {
+    ~ .emoji::before {
       content: '';
       position: absolute;
       left: 0;
@@ -37,14 +37,14 @@
     }
 
     &:checked {
-      ~.emoji::before {
+      ~ .emoji::before {
         content: '';
         left: 100%;
         margin-left: -1em;
       }
     }
 
-    ~.well {
+    ~ .well {
       white-space: nowrap;
 
       &::before {
@@ -53,6 +53,7 @@
         right: 100%;
         margin-right: torem(5px);
       }
+
       &::after {
         position: absolute;
         top: 0;
@@ -65,20 +66,21 @@
 
 @mixin emojiType($leftEmoji, $rightEmoji, $leftLabel, $rightLabel) {
   .toggle {
-    ~.emoji::before {
+    ~ .emoji::before {
       content: $leftEmoji;
     }
 
     &:checked {
-      ~.emoji::before {
+      ~ .emoji::before {
         content: $rightEmoji;
       }
     }
 
-    ~.well {
+    ~ .well {
       &::before {
         content: $leftLabel;
       }
+
       &::after {
         content: $rightLabel;
       }

@@ -1,9 +1,10 @@
 #showpart {
+  @include flexbox(row, nowrap, center, center);
+
   width: 90vw;
   height: 90vw;
   max-width: torem(500px);
   max-height: torem(500px);
-  @include flexbox(row, nowrap, center, center);
   border: 1px solid color(black);
 
   .box {
@@ -11,8 +12,8 @@
     font-size: fontSize(bolder);
 
     &.box--2d {
-      --transform-translate-x: 0px;
-      --transform-translate-y: 0px;
+      --transform-translate-x: 0;
+      --transform-translate-y: 0;
       --transform-rotate: 0deg;
       --transform-scale: 1;
       --transform-skew-x: 0deg;
@@ -68,12 +69,13 @@
         transform-style: var(--transform-transform-style);
 
         .face {
+          @include flexbox(row, nowrap, center, center);
+
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          @include flexbox(row, nowrap, center, center);
           transform-origin:
             var(--transform-transform-origin-x)
             var(--transform-transform-origin-y);
@@ -84,22 +86,27 @@
           background-color: rgba(142, 53, 87, 0.7);
           transform: translateZ(var(--transform-half-width));
         }
+
         .back {
           background-color: rgba(51, 204, 204, 0.7);
           transform: rotateY(180deg) translateZ(var(--transform-half-width));
         }
+
         .top {
           background-color: rgba(255, 204, 0, 0.7);
           transform: rotateX(90deg) translateZ(var(--transform-half-width));
         }
+
         .bottom {
           background-color: rgba(0, 153, 51, 0.7);
           transform: rotateX(-90deg) translateZ(var(--transform-half-width));
         }
+
         .left {
           background-color: rgba(221, 17, 68, 0.7);
           transform: rotateY(-90deg) translateZ(var(--transform-half-width));
         }
+
         .right {
           background-color: rgba(255, 51, 0, 0.7);
           transform: rotateY(90deg) translateZ(var(--transform-half-width));
@@ -131,26 +138,31 @@
             content: 'translateX(' attr(data-value) 'px)';
           }
         }
+
         &.label--translateY {
           &::after {
             content: 'translateY(' attr(data-value) 'px)';
           }
         }
+
         &.label--rotate {
           &::after {
             content: 'rotate(' attr(data-value) 'deg)';
           }
         }
+
         &.label--scale {
           &::after {
             content: 'scale(' attr(data-value) ')';
           }
         }
+
         &.label--skewX {
           &::after {
             content: 'skewX(' attr(data-value) 'deg)';
           }
         }
+
         &.label--skewY {
           &::after {
             content: 'skewY(' attr(data-value) 'deg)';
@@ -163,21 +175,25 @@
             content: 'perspective: ' attr(data-value);
           }
         }
+
         &.label--perspective-origin {
           &::after {
             content: 'perspective-origin: ' attr(data-value-x) '% ' attr(data-value-y) '%';
           }
         }
+
         &.label--transform-style {
           &::after {
             content: 'transform-style: ' attr(data-value);
           }
         }
+
         &.label--transform-origin {
           &::after {
             content: 'transform-origin: ' attr(data-value-x) '% ' attr(data-value-y) '%';
           }
         }
+
         &.label--backface-visibility {
           &::after {
             content: 'backface-visibility: ' attr(data-value);

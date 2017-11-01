@@ -1,0 +1,23 @@
+{
+  "battery-status.js": "battery-status-f6f4a3bb2d.js",
+  "blend.js": "blend-2c3493650a.js",
+  "canvas.js": "canvas-7c9bfbd83c.js",
+  "clip-path.js": "clip-path-67fdbc44ed.js",
+  "constraint-validation.js": "constraint-validation-d8d58ebaa7.js",
+  "copy-to-clipboard.js": "copy-to-clipboard-56446de0cd.js",
+  "dataurl.js": "dataurl-d51e4b74fe.js",
+  "drag-drop.js": "drag-drop-3b0be6d1ef.js",
+  "fade-up-from-the-bottom.js": "fade-up-from-the-bottom-9abb7091b8.js",
+  "file-api.js": "file-api-d1280f2db6.js",
+  "fullscreen.js": "fullscreen-db838ed1c0.js",
+  "getusermedia.js": "getusermedia-3282324e59.js",
+  "history.js": "history-d87ac518d6.js",
+  "main.css": "main-deac9817ce.css",
+  "main.js": "main-3480b6ebed.js",
+  "notification.js": "notification-a794bcc86f.js",
+  "page-visibility.js": "page-visibility-d9eee998ce.js",
+  "pages.css": "pages-4f542f0314.css",
+  "transform.js": "transform-5663aa37c0.js",
+  "vibration.js": "vibration-161b4480dd.js",
+  "waapi.js": "waapi-4fb0c5f082.js"
+}

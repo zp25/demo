@@ -4,9 +4,11 @@
   .first {
     background-image: url(../images/paisley.png);
   }
+
   .second {
     background-image: url(../images/weather.png);
   }
+
   .third {
     background-image: url(../images/swirl_pattern.png);
   }
@@ -27,18 +29,19 @@
     // Zooming Background Images
     &.banner--list {
       @include flexbox(row, nowrap, space-around, center);
+
       padding: 0;
       margin: 0;
 
-      li {
-        flex: 0 0 auto;
-        width: 30%;
+      .item {
+        display: block;
+        flex: 0 0 30%;
         height: torem(200px);
         overflow: hidden;
 
         h2 {
           line-height: torem(200px);
-          transition: transform .5s;
+          transition: transform 0.5s;
           cursor: default;
         }
 

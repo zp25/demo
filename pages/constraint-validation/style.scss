@@ -40,7 +40,7 @@
       color: var(--color-main);
       font-size: fontSize(bold);
       line-height: torem(32px);
-      transition: .2s ease-out;
+      transition: 0.2s ease-out;
     }
 
     .input {
@@ -63,7 +63,7 @@
       font-size: fontSize(light);
       line-height: torem(12px);
       opacity: 0;
-      transition: .2s ease-out;
+      transition: 0.2s ease-out;
     }
   }
 

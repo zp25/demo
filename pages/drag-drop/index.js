@@ -17,7 +17,7 @@ module.exports = templater`
       ${link}
 
       <section class="col col--s12 section">
-        <p>拖动交换各元素位置，并以localstorage存储</p>
+        <p>拖动交换各元素位置，并以localStorage存储</p>
       </section>
 
       <section class="col col--s12 section">

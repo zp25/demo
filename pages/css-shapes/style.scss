@@ -5,6 +5,7 @@
     background-color: color(green);
     margin-bottom: torem(10px);
   }
+
   .graphics-triangle {
     margin-bottom: torem(10px);
   }
@@ -13,11 +14,13 @@
     width: torem(200px);
     height: torem(100px);
   }
+
   #circle {
     width: torem(100px);
     height: torem(100px);
     border-radius: 100%;
   }
+
   #oval {
     width: torem(200px);
     height: torem(100px);
@@ -40,6 +43,7 @@
     border-bottom: torem(100px) solid color(green);
     border-left: torem(50px) solid transparent;
   }
+
   #triangle-down {
     width: 0;
     height: 0;
@@ -116,6 +120,7 @@
       border-left: torem(30px) solid transparent;
       transform: rotate(-35deg);
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -170,6 +175,7 @@
       border-bottom: torem(25px) solid color(green);
       border-left: torem(50px) solid transparent;
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -200,6 +206,7 @@
       border-bottom: torem(29px) solid color(green);
       border-left: torem(29px) solid color(white);
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -219,7 +226,8 @@
     height: torem(90px);
     position: relative;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       left: torem(50px);
@@ -231,6 +239,7 @@
       transform-origin: 0 100%;
       transform: rotate(-45deg);
     }
+
     &::after {
       left: 0;
       transform-origin: 100% 100%;
@@ -243,7 +252,8 @@
     width: torem(212px);
     height: torem(100px);
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       top: 0;
@@ -254,6 +264,7 @@
       border-radius: torem(50px) torem(50px) 0 torem(50px);
       transform: rotate(-45deg);
     }
+
     &::after {
       left: auto;
       right: 0;
@@ -292,8 +303,8 @@
   }
 
   #pacman {
-    width: 0px;
-    height: 0px;
+    width: 0;
+    height: 0;
     border: torem(60px) solid color(green);
     border-right: torem(60px) solid transparent;
     border-radius: 100%;
@@ -327,7 +338,8 @@
     margin-bottom: torem(20px);
     margin-left: torem(15px);
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: '';
       position: absolute;
       top: 0;
@@ -336,9 +348,11 @@
       height: 100%;
       background: color(green);
     }
+
     &::before {
       transform: rotate(30deg);
     }
+
     &::after {
       transform: rotate(60deg);
     }
@@ -386,6 +400,7 @@
       border: torem(18px) solid color(green);
       border-radius: 100%;
     }
+
     &::after {
       content: '';
       position: absolute;
@@ -395,7 +410,7 @@
       height: torem(48px);
       background: color(green);
       border: torem(18px) solid color(white);
-      border-radius:100%;
+      border-radius: 100%;
     }
   }
 
@@ -412,8 +427,8 @@
     box-shadow:
       0 0 0 1em color(green),
       0 1em 0 1em color(green),
-      -2.5em 1.5em 0 .5em color(green),
-      2.5em 1.5em 0 .5em color(green),
+      -2.5em 1.5em 0 0.5em color(green),
+      2.5em 1.5em 0 0.5em color(green),
       -3em -3em 0 0 color(green),
       3em -3em 0 0 color(green),
       -2em -2em 0 0 color(green),
@@ -440,12 +455,10 @@
       -1em 4em 0 0 color(green),
       1em 4em 0 0 color(green),
       2em 4em 0 0 color(green);
-
     background: color(green);
     width: 1em;
     height: 1em;
     overflow: hidden;
-
     margin: torem(60px) 0 torem(70px) torem(70px);
   }
 }
