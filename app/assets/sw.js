@@ -1,4 +1,4 @@
-const CACHE_VERSION = 2.2;
+const CACHE_VERSION = 2.3;
 const CURRENT_CACHES = {
   offline: `offline-v${CACHE_VERSION}`,
 };
@@ -6,14 +6,16 @@ const CURRENT_CACHES = {
 const pageNotFound = '/404.html';
 
 // 默认缓存
+// 待解决首次访问即可离线
 const OFFLINE_URL = [
   pageNotFound,
-  '/',
-  'index.html',
-  '/styles/main.css',
-  '/styles/pages.css',
-  '/scripts/main.js',
-  '/manifest.json',
+  // '/',
+  // 'index.html',
+  // '/styles/main.css',
+  // '/styles/pages.css',
+  // '/scripts/main.js',
+  // '/manifest.json',
+  '/worker.js',
   '/images/zp.jpg',
 ];
 
