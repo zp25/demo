@@ -73,7 +73,7 @@ function error(e) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const url = new URL('scripts/worker.js', window.location.origin);
+  const url = new URL('worker.js', window.location.origin);
   const worker = new Worker(url);
 
   worker.addEventListener('message', msg, false);

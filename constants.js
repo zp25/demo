@@ -13,19 +13,17 @@ const HTMLMINIFIER = {
 };
 
 const PATHS = {
+  root: './',
   html: {
     src: 'app/html/*.html',
     dest: 'dist/html',
   },
   styles: {
-    src: [
-    'app/styles/**/*.{scss,css}',
-    ],
-    watch: [
-      'pages/**/*.{scss,css}',
-    ],
+    src: 'app/styles/**/*.{scss,css}',
+    watch: 'pages/**/*.{scss,css}',
     tmp: '.tmp/styles',
     dest: 'dist/styles',
+    // gulp-sass includePaths
     includePaths: [
       'node_modules/normalize.css',
       'node_modules/zp-ui',
@@ -52,6 +50,7 @@ const PATHS = {
   },
   copy: ['app/assets/*', '!app/*.html'],
   clean: ['.tmp', 'dist/*'],
+  manifest: './rev-manifest.json',
   assets: ['.tmp', 'app', 'app/assets', 'app/html', 'node_modules'],
 };
 

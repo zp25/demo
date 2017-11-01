@@ -9,7 +9,11 @@ import {
   PATHS,
 } from './constants';
 
-const $ = gulpLoadPlugins();
+const $ = gulpLoadPlugins({
+  rename: {
+    'gulp-rev-replace': 'replace',
+  },
+});
 const BS = browserSync.create();
 
 // Lint
@@ -18,7 +22,7 @@ const lint = () => gulp.src(PATHS.scripts.src)
   .pipe($.eslint.format())
   .pipe($.if(!BS.active, $.eslint.failOnError()));
 
-const stylelint = () => gulp.src(PATHS.styles.src)
+const stylelint = () => gulp.src([PATHS.styles.src, PATHS.styles.watch])
   .pipe($.stylelint({
     failAfterError: false,
     reporters: [
@@ -98,8 +102,14 @@ function sass() {
       )
       .pipe($.postcss(processors))
       .pipe($.size({ title: 'styles' }))
+      .pipe($.rev())
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.styles.dest));
+    .pipe(gulp.dest(PATHS.styles.dest))
+    .pipe($.rev.manifest({
+      base: process.cwd(),
+      merge: true,
+    }))
+    .pipe(gulp.dest(PATHS.root));
 }
 
 // Scripts
@@ -135,14 +145,27 @@ const script = () => gulp.src(PATHS.scripts.src)
       },
     }))
     .pipe($.size({ title: 'scripts' }))
+    .pipe($.if(renameFilter, $.rename(rename)))
+    .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
-  .pipe($.if(renameFilter, $.rename(rename)))
-  .pipe(gulp.dest(PATHS.scripts.dest));
+  .pipe(gulp.dest(PATHS.scripts.dest))
+  .pipe($.rev.manifest({
+    base: process.cwd(),
+    merge: true,
+  }))
+  .pipe(gulp.dest(PATHS.root));
 
 // HTML
 const html = () => gulp.src(PATHS.html.src)
   .pipe($.useref({
     searchPath: PATHS.assets,
+  }))
+  .pipe($.replace({
+    manifest: gulp.src(PATHS.manifest),
+  }))
+  .pipe($.inlineSource({
+    rootpath: PATHS.html.dest,
+    compress: false,
   }))
   .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
   .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
@@ -162,7 +185,7 @@ function serve() {
   gulp.watch(PATHS.html.src).on('change', BS.reload);
   gulp.watch(PATHS.images.src, tmpWebp);
 
-  gulp.watch(PATHS.styles.src.concat(PATHS.styles.watch), gulp.parallel(stylelint, tmpSass));
+  gulp.watch([PATHS.styles.src, PATHS.styles.watch], gulp.parallel(stylelint, tmpSass));
 
   gulp.watch(PATHS.scripts.lint, lint);
   gulp.watch(PATHS.scripts.src, tmpScript);

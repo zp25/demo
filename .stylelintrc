@@ -4,6 +4,7 @@
     "at-rule-empty-line-before": null,
     "at-rule-no-unknown": [true, {
       "ignoreAtRules": [
+        "each",
         "extends",
         "for",
         "function",
