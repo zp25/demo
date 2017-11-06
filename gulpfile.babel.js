@@ -38,10 +38,12 @@ const stylelint = () => gulp.src([PATHS.styles.src, PATHS.styles.watch])
 const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
 
 const images = () => gulp.src(PATHS.images.src)
-  .pipe($.imagemin({
+  .pipe($.cache($.imagemin({
     progressive: true,
     interlaced: true,
     multipass: true,
+  }), {
+    key: makeHashKey('images'),
   }))
   .pipe(gulp.dest(PATHS.images.dest))
   .pipe($.size({ title: 'images' }));
