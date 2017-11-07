@@ -17,6 +17,10 @@ module.exports = templater`
         <canvas id="fpDoodle" width="590" height="550">你的浏览器不支持canvas元素</canvas>
       </section>
 
+      <section class="col col--s12 section">
+        <a href="#canvas" class="download" download="canvas">下载图片</a>
+      </section>
+
       <section class="col col--s12 code">
         ${style}
         ${script('code')}

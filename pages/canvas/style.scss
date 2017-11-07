@@ -1,3 +1,11 @@
 #fpDoodle {
   background-color: color(grey-bg);
 }
+
+.download {
+  opacity: 0;
+
+  &.download--active {
+    opacity: 1;
+  }
+}

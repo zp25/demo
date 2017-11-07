@@ -271,6 +271,13 @@ class DrawTetris extends Tetris {
   }
 }
 
+const buildDownload = (dataURL) => {
+  const download = document.querySelector('.download');
+
+  download.href = dataURL;
+  download.classList.add('download--active');
+};
+
 window.addEventListener('load', () => {
   const canvas = document.querySelector('#fpDoodle');
   const ctx = canvas.getContext('2d');
@@ -285,4 +292,6 @@ window.addEventListener('load', () => {
 
     tetris.drawTransform(t, ctx, x, y);
   };
+
+  buildDownload(canvas.toDataURL('image/png'));
 }, false);

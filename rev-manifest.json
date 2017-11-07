@@ -1,7 +1,7 @@
 {
   "battery-status.js": "battery-status-f6f4a3bb2d.js",
   "blend.js": "blend-2c3493650a.js",
-  "canvas.js": "canvas-7c9bfbd83c.js",
+  "canvas.js": "canvas-a4ca1a0e7e.js",
   "clip-path.js": "clip-path-67fdbc44ed.js",
   "constraint-validation.js": "constraint-validation-d8d58ebaa7.js",
   "copy-to-clipboard.js": "copy-to-clipboard-56446de0cd.js",
@@ -16,7 +16,7 @@
   "main.js": "main-3480b6ebed.js",
   "notification.js": "notification-a794bcc86f.js",
   "page-visibility.js": "page-visibility-d9eee998ce.js",
-  "pages.css": "pages-4f542f0314.css",
+  "pages.css": "pages-535b5e5dca.css",
   "transform.js": "transform-5663aa37c0.js",
   "vibration.js": "vibration-161b4480dd.js",
   "waapi.js": "waapi-4fb0c5f082.js"
