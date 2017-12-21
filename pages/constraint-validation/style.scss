@@ -10,29 +10,6 @@
     height: torem(52px);
     margin-top: torem(32px);
 
-    &.focus {
-      .label {
-        color: var(--color-focus);
-        font-size: fontSize(light);
-        line-height: torem(16px);
-        transform: translateY(torem(-16px));
-      }
-
-      .input {
-        border-bottom: 1px solid var(--color-focus);
-      }
-    }
-
-    &.invalid {
-      .input {
-        border-bottom: 1px solid var(--color-error);
-      }
-
-      .helper {
-        opacity: 1;
-      }
-    }
-
     .label {
       position: absolute;
       top: 0;
@@ -64,6 +41,29 @@
       line-height: torem(12px);
       opacity: 0;
       transition: 0.2s ease-out;
+    }
+
+    &.focus {
+      .label {
+        color: var(--color-focus);
+        font-size: fontSize(light);
+        line-height: torem(16px);
+        transform: translateY(torem(-16px));
+      }
+
+      .input {
+        border-bottom: 1px solid var(--color-focus);
+      }
+    }
+
+    &.invalid {
+      .input {
+        border-bottom: 1px solid var(--color-error);
+      }
+
+      .helper {
+        opacity: 1;
+      }
     }
   }
 

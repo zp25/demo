@@ -90,7 +90,7 @@
 
 #dice-multi {
   #m-cross {
-    .item {
+    .item { // stylelint-disable-line no-descending-specificity
       &:nth-child(2) {
         align-self: center;
       }
