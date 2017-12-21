@@ -382,6 +382,18 @@
       "file": "scroll-indicator.html"
     },
     {
+      "name": "Responsive Spreadsheet",
+      "template": "responsive-spreadsheet/index.js",
+      "link": [
+        {
+          "title": "An Idea for a Simple Responsive Spreadsheet",
+          "href": "https://css-tricks.com/idea-simple-responsive-spreadsheet/"
+        }
+      ],
+      "style": "responsive-spreadsheet/style.scss",
+      "file": "responsive-spreadsheet.html"
+    },
+    {
       "draft": true,
       "name": "Text",
       "template": "text.js",

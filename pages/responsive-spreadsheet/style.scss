@@ -1,0 +1,44 @@
+#responsive-spreadsheet {
+  @include flexbox(row, nowrap, flex-start, flex-start);
+
+  max-width: torem(700px);
+  max-height: torem(450px);
+  overflow: scroll;
+
+  .table {
+    border-collapse: collapse;
+  }
+
+  .th,
+  .td {
+    @extend .ellipsis;
+
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: torem(20px);
+  }
+
+  .th {
+    position: sticky;
+    top: -1px;
+    background-color: #eee;
+    z-index: 2;
+
+    // The first cell that lives in the top left of our spreadsheet
+    &:first-of-type {
+      left: -1px;
+      z-index: 3;
+    }
+  }
+
+  .tbody {
+    .tr {
+      .td:first-of-type {
+        position: sticky;
+        left: -1px;
+        background-color: #eee;
+        z-index: 1;
+      }
+    }
+  }
+}
