@@ -28,5 +28,5 @@ module.exports = templater`
   </div>
 
   ${useref('script')}
-  ${script('inline')}
+  ${script()}
 `;
