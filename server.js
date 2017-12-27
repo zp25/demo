@@ -23,6 +23,7 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
+      imgSrc: ['data:'],
       objectSrc: ["'none'"],
       frameAncestors: ["'none'"],
     },
