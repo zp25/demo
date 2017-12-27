@@ -11,16 +11,14 @@ const writeFile = (page) => new Promise((resolve, reject) => {
   const {
     name,
     template,
-    link,
-    style,
-    script,
     file,
+    ...rest
   } = page;
 
   const input = path.resolve('pages/', template);
   const output = path.resolve('app/html/', file);
 
-  const data = name === 'index' ? config : { link, style, script };
+  const data = name === 'index' ? config : rest;
   const result = wrap({
     file,
     app: require(input)(data),
