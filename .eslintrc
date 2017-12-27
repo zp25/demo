@@ -6,7 +6,8 @@
   },
   "globals": {
     "$": false,
-    "$$": false
+    "$$": false,
+    "QRCode": false
   },
   "rules": {
     "no-param-reassign": ["error", { "props": false }],

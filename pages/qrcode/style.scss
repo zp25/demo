@@ -1,0 +1,23 @@
+#qrcode {
+  @include flexbox(row, nowrap, flex-start, center);
+
+  .input {
+    flex: 1 1 auto;
+    max-width: torem(800px);
+    font-size: fontSize();
+    line-height: 1.5;
+    padding: torem(5px);
+    margin-right: torem(10px);
+  }
+
+  .submit {
+    height: torem(30px);
+    border-radius: torem(3px);
+    padding: torem(5px);
+  }
+}
+
+.qrcode-output {
+  width: torem(220px);
+  height: torem(220px);
+}

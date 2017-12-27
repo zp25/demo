@@ -266,6 +266,20 @@
       "file": "dataurl.html"
     },
     {
+      "name": "QRCode",
+      "template": "qrcode/index.js",
+      "style": "qrcode/style.scss",
+      "script": "qrcode/script.js",
+      "useref": [
+        {
+          "type": "script",
+          "src": "qrcode/build/qrcode.min.js",
+          "dest": "scripts/qrcode.min.js"
+        }
+      ],
+      "file": "qrcode.html"
+    },
+    {
       "name": "Fade up from the bottom",
       "template": "fade-up-from-the-bottom/index.js",
       "style": "fade-up-from-the-bottom/style.scss",
@@ -404,18 +418,6 @@
         }
       ],
       "file": "text.html"
-    },
-    {
-      "draft": true,
-      "name": "Making Charts with CSS",
-      "template": "charts-with-css.js",
-      "link": [
-        {
-          "title": "Making Charts with CSS",
-          "href": "https://css-tricks.com/making-charts-with-css/"
-        }
-      ],
-      "file": "charts-with-css.html"
     },
     {
       "draft": true,
