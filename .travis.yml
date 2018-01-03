@@ -9,8 +9,9 @@ deploy:
   access_key_id: $ACCESSKEYID
   secret_access_key:
     secure: "$SECRETACCESSKEY"
-  region: "us-west-1c"
+  region: "us-west-1"
   app: "demo.zp25"
   env: "Demozp25-env"
+  bucket_name: "elasticbeanstalk-us-west-1-633956617217"
 on:
   branch: master
