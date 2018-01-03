@@ -5,13 +5,10 @@ cache: yarn
 script:
   - npm run build
 deploy:
-  provider: elasticbeanstalk
-  access_key_id: $ACCESSKEYID
-  secret_access_key:
-    secure: "$SECRETACCESSKEY"
-  region: "us-west-1"
-  app: "demo.zp25"
-  env: "Demozp25-env"
-  bucket_name: "elasticbeanstalk-us-west-1-633956617217"
-on:
-  branch: master
+  provider: heroku
+  skip_cleanup: true
+  api_key:
+    secure: b9hq8UPkTxWXFnDd+sTaReZukNc1E99CLN14ECHYgdZNXIHfgN4op4en+Na0A5i7owNbmwLh+wZR8OMIrEuFHVEIOEH426gPvgcaLWmWmRDswglzbPwhzZjDPPmILC/zsc4KIY76eXwx+2BpCQGCNMb5TJLSej0eCdy6gxx60PxxeYz8cnW6wfw6pr3Qfb/shpqaECV+GFvGzMCNJcGH/JCQQ5Yqa45N63CxuI6HlXIY+b9PAq47MLSQJJTasCSG+0dO/AQHh/lv0rXV/J7a6HsefIMFazCuhhkr3z8rJt7iP05lRfdnBNq8Z6NG+2tja99o4+8gHEb0gOUBTrNHZ679P1bg9sg/xeqoEnEUhnOGmMQxNrj97Xkjbem3s8U2zWDemvKceigOMcQPYD4lUkdyXNybipfVgGFxzDffnAynTOiwejtNJ0reRxIUD2zd9kTDAMyRNxN8bN/RQLYqpzKZzARCtkMRtfoQCsUUOt8d0v+ZEV8ZvhdhcgSIc2kHdpODcJgwUTohklwc2tbjEeBgxgw4K19KYqXejZMBadcLy9xPdWrz0Z7yRAIANopqYlXu0E3S+b+9YYtPoIlnboQxBAhGkRPkAWhj3YrOYKHvcuYLY07GuiO+psibhrOUGKx7CXPlkTSkULBJQI600GBGp1tLQiP1CSIsFCbtGDw=
+  app: rens-demo
+  on:
+    branch: master
