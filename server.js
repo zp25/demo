@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const compression = require('compression');
 const errorHandler = require('errorhandler');
 const helmet = require('helmet');
+const ms = require('ms');
 
 const app = express();
 
@@ -12,10 +13,6 @@ const html = path.resolve(static, 'html');
 
 app.set('port', process.env.PORT || 3001);
 app.set('favicon', path.resolve(static, 'images/favicon.png'));
-
-app.set('oneDay', 24 * 3600);
-app.set('oneWeek', 7 * 24 * 3600);
-app.set('halfYear', 180 * 24 * 3600);
 
 // Use Helmet
 app.disable('x-powered-by');
@@ -33,7 +30,7 @@ app.use(helmet({
     action: 'deny',
   },
   hsts: {
-    maxAge: app.get('halfYear'),
+    maxAge: ms('0.5y') / 1000,
     includeSubDomains: true,
   },
   referrerPolicy: {
@@ -45,8 +42,8 @@ app.use(helmet({
 app.use(compression());
 app.use(favicon(app.get('favicon')));
 
-app.use(express.static(html, { maxAge: app.get('oneDay') }));
-app.use(express.static(static, { maxAge: app.get('oneWeek') }));
+app.use(express.static(html, { maxAge: ms('1d') }));
+app.use(express.static(static, { maxAge: ms('1w') }));
 
 if (app.get('env') === 'development') {
   console.log('Development mode');
