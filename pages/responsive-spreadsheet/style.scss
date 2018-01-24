@@ -11,7 +11,7 @@
 
   .th,
   .td {
-    @extend .ellipsis;
+    @extend %ellipsis;
 
     text-align: center;
     border: 1px solid #ddd;

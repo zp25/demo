@@ -37,7 +37,7 @@
     .helper {
       display: block;
       color: var(--color-error);
-      font-size: fontSize(light);
+      font-size: fontSize(lighter);
       line-height: torem(12px);
       opacity: 0;
       transition: 0.2s ease-out;
@@ -46,7 +46,7 @@
     &.focus {
       .label {
         color: var(--color-focus);
-        font-size: fontSize(light);
+        font-size: fontSize(lighter);
         line-height: torem(16px);
         transform: translateY(torem(-16px));
       }
