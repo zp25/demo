@@ -408,6 +408,19 @@
       "file": "responsive-spreadsheet.html"
     },
     {
+      "name": "div模拟textarea",
+      "template": "responsive-textarea/index.js",
+      "link": [
+        {
+          "title": "div模拟textarea文本域轻松实现高度自适应",
+          "href": "http://www.zhangxinxu.com/wordpress/2010/12/div-textarea-height-auto/"
+        }
+      ],
+      "style": "responsive-textarea/style.scss",
+      "script": "responsive-textarea/script.js",
+      "file": "responsive-textarea.html"
+    },
+    {
       "draft": true,
       "name": "Text",
       "template": "text.js",
@@ -442,6 +455,20 @@
         }
       ],
       "file": "wavescroll.html"
+    },
+    {
+      "draft": true,
+      "name": "Direction Aware Hover Effects",
+      "template": "hover-effects/index.js",
+      "link": [
+        {
+          "title": "Direction Aware Hover Effects",
+          "href": "https://css-tricks.com/direction-aware-hover-effects/"
+        }
+      ],
+      "style": "hover-effects/style.scss",
+      "script": "hover-effects/script.js",
+      "file": "hover-effects.html"
     }
   ]
 }

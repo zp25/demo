@@ -1,0 +1,15 @@
+#responsive-textarea {
+  .textarea {
+    width: torem(220px);
+    min-height: torem(120px);
+    border: 1px solid grey;
+    outline: none;
+    padding: torem(5px);
+    margin-bottom: torem(10px);
+  }
+
+  .output {
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+}
