@@ -7,7 +7,7 @@ const wrap = require('./pages/wrap');
  * 新建单个文件
  * @return {Promise}
  */
-const writeFile = (page) => new Promise((resolve, reject) => {
+const writeFile = page => new Promise((resolve, reject) => {
   const {
     name,
     template,
@@ -15,21 +15,28 @@ const writeFile = (page) => new Promise((resolve, reject) => {
     ...rest
   } = page;
 
-  const input = path.resolve('pages/', template);
-  const output = path.resolve('app/html/', file);
+  const input = `./pages/${template}`;
+  const output = `./app/html/${file}`;
 
-  const data = name === 'index' ? config : rest;
-  const result = wrap({
-    file,
-    app: require(input)(data),
+  // 规范路径
+  const { style, script } = rest;
+  const data = Object.assign({}, rest, {
+    style: style ? path.resolve('pages/', template, 'style.scss') : false,
+    script: script ? path.resolve('pages/', template, 'script.js') : false,
   });
 
-  fs.writeFile(output, result, (err) => {
-    if (err) {
-      reject(err);
-    } else {
-      resolve(file);
-    }
+  // 注意wrap必须使用templaterAsync，其它可使用templater，例如index, 404
+  wrap({
+    file,
+    app: require(input)(data),
+  }).then((result) => {
+    fs.writeFile(output, result, (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(file);
+      }
+    });
   });
 });
 
@@ -37,11 +44,24 @@ const writeFile = (page) => new Promise((resolve, reject) => {
  * 读取配置，新建所有文件
  * @return {Promise}
  */
-const writeFiles = () => {
+const writeFiles = ({
+  index,
+  '404': notFound,
+  ...contents
+}) => {
+  let spread = [];
+  for (let [key, group] of Object.entries(contents)) {
+    group = group.map(d => Object.assign({}, d, {
+      template: path.join(key, d.template),
+    }));
+
+    spread = spread.concat(group);
+  }
+
   const pages = [
-    config.index,
-    config['404'],
-  ].concat(config.javascript, config.css, config.more).filter(d => !d.draft);
+    Object.assign({}, index, contents),
+    notFound,
+  ].concat(spread).filter(d => !d.draft);
 
   return Promise.all(pages.map(page => writeFile(page)));
 };
@@ -68,11 +88,11 @@ const ensureExists = (path, mask, cb) => {
 ensureExists('app/html', 0o755, (err) => {
   if (err) {
     throw err;
-  } else {
-    writeFiles().then((data) => {
-      console.log(`total: ${data.length} files\ndone!`);
-    }).catch((err) => {
-      console.log(`${err.code}: ${err.message}`);
-    });
   }
+
+  writeFiles(config).then((data) => {
+    console.log(`total: ${data.length} files\ndone!`);
+  }).catch((err) => {
+    console.log(err);
+  });
 });

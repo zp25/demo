@@ -1,6 +1,5 @@
 const { templater } = require('zp-lib');
-const header = require('./public/header');
-const link = require('./public/link');
+const { header, link } = require('demo-public');
 
 module.exports = templater`
   <div id="app" class="container">

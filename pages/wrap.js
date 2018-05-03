@@ -1,4 +1,4 @@
-const { templater } = require('zp-lib');
+const { templaterAsync: templater } = require('zp-lib');
 
 module.exports = templater`
   <!DOCTYPE html>
