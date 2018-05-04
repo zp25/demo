@@ -6,43 +6,43 @@
     margin: torem(10px) 0;
   }
 
-  #blur {
+  .blur {
     filter: blur(5px);
   }
 
-  #brightness {
+  .brightness {
     filter: brightness(0.5);
   }
 
-  #contrast {
+  .contrast {
     filter: contrast(0.2);
   }
 
-  #drop-shadow {
+  .drop-shadow {
     filter: drop-shadow(torem(10px) torem(10px) torem(10px) color(gray));
   }
 
-  #grayscale {
+  .grayscale {
     filter: grayscale(100%);
   }
 
-  #hue-rotate {
+  .hue-rotate {
     filter: hue-rotate(90deg);
   }
 
-  #invert {
+  .invert {
     filter: invert(100%);
   }
 
-  #opacity {
+  .opacity {
     filter: opacity(0.5);
   }
 
-  #saturate {
+  .saturate {
     filter: saturate(200%);
   }
 
-  #sepia {
+  .sepia {
     filter: sepia(100%);
   }
 }

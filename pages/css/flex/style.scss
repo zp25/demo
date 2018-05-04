@@ -23,63 +23,63 @@
   }
 }
 
-#dice-single {
-  #top-left {
+.dice--single {
+  .top-left {
     justify-content: flex-start;
   }
 
-  #top-center {
+  .top-center {
     justify-content: center;
   }
 
-  #top-right {
+  .top-right {
     justify-content: flex-end;
   }
 
-  #mid-left {
+  .mid-left {
     align-items: center;
   }
 
-  #mid-center {
+  .mid-center {
     justify-content: center;
     align-items: center;
   }
 
-  #bottom-right {
+  .bottom-right {
     justify-content: flex-end;
     align-items: flex-end;
   }
 }
 
-#dice-double {
-  #d-top {
+.dice--double {
+  .d-top {
     justify-content: space-between;
   }
 
-  #d-left {
+  .d-left {
     flex-direction: column;
     justify-content: space-between;
   }
 
-  #d-center {
+  .d-center {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
   }
 
-  #d-right {
+  .d-right {
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
   }
 
-  #d-cross {
+  .d-cross {
     .item:nth-child(2) {
       align-self: center;
     }
   }
 
-  #d-cross-big {
+  .d-cross-big {
     justify-content: space-between;
 
     .item:nth-child(2) {
@@ -88,8 +88,8 @@
   }
 }
 
-#dice-multi {
-  #m-cross {
+.dice--multi {
+  .m-cross {
     .item { // stylelint-disable-line no-descending-specificity
       &:nth-child(2) {
         align-self: center;
@@ -101,13 +101,13 @@
     }
   }
 
-  #m-quarter {
+  .m-quarter {
     flex-wrap: wrap;
     justify-content: flex-end;
     align-content: space-between;
   }
 
-  #m-quarter-b {
+  .m-quarter-b {
     flex-wrap: wrap;
     align-content: space-between;
 
@@ -118,17 +118,17 @@
     }
   }
 
-  #m-six-a {
+  .m-six-a {
     flex-wrap: wrap;
     align-content: space-between;
   }
 
-  #m-six-b {
+  .m-six-b {
     flex-flow: column wrap;
     align-content: space-between;
   }
 
-  #m-six-c {
+  .m-six-c {
     flex-wrap: wrap;
 
     .row {

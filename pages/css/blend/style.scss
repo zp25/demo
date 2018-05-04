@@ -47,7 +47,7 @@
 
   width: torem(300px);
   height: torem(300px);
-  background-image: url(../images/br.png), url(../images/tr.png);
+  background-image: url('../images/br.png'), url('../images/tr.png');
   background-size: cover;
   background-blend-mode: var(--blend-background-blend-mode);
   margin: torem(5px) 0;

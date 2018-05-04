@@ -2,15 +2,15 @@
   @include flexbox(column);
 
   .first {
-    background-image: url(../images/paisley.png);
+    background-image: url('../images/paisley.png');
   }
 
   .second {
-    background-image: url(../images/weather.png);
+    background-image: url('../images/weather.png');
   }
 
   .third {
-    background-image: url(../images/swirl_pattern.png);
+    background-image: url('../images/swirl_pattern.png');
   }
 
   .banner {

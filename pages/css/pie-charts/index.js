@@ -19,12 +19,12 @@ module.exports = templater`
 
       <section class="col col--s12 section">
         <div class="pie pie-less" id="percent-30"></div>
-        <p>30%</p>
+        <p class="title">30%</p>
       </section>
 
       <section class="col col--s12 section">
         <div class="pie pie-more" id="percent-60"></div>
-        <p>60%</p>
+        <p class="title">60%</p>
       </section>
 
       <section class="col col--s12 section">

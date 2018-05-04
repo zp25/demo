@@ -1,3 +1,5 @@
+// stylelint-disable function-parentheses-space-inside
+
 #mask {
   @include flexbox(row, nowrap, center, flex-start);
 
@@ -10,8 +12,8 @@
 
   .bg {
     height: 100%;
-    mask: url(#masking);
-    -webkit-mask-image: -webkit-gradient(
+    mask: url('#masking');
+    mask-image: -webkit-gradient(
       linear,
       left top,
       right top,

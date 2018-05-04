@@ -24,7 +24,7 @@
       display: block;
       width: 100%;
       height: torem(32px);
-      border: none;
+      border: 0;
       border-bottom: 1px solid var(--color-main);
       padding: 0;
       margin-bottom: torem(8px);
@@ -76,7 +76,7 @@
       font-size: fontSize();
       line-height: torem(36px);
       background-color: var(--color-focus);
-      border: none;
+      border: 0;
       border-radius: torem(3px);
       padding: 0 torem(16px);
       cursor: pointer;

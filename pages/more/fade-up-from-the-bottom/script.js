@@ -6,9 +6,9 @@ function checkIfInView() {
     const rectObj = elem.getBoundingClientRect();
 
     if (rectObj.top < window.innerHeight) {
-      elem.classList.add('inView');
+      elem.classList.add('inview');
     } else {
-      elem.classList.remove('inView');
+      elem.classList.remove('inview');
     }
   });
 }

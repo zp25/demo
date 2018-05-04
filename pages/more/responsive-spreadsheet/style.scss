@@ -32,13 +32,11 @@
   }
 
   .tbody {
-    .tr {
-      .td:first-of-type {
-        position: sticky;
-        left: -1px;
-        background-color: #eee;
-        z-index: 1;
-      }
+    .td:first-of-type {
+      position: sticky;
+      left: -1px;
+      background-color: #eee;
+      z-index: 1;
     }
   }
 }

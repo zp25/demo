@@ -18,6 +18,7 @@ module.exports = templater`
           <h2>Slide One</h2>
         </div>
 
+        <!-- Zooming Background Images -->
         <ul class="banner banner--list">
           <li class="item"><h2 class="first">first</h2></li>
           <li class="item"><h2 class="second">second</h2></li>

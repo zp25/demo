@@ -6,8 +6,8 @@ ol {
 
 pre {
   font-size: fontSize(lighter);
-  border: 1px solid color(border);
-  background-color: color(grey-bg-pre);
+  border: 1px solid var(--lightgrey);
+  background-color: var(--pre);
   padding: torem(5px);
   margin-top: 0;
   margin-bottom: torem(14px);

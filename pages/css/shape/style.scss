@@ -4,7 +4,6 @@
     width: torem(240px);
     height: torem(140px);
     shape-outside: circle(torem(70px) at torem(170px)) border-box;
-    -webkit-clip-path: inset(0 round torem(10px) torem(70px) torem(70px) torem(10px) / torem(10px) 50% 50% torem(10px));
     clip-path: inset(0 round torem(10px) torem(70px) torem(70px) torem(10px) / torem(10px) 50% 50% torem(10px));
     margin-top: torem(50px);
   }

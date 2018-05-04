@@ -1,21 +1,9 @@
-:-webkit-full-screen {
-  background-color: color(grey-bg);
-}
-
-:-moz-full-screen {
-  background-color: color(grey-bg);
-}
-
 :fullscreen {
-  background-color: color(grey-bg);
-}
-
-:-webkit-full-screen::-webkit-backdrop {
-  background-color: color(blue);
+  background-color: var(--bg);
 }
 
 :fullscreen::backdrop {
-  background-color: color(blue);
+  background-color: var(--blue);
 }
 
 #fullscreen {

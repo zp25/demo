@@ -1,14 +1,14 @@
 .emoji-toggles {
-  --emoji-toggles-height: torem(20px);
+  $togglesHeight: torem(20px);
 
   position: relative;
   width: torem(60px);
-  margin: var(--emoji-toggles-height) torem(60px);
+  margin: $togglesHeight torem(60px);
 
   .well {
     display: block;
-    height: var(--emoji-toggles-height);
-    background-color: color(grey-bg);
+    height: $togglesHeight;
+    background-color: var(--bg);
     border-radius: torem(10px);
     cursor: pointer;
   }
@@ -32,7 +32,7 @@
       left: 0;
       top: 0;
       font-size: fontSize(40px);
-      line-height: var(--emoji-toggles-height);
+      line-height: $togglesHeight;
       transition: 0.2s;
     }
 
@@ -89,5 +89,5 @@
 }
 
 .emoji-monkey {
-  @include emojiType("\01F638", '\01F63F', 'Happy', 'Sad');
+  @include emojiType('\01F638', '\01F63F', 'Happy', 'Sad');
 }

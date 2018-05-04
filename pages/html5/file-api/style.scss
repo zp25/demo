@@ -1,12 +1,12 @@
 #file-api {
   .btn {
     display: inline;
-    border: none;
-    color: color(green);
+    border: 0;
+    color: var(--green);
     font-size: fontSize();
     line-height: 1.5;
     text-decoration: underline;
-    background-color: color(white);
+    background-color: var(--white);
     cursor: pointer;
   }
 

@@ -1,19 +1,19 @@
 .container--scroll-indicator {
-  --scroll-indicator-header-height: torem(92px);
-  --scroll-indicator-offset-top: torem(95px);
+  $headerHeight: torem(92px);
+  $offsetTop: torem(95px);
 
-  background: linear-gradient(to right top, color(blue-lignt) 50%, color(grey-bg) 50%);
+  background: linear-gradient(to right top, var(--lightblue) 50%, var(--bg) 50%);
   // 高度为100%减去::before高度，滚动条到底时bg正好在::before上方结束
-  background-size: 100% calc(100% - 100vh + var(--scroll-indicator-offset-top));
+  background-size: 100% calc(100% - 100vh + $offsetTop);
   background-repeat: no-repeat;
 
   &::before {
     content: '';
     position: fixed;
-    top: var(--scroll-indicator-offset-top);
+    top: $offsetTop;
     bottom: 0;
     width: 100%;
-    background-color: color(white);
+    background-color: var(--white);
   }
 
   .header {
@@ -21,30 +21,30 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: color(white);
+    background-color: var(--white);
     // 尺寸见grid
     padding-left: 2.5%;
     padding-right: 2.5%;
     z-index: 666;
+  }
 
-    @media only screen and (min-width: 601px) {
-      & {
-        padding-left: 7.5%;
-        padding-right: 7.5%;
-      }
+  @media only screen and (min-width: 601px) {
+    .header {
+      padding-left: 7.5%;
+      padding-right: 7.5%;
     }
+  }
 
-    @media only screen and (min-width: 993px) {
-      & {
-        padding-left: 15%;
-        padding-right: 15%;
-      }
+  @media only screen and (min-width: 993px) {
+    .header {
+      padding-left: 15%;
+      padding-right: 15%;
     }
   }
 
   .main {
     position: relative;
-    margin-top: var(--scroll-indicator-offset-top);
+    margin-top: $offsetTop;
   }
 
   #scroll-indicator {

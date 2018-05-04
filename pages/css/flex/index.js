@@ -14,71 +14,71 @@ module.exports = templater`
       ${link}
 
       <section class="col col--s12 section">
-        <div class="dice" id="dice-single">
-          <div class="box" id="top-left">
+        <div class="dice dice--single">
+          <div class="box top-left">
             <span class="item"></span>
           </div>
-          <div class="box" id="top-center">
+          <div class="box top-center">
             <span class="item"></span>
           </div>
-          <div class="box" id="top-right">
+          <div class="box top-right">
             <span class="item"></span>
           </div>
-          <div class="box" id="mid-left">
+          <div class="box mid-left">
             <span class="item"></span>
           </div>
-          <div class="box" id="mid-center">
+          <div class="box mid-center">
             <span class="item"></span>
           </div>
-          <div class="box" id="bottom-right">
-            <span class="item"></span>
-          </div>
-        </div>
-      </section>
-
-      <section class="col col--s12 section">
-        <div class="dice" id="dice-double">
-          <div class="box" id="d-top">
-            <span class="item"></span>
-            <span class="item"></span>
-          </div>
-          <div class="box" id="d-left">
-            <span class="item"></span>
-            <span class="item"></span>
-          </div>
-          <div class="box" id="d-center">
-            <span class="item"></span>
-            <span class="item"></span>
-          </div>
-          <div class="box" id="d-right">
-            <span class="item"></span>
-            <span class="item"></span>
-          </div>
-          <div class="box" id="d-cross">
-            <span class="item"></span>
-            <span class="item"></span>
-          </div>
-          <div class="box" id="d-cross-big">
-            <span class="item"></span>
+          <div class="box bottom-right">
             <span class="item"></span>
           </div>
         </div>
       </section>
 
       <section class="col col--s12 section">
-        <div class="dice" id="dice-multi">
-          <div class="box" id="m-cross">
+        <div class="dice dice--double">
+          <div class="box d-top">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+          <div class="box d-left">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+          <div class="box d-center">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+          <div class="box d-right">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+          <div class="box d-cross">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+          <div class="box d-cross-big">
+            <span class="item"></span>
+            <span class="item"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="col col--s12 section">
+        <div class="dice dice--multi">
+          <div class="box m-cross">
             <span class="item"></span>
             <span class="item"></span>
             <span class="item"></span>
           </div>
-          <div class="box" id="m-quarter">
+          <div class="box m-quarter">
             <span class="item"></span>
             <span class="item"></span>
             <span class="item"></span>
             <span class="item"></span>
           </div>
-          <div class="box" id="m-quarter-b">
+          <div class="box m-quarter-b">
             <div class="row">
               <span class="item"></span>
               <span class="item"></span>
@@ -88,7 +88,7 @@ module.exports = templater`
               <span class="item"></span>
             </div>
           </div>
-          <div class="box" id="m-six-a">
+          <div class="box m-six-a">
             <span class="item"></span>
             <span class="item"></span>
             <span class="item"></span>
@@ -96,7 +96,7 @@ module.exports = templater`
             <span class="item"></span>
             <span class="item"></span>
           </div>
-          <div class="box" id="m-six-b">
+          <div class="box m-six-b">
             <span class="item"></span>
             <span class="item"></span>
             <span class="item"></span>
@@ -104,7 +104,7 @@ module.exports = templater`
             <span class="item"></span>
             <span class="item"></span>
           </div>
-          <div class="box" id="m-six-c">
+          <div class="box m-six-c">
             <div class="row">
               <span class="item"></span>
               <span class="item"></span>

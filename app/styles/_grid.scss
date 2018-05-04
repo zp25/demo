@@ -3,7 +3,7 @@
  **/
 @mixin blocks($size) {
   @each $block in article, aside, div, footer, header, main, menu, nav, section {
-    & > #{$block} {
+    & > #{$block} { // stylelint-disable-line scss/selector-no-redundant-nesting-selector
       width: $size;
     }
   }
