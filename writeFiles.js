@@ -47,6 +47,7 @@ const writeFile = page => new Promise((resolve, reject) => {
 const writeFiles = ({
   index,
   '404': notFound,
+  error,
   ...contents
 }) => {
   let spread = [];
@@ -61,6 +62,7 @@ const writeFiles = ({
   const pages = [
     Object.assign({}, index, contents),
     notFound,
+    error,
   ].concat(spread).filter(d => !d.draft);
 
   return Promise.all(pages.map(page => writeFile(page)));

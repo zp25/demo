@@ -9,7 +9,7 @@ module.exports = templater`
       ${link}
 
       <section class="col col--s12 section">
-        <h2>Page Not Found</h2>
+        <h2>Network Error</h2>
       </section>
 
       <section class="col col--s12 section">
