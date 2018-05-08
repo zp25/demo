@@ -118,11 +118,13 @@ function sass() {
 const renameFilter = (file) => {
   const dirArr = file.dirname.split('/');
 
-  return dirArr[dirArr.length - 2] === 'pages';
+  return dirArr[dirArr.length - 3] === 'pages';
 };
 
 const rename = (path) => {
-  path.basename = path.dirname;
+  const arr = path.dirname.split('/');
+
+  path.basename = arr[arr.length - 1];
   path.dirname = '.';
 };
 
