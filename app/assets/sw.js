@@ -1,21 +1,18 @@
-const CACHE_VERSION = 2.3;
+const CACHE_VERSION = 'v2.4';
 const CURRENT_CACHES = {
-  offline: `offline-v${CACHE_VERSION}`,
+  offline: `offline-${CACHE_VERSION}`,
 };
 
+const networkError = '/error.html';
 const pageNotFound = '/404.html';
 
 // 默认缓存
-// 待解决首次访问即可离线
 const OFFLINE_URL = [
   pageNotFound,
-  // '/',
-  // 'index.html',
-  // '/styles/main.css',
-  // '/styles/pages.css',
-  // '/scripts/main.js',
-  // '/manifest.json',
-  '/worker.js',
+  networkError,
+  '/',
+  '/index.html',
+  '/manifest.json',
   '/images/zp.jpg',
 ];
 
@@ -40,56 +37,67 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+/**
+ * fetch并存储到cache
+ * @param {Request} req - Request对象
+ * @return {Promise}
+ * @throws {TypeError} If network error
+ * @throws {Error} If res.ok === false
+ */
+const fetchAndCache = req => fetch(req).then((res) => {
+  if (!res.ok) {
+    throw new Error(`${res.status} ${res.statusText}`);
+  }
+
+  return caches.open(CURRENT_CACHES.offline).then((cache) => {
+    cache.put(req, res.clone());
+
+    return res;
+  });
+});
+
 // 代理
 self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') {
-    event.respondWith(
-      fetch(event.request),
-    );
-  } else if (event.request.mode === 'navigate') {
-    // HTML，总是请求资源并缓存
-    event.respondWith(
-      fetch(event.request).then((res) => {
-        if (!res.ok) {
-          throw new Error(`${res.status} ${res.statusText}`);
-        }
+  const { pathname } = new URL(event.request.url);
 
-        return caches.open(CURRENT_CACHES.offline).then((cache) => {
-          cache.put(event.request, res.clone());
+  if (pathname === '/' || pathname === '/index.html') {
+    // Network falling back to the cache
+    event.respondWith(
+      fetchAndCache(event.request).catch(() => (
+        caches.match(event.request).then((res) => {
+          if (!res) {
+            return caches.match(networkError);
+          }
 
           return res;
-        });
-      }).catch(() => caches.match(event.request).then((res) => {
-        if (!res) {
-          return caches.match(pageNotFound);
-        }
-
-        return res;
-      })),
+        })
+      )),
     );
   } else {
-    // 其它资源，先匹配缓存，未匹配请求资源，无资源以404响应
+    // Cache falling back to the network
     event.respondWith(
       caches.match(event.request).then((asset) => {
         if (asset) {
           return asset;
         }
 
-        return fetch(event.request).then((res) => {
-          if (!res.ok) {
-            throw new Error(`${res.status} ${res.statusText}`);
+        return fetchAndCache(event.request);
+      }).catch((err) => {
+        // document间导航，包括html或直接访问图片
+        if (event.request.mode === 'navigate') {
+          if (err instanceof TypeError) {
+            return caches.match(networkError);
           }
 
-          return caches.open(CURRENT_CACHES.offline).then((cache) => {
-            cache.put(event.request, res.clone());
+          return Response.redirect(pageNotFound, 301);
+        }
 
-            return res;
-          });
-        }).catch(() => new Response('Page Not Found', {
+        // 页面中加载的资源
+        return new Response('Page Not Found', {
           status: 404,
           statusText: 'Not Found',
-        }));
-      }),
+        });
+      })
     );
   }
 });

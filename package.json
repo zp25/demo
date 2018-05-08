@@ -28,15 +28,15 @@
     "normalize.css": "^8.0.0",
     "qrcode": "^1.2.0",
     "serve-favicon": "^2.5.0",
-    "zp-lib": "^0.0.9",
-    "zp-ui": "^0.4.0"
+    "zp-lib": "^0.0.10",
+    "zp-ui": "^0.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^8.4.1",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "browser-sync": "^2.24.3",
+    "browser-sync": "^2.24.4",
     "cssnano": "^3.10.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^4.19.1",

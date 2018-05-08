@@ -47,9 +47,9 @@ const swControl = () => {
   const control = swControl();
 
   if ('serviceWorker' in navigator) {
-    const serviceWorkerContainer = navigator.serviceWorker;
+    const container = navigator.serviceWorker;
 
-    serviceWorkerContainer.register('sw.js', { scope: '/' }).then((reg) => {
+    container.register('/sw.js').then((reg) => {
       let serviceWorker;
 
       if (reg.installing) {
