@@ -23,6 +23,9 @@ module.exports = templater`
     <link rel="manifest" href="manifest.json">
     <!-- canonical -->
     <link rel="canonical" href="https://demo.zp25.ninja/${'file'}">
+    <!-- build:css styles/normalize.css -->
+    <link rel="stylesheet" href="normalize.css/normalize.css"></script>
+    <!-- endbuild -->
     <link rel="stylesheet" href="styles/main.css" media="all">
     <link rel="stylesheet" href="styles/pages.css" media="all">
     <script defer src="scripts/main.js" type="text/javascript"></script>

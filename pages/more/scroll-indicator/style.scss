@@ -1,16 +1,15 @@
 .container--scroll-indicator {
-  $headerHeight: torem(92px);
-  $offsetTop: torem(95px);
+  --offsetTop: #{torem(95px)};
 
   background: linear-gradient(to right top, var(--lightblue) 50%, var(--bg) 50%);
   // 高度为100%减去::before高度，滚动条到底时bg正好在::before上方结束
-  background-size: 100% calc(100% - 100vh + $offsetTop);
+  background-size: 100% calc(100% - 100vh + var(--offsetTop));
   background-repeat: no-repeat;
 
   &::before {
     content: '';
     position: fixed;
-    top: $offsetTop;
+    top: var(--offsetTop);
     bottom: 0;
     width: 100%;
     background-color: var(--white);
@@ -44,7 +43,7 @@
 
   .main {
     position: relative;
-    margin-top: $offsetTop;
+    margin-top: var(--offsetTop);
   }
 
   #scroll-indicator {

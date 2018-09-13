@@ -210,8 +210,8 @@ class DrawTetris extends Tetris {
       ctx.restore();
 
       this.constructor.tetrisAct(canvas, 'www');
-    } else if ((x > 335 && x < 495 && y > 15 && y < 95) ||
-               (x > 415 && x < 575 && y > 95 && y < 175)) {
+    } else if ((x > 335 && x < 495 && y > 15 && y < 95)
+               || (x > 415 && x < 575 && y > 95 && y < 175)) {
       ctx.save();
       ctx.translate(328, 10);
       ctx.scale(s, s);
@@ -219,8 +219,8 @@ class DrawTetris extends Tetris {
       ctx.restore();
 
       this.constructor.tetrisAct(canvas, 'lxl');
-    } else if ((x > 95 && x < 175 && y > 335 && y < 415) ||
-               (x > 15 && x < 255 && y > 415 && y < 495)) {
+    } else if ((x > 95 && x < 175 && y > 335 && y < 415)
+               || (x > 15 && x < 255 && y > 415 && y < 495)) {
       ctx.save();
       ctx.translate(263, 500);
       ctx.save();
@@ -239,8 +239,8 @@ class DrawTetris extends Tetris {
       ctx.restore();
 
       this.constructor.tetrisAct(canvas, 'zp');
-    } else if ((x > 215 && x < 295 && y > 295 && y < 375) ||
-               (x > 295 && x < 375 && y > 135 && y < 375)) {
+    } else if ((x > 215 && x < 295 && y > 295 && y < 375)
+               || (x > 295 && x < 375 && y > 135 && y < 375)) {
       ctx.save();
       ctx.translate(292, 126);
       ctx.scale(s, s);
