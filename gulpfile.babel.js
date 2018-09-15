@@ -1,9 +1,18 @@
+import path from 'path';
 import gulp from 'gulp';
 import rimraf from 'rimraf';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import log from 'fancy-log';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import watchify from 'watchify';
+import source from 'vinyl-source-stream';
+import buffer from 'vinyl-buffer';
+import es from 'event-stream';
+import globby from 'globby';
 import {
   HTMLMINIFIER,
   PATHS,
@@ -14,6 +23,8 @@ const $ = gulpLoadPlugins({
     'gulp-rev-replace': 'replace',
   },
 });
+const pwd = process.cwd();
+
 const BS = browserSync.create();
 
 // Lint
@@ -115,31 +126,30 @@ function sass() {
 }
 
 // Scripts
-const renameFilter = (file) => {
-  const dirArr = file.dirname.split('/');
+const rename = (entry) => {
+  const arr = path.dirname(entry).split('/');
+  const len = arr.length;
 
-  return dirArr[dirArr.length - 3] === 'pages';
+  const basename = arr[len - 3] === 'pages' ? arr[len - 1] : path.basename(entry, '.js');
+
+  return {
+    dirname: '.',
+    basename,
+    extname: '.js',
+  };
 };
 
-const rename = (path) => {
-  const arr = path.dirname.split('/');
-
-  path.basename = arr[arr.length - 1];
-  path.dirname = '.';
-};
-
-const tmpScript = () => gulp.src(PATHS.scripts.src)
-  .pipe($.newer(PATHS.scripts.tmp))
-  .pipe($.sourcemaps.init())
-    .pipe($.babel())
-  .pipe($.sourcemaps.write())
-  .pipe($.if(renameFilter, $.rename(rename)))
+const development = basename => b => b.bundle()
+  .on('error', log.bind(log, 'Browserify Error'))
+  .pipe(source(`${basename}.js`))
   .pipe(gulp.dest(PATHS.scripts.tmp))
   .pipe(BS.stream({ once: true }));
 
-const script = () => gulp.src(PATHS.scripts.src)
-  .pipe($.sourcemaps.init())
-    .pipe($.babel())
+const production = basename => b => b.bundle()
+  .on('error', log.bind(log, 'Browserify Error'))
+  .pipe(source(`${basename}.js`))
+  .pipe(buffer())
+  .pipe($.sourcemaps.init({ loadMaps: true }))
     .pipe($.uglify({
       // preserveComments: 'license',
       compress: {
@@ -148,16 +158,66 @@ const script = () => gulp.src(PATHS.scripts.src)
         },
       },
     }))
-    .pipe($.size({ title: 'scripts' }))
-    .pipe($.if(renameFilter, $.rename(rename)))
+    .pipe($.size({ title: 'scripts', showFiles: true }))
     .pipe($.rev())
   .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(PATHS.scripts.dest))
-  .pipe($.rev.manifest({
-    base: process.cwd(),
-    merge: true,
-  }))
-  .pipe(gulp.dest(PATHS.root));
+  .pipe(gulp.dest(PATHS.scripts.dest));
+
+const tmpScript = (done) => {
+  globby(PATHS.scripts.src).then((entries) => {
+    const tasks = entries.map((entry) => {
+      const { basename } = rename(entry);
+
+      const b = browserify({
+        entries: entry,
+        cache: {},
+        packageCache: {},
+        transform: [babelify],
+        plugin: [watchify],
+        // apply source maps
+        debug: true,
+      });
+
+      // 只有执行bundle()后watchify才能监听update事件
+      b.on('update', () => development(basename)(b));
+      // watchify监听log事件，输出内容X bytes written (Y seconds)，fancy-log添加时间
+      b.on('log', log);
+
+      return development(basename)(b);
+    });
+
+    es.merge(tasks).on('end', done);
+  });
+};
+
+const script = (done) => {
+  globby(PATHS.scripts.src).then((entries) => {
+    const tasks = entries.map((entry) => {
+      const { basename } = rename(entry);
+
+      const b = browserify({
+        entries: entry,
+        cache: {},
+        packageCache: {},
+        transform: [babelify],
+        // apply source maps
+        debug: true,
+      });
+
+      return production(basename)(b);
+    });
+
+    const manifest = gulp.src(PATHS.manifest);
+
+    es.merge(tasks.concat(manifest))
+      .pipe($.rev.manifest({
+        base: pwd,
+        merge: true,
+      }))
+      .pipe(gulp.dest(PATHS.root))
+      .on('end', done);
+  });
+};
 
 // HTML
 const html = () => gulp.src(PATHS.html.src)
@@ -192,7 +252,6 @@ function serve() {
   gulp.watch([PATHS.styles.src, PATHS.styles.watch], gulp.parallel(stylelint, tmpSass));
 
   gulp.watch(PATHS.scripts.lint, lint);
-  gulp.watch(PATHS.scripts.src, tmpScript);
 }
 
 // Clean output directory
