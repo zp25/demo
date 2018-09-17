@@ -32,12 +32,19 @@ function getUserMedia() {
   const video = document.querySelector('.video');
 
   navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-    const imgURL = window.URL.createObjectURL(stream);
+    // Older browsers may not have srcObject
+    if ('srcObject' in video) {
+      // MediaStream不需要创建Object URL，可直接传入video.srcObject属性
+      video.srcObject = stream;
+    } else {
+      // Avoid using this in new browsers, as it is going away.
+      const imgURL = window.URL.createObjectURL(stream);
 
-    video.src = imgURL;
-    video.onloadedmetadata = () => {
-      window.URL.revokeObjectURL(imgURL);
-    };
+      video.src = imgURL;
+      video.onloadedmetadata = () => {
+        window.URL.revokeObjectURL(imgURL);
+      };
+    }
   }).catch((err) => {
     detail.innerHTML = `<li>${err.name}: ${err.message}</li>`;
   });
