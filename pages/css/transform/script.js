@@ -1,3 +1,5 @@
+import { Group } from 'zp-ui';
+
 window.$ = document.querySelector.bind(document);
 window.$$ = document.querySelectorAll.bind(document);
 
@@ -48,85 +50,119 @@ const MAP = {
   },
 };
 
-/**
- * 模式更改的样式设定
- * @param {string} mode - 当前模式
- */
-function changeMode(mode) {
-  const box2d = $('.box--2d');
-  const form2d = $('.form--2d');
-  const box3d = $('.box--3d');
-  const form3d = $('.form--3d');
+const selectObserver = () => {
+  const boxActive = 'box--active';
+  const formActive = 'form--active';
 
-  if (mode === '3d') {
-    box2d.classList.remove('box--active');
-    form2d.classList.remove('form--active');
+  return {
+    /**
+     * 模式更改的样式设定
+     */
+    update: ({ mode }) => {
+      const box2d = $('.box--2d');
+      const form2d = $('.form--2d');
+      const box3d = $('.box--3d');
+      const form3d = $('.form--3d');
 
-    box3d.classList.add('box--active');
-    form3d.classList.add('form--active');
-  } else {
-    box2d.classList.add('box--active');
-    form2d.classList.add('form--active');
+      if (mode === '3d') {
+        box2d.classList.remove(boxActive);
+        form2d.classList.remove(formActive);
 
-    box3d.classList.remove('box--active');
-    form3d.classList.remove('form--active');
-  }
-}
+        box3d.classList.add(boxActive);
+        form3d.classList.add(formActive);
+      } else {
+        box2d.classList.add(boxActive);
+        form2d.classList.add(formActive);
 
-/**
- * 设置2D值
- */
-function setValue2D(e) {
-  const { target } = e;
+        box3d.classList.remove(boxActive);
+        form3d.classList.remove(formActive);
+      }
+    },
+  };
+};
 
-  const label = target.getAttribute('id');
+const form2dObserver = () => ({
+  update: ({ label, value }) => {
+    const result = value + MAP[label].unit;
 
-  const val = target.value;
-  const result = val + MAP[label].unit;
+    // 修改
+    $('.box--2d').style.setProperty(MAP[label].prop, result);
+    $(`.form--2d .label--${label}`).dataset.value = value;
+  },
+});
 
-  // 修改
-  $('.box--2d').style.setProperty(MAP[label].prop, result);
-  $(`.form--2d .label--${label}`).dataset.value = val;
-}
+const form3dObserver = () => ({
+  update: ({ label: tmpLabel, group, value }) => {
+    let suffix = '';
+    let label = tmpLabel;
 
-/**
- * 设置3D值
- */
-function setValue3D(e) {
-  const { target } = e;
-  const { group } = target.dataset;
+    if (group && group === 'double') {
+      suffix = label.slice(-2);
+      label = label.slice(0, -2);
+    }
 
-  let suffix = '';
-  let label = target.getAttribute('id');
+    const result = value + MAP[label].unit;
 
-  if (group && group === 'double') {
-    suffix = label.slice(-2);
-    label = label.slice(0, -2);
-  }
+    // 修改
+    $('.box--3d').style.setProperty(MAP[label].prop + suffix, result);
+    $(`.form--3d .label--${label}`).dataset[`value${suffix.slice(-1).toUpperCase()}`] = value;
+  },
+});
 
-  const val = target.value;
-  const result = val + MAP[label].unit;
+const createHandler = ({ select, form2d, form3d }) => ({
+  /**
+   * 模式切换
+   */
+  switchMode: ({ target }) => {
+    const { value } = target;
 
-  // 修改
-  $('.box--3d').style.setProperty(MAP[label].prop + suffix, result);
-  $(`.form--3d .label--${label}`).dataset[`value${suffix.slice(-1).toUpperCase()}`] = val;
-}
+    select.update({ mode: value });
+  },
 
-/**
- * 模式切换
- */
-function switchMode(e) {
-  const { value } = e.target;
+  /**
+   * 2d表单
+   */
+  setValue2D: ({ target }) => {
+    const { value } = target;
 
-  changeMode(value);
-}
+    form2d.update({
+      label: target.getAttribute('id'),
+      value,
+    });
+  },
+
+  /**
+   * 3d表单
+   */
+  setValue3D: ({ target }) => {
+    const {
+      value,
+      dataset: { group },
+    } = target;
+
+    form3d.update({
+      label: target.getAttribute('id'),
+      group,
+      value,
+    });
+  },
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-  $('#select').addEventListener('change', switchMode, false);
+  const select = new Group('select');
+  select.attach(selectObserver());
 
-  $('.form--2d').addEventListener('change', setValue2D, false);
-  $('.form--3d').addEventListener('change', setValue3D, false);
+  const form2d = new Group('form2d');
+  form2d.attach(form2dObserver());
+
+  const form3d = new Group('form3d');
+  form3d.attach(form3dObserver());
+
+  const handler = createHandler({ select, form2d, form3d });
+  $('#select').addEventListener('change', handler.switchMode, false);
+  $('.form--2d').addEventListener('change', handler.setValue2D, false);
+  $('.form--3d').addEventListener('change', handler.setValue3D, false);
 
   // init
-  changeMode('2d');
+  select.update({ mode: '2d' });
 }, false);

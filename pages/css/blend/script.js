@@ -1,15 +1,25 @@
-/**
- * select处理
- */
-function blend(e) {
-  const t = document.querySelector('#background-blend-mode');
-  const blendMode = e.target.value;
+import { Group } from 'zp-ui';
 
-  t.style.setProperty('--blend-background-blend-mode', blendMode);
-}
+const blendObserver = () => {
+  const t = document.querySelector('#background-blend-mode');
+
+  return {
+    update: ({ value }) => {
+      t.style.setProperty('--blend-background-blend-mode', value);
+    },
+  };
+};
+
+const handler = blend => ({ target }) => {
+  const { value } = target;
+
+  blend.update({ value });
+};
 
 document.addEventListener('DOMContentLoaded', () => {
-  const t = document.querySelector('#background-blend-mode-select');
+  const blend = new Group('blend');
+  blend.attach(blendObserver());
 
-  t.addEventListener('change', blend, false);
+  const t = document.querySelector('#background-blend-mode-select');
+  t.addEventListener('change', handler(blend), false);
 }, false);

@@ -62,8 +62,8 @@
       }
 
       .cube {
-        --transform-width: torem(160px);
-        --transform-half-width: torem(80px);
+        --transform-width: #{torem(160px)};
+        --transform-half-width: #{torem(80px)};
 
         position: relative;
         width: var(--transform-width);

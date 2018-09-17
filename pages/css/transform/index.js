@@ -38,7 +38,7 @@ module.exports = templater`
       </section>
 
       <section class="col col--s12 section">
-        <select id="select">
+        <select id="select" data-group="select">
           <option value="2d" selected>2D</option>
           <option value="3d">3D Box</option>
         </select>

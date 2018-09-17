@@ -55,7 +55,7 @@ module.exports = templater`
         </div>
       </section>
 
-      <section class="col col--s12 section">
+      <section class="col col--s12 section" data-group="blend">
         <h2>background-blend-mode</h2>
         <p>元素各背景图片和颜色的合成效果</p>
 
