@@ -1,6 +1,6 @@
 {
   "battery-status.js": "battery-status-3970d4a757.js",
-  "blend.js": "blend-9c649819d0.js",
+  "blend.js": "blend-c940965430.js",
   "canvas.js": "canvas-8872d3831e.js",
   "clip-path.js": "clip-path-4e467f9911.js",
   "constraint-validation.js": "constraint-validation-5a2c137e86.js",
@@ -10,16 +10,16 @@
   "fade-up-from-the-bottom.js": "fade-up-from-the-bottom-57f8ffe1d5.js",
   "file-api.js": "file-api-ff94719bd0.js",
   "fullscreen.js": "fullscreen-92e152d29e.js",
-  "getusermedia.js": "getusermedia-1f959da1dd.js",
+  "getusermedia.js": "getusermedia-dcbecc6777.js",
   "history.js": "history-4585a3f466.js",
   "main.css": "main-fdca3ff4bf.css",
   "main.js": "main-23fbe1f297.js",
   "notification.js": "notification-5bb9ad59d1.js",
   "page-visibility.js": "page-visibility-5936b56fbc.js",
-  "pages.css": "pages-b8361d83c6.css",
+  "pages.css": "pages-c3e9da7b89.css",
   "qrcode.js": "qrcode-3bd956727c.js",
   "responsive-textarea.js": "responsive-textarea-e2f6fb6d06.js",
-  "transform.js": "transform-69d89ad2a0.js",
+  "transform.js": "transform-cc5738a289.js",
   "vibration.js": "vibration-ae11673d83.js",
   "waapi.js": "waapi-59903d2847.js"
 }
