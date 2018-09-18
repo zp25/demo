@@ -429,6 +429,18 @@
       "file": "responsive-textarea.html"
     },
     {
+      "name": "Old Timey Terminal Styling",
+      "template": "terminal-styling",
+      "link": [
+        {
+          "title": "Old Timey Terminal Styling",
+          "href": "https://css-tricks.com/old-timey-terminal-styling/"
+        }
+      ],
+      "style": true,
+      "file": "terminal-styling.html"
+    },
+    {
       "draft": true,
       "name": "Text",
       "template": "text.js",
