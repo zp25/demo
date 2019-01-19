@@ -8,10 +8,10 @@ const ms = require('ms');
 
 const app = express();
 
-const static = path.resolve(__dirname, 'dist');
+const staticResource = path.resolve(__dirname, 'dist');
 
 app.set('port', process.env.PORT || 3001);
-app.set('favicon', path.resolve(static, 'images/favicon.png'));
+app.set('favicon', path.resolve(staticResource, 'images/favicon.png'));
 
 // Use Helmet
 app.disable('x-powered-by');
@@ -20,6 +20,8 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       imgSrc: ["'self'", 'data:'],
+      workerSrc: ["'self'"],
+      frameSrc: ["'none'"],
       objectSrc: ["'none'"],
       frameAncestors: ["'none'"],
     },
@@ -42,10 +44,10 @@ app.use(compression());
 app.use(favicon(app.get('favicon')));
 
 // static assets
-const images = path.resolve(static, 'images');
-const scripts = path.resolve(static, 'scripts');
-const styles = path.resolve(static, 'styles');
-const html = path.resolve(static, 'html');
+const images = path.resolve(staticResource, 'images');
+const scripts = path.resolve(staticResource, 'scripts');
+const styles = path.resolve(staticResource, 'styles');
+const html = path.resolve(staticResource, 'html');
 
 app.use('/images', express.static(images, { maxAge: ms('1w') }));
 app.use('/scripts', express.static(scripts, { maxAge: ms('0.5y') }));
@@ -55,7 +57,7 @@ app.use(express.static(html, {
     res.set('Cache-Control', 'no-cache');
   },
 }));
-app.use(express.static(static, {
+app.use(express.static(staticResource, {
   setHeaders: (res) => {
     res.set('Cache-Control', 'no-cache');
   },

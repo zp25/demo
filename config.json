@@ -288,6 +288,12 @@
           "dest": "scripts/qrcode.min.js"
         }
       ],
+      "link": [
+        {
+          "title": "Creating a QR Code step by step",
+          "href": "https://www.nayuki.io/page/creating-a-qr-code-step-by-step"
+        }
+      ],
       "file": "qrcode.html"
     },
     {

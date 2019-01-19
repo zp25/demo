@@ -1,3 +1,5 @@
+/* eslint global-require: 0, import/no-dynamic-require: 0 */
+
 const path = require('path');
 const fs = require('fs');
 const config = require('./config.json');
@@ -46,18 +48,18 @@ const writeFile = page => new Promise((resolve, reject) => {
  */
 const writeFiles = ({
   index,
-  '404': notFound,
+  404: notFound,
   error,
   ...contents
 }) => {
   let spread = [];
-  for (let [key, group] of Object.entries(contents)) {
-    group = group.map(d => Object.assign({}, d, {
+  [...Object.entries(contents)].forEach(([key, group]) => {
+    const newGroup = group.map(d => Object.assign({}, d, {
       template: path.join(key, d.template),
     }));
 
-    spread = spread.concat(group);
-  }
+    spread = spread.concat(newGroup);
+  });
 
   const pages = [
     Object.assign({}, index, contents),
@@ -72,13 +74,13 @@ const writeFiles = ({
  * 新建文件夹
  * @see {@link https://stackoverflow.com/a/21196961/3388271}
  */
-const ensureExists = (path, mask, cb) => {
+const ensureExists = (dir, mask, cb) => {
   if (typeof mask === 'function') {
-    cb = mask;
-    mask = 0o777;
+    cb = mask; // eslint-disable-line no-param-reassign
+    mask = 0o777; // eslint-disable-line no-param-reassign
   }
 
-  fs.mkdir(path, mask, (err) => {
+  fs.mkdir(dir, mask, (err) => {
     if (err && err.code !== 'EEXIST') {
       cb(err);
     } else {
@@ -94,7 +96,7 @@ ensureExists('app/html', 0o755, (err) => {
 
   writeFiles(config).then((data) => {
     console.log(`total: ${data.length} files\ndone!`);
-  }).catch((err) => {
-    console.log(err);
+  }).catch((writeErr) => {
+    console.log(writeErr);
   });
 });
