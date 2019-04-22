@@ -13,12 +13,12 @@ module.exports = templater`
     <meta name="format-detection" content="email=no">
     <title>DEMO | zp25</title>
     <!-- app icon -->
-    <link rel="apple-touch-icon" sizes="120x120" href="images/icon@iphone.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/icon@iphone-plus.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/icon@ipad.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="images/icon@ipad-pro.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icon@iphone.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon@iphone-plus.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icon@ipad.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="icon@ipad-pro.png">
     <!-- favicon -->
-    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
     <!-- manifest -->
     <link rel="manifest" href="manifest.json">
     <!-- canonical -->
