@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const favicon = require('serve-favicon');
 const compression = require('compression');
 const errorHandler = require('errorhandler');
 const helmet = require('helmet');
@@ -8,10 +7,18 @@ const ms = require('ms');
 
 const app = express();
 
-const staticResource = path.resolve(__dirname, 'dist');
+const static = path.resolve(__dirname, 'dist');
+const images = path.resolve(static, 'images');
+const scripts = path.resolve(static, 'scripts');
+const styles = path.resolve(static, 'styles');
 
 app.set('port', process.env.PORT || 3001);
-app.set('favicon', path.resolve(staticResource, 'images/favicon.png'));
+
+const FAVICON = [
+  'favicon.png',
+  'icon@iphone.png',
+  'icon@iphone-plus.png',
+];
 
 // Use Helmet
 app.disable('x-powered-by');
@@ -41,24 +48,20 @@ app.use(helmet({
 
 // middleware
 app.use(compression());
-app.use(favicon(app.get('favicon')));
 
 // static assets
-const images = path.resolve(staticResource, 'images');
-const scripts = path.resolve(staticResource, 'scripts');
-const styles = path.resolve(staticResource, 'styles');
-const html = path.resolve(staticResource, 'html');
+FAVICON.forEach((icon) => {
+  app.use(`/${icon}`, express.static(path.resolve(static, icon), {
+    maxAge: ms('0.5y'),
+  }));
+});
 
-app.use('/images', express.static(images, { maxAge: ms('1w') }));
+app.use('/images', express.static(images, { maxAge: ms('0.5y') }));
 app.use('/scripts', express.static(scripts, { maxAge: ms('0.5y') }));
 app.use('/styles', express.static(styles, { maxAge: ms('0.5y') }));
-app.use(express.static(html, {
+app.use(express.static(static, {
   setHeaders: (res) => {
-    res.set('Cache-Control', 'no-cache');
-  },
-}));
-app.use(express.static(staticResource, {
-  setHeaders: (res) => {
+    // 其他静态资源no-cache
     res.set('Cache-Control', 'no-cache');
   },
 }));
