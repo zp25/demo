@@ -1,4 +1,4 @@
-const loremIpsum = require('lorem-ipsum');
+const loremIpsum = require('lorem-ipsum').loremIpsum;
 const { templaterAsync: templater } = require('zp-lib');
 const {
   header,
