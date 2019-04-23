@@ -1,0 +1,7 @@
+{
+  "public": "dist",
+  "cleanUrls": [
+    "!*.html",
+    "index.html"
+  ]
+}
