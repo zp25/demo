@@ -1,5 +1,7 @@
 # demo
 
+[![Build Status](https://travis-ci.org/zp25/demo.svg?branch=master)](https://travis-ci.org/zp25/demo)
+
 zp25's demo
 
 <https://demo.zp25.ninja>
@@ -8,7 +10,7 @@ zp25's demo
 
 ~~~
 +-- app
-|   +-- assets
+|   +-- public
 |   |   +-- manifest.json
 |   |   +-- sw.js
 |   |   +-- worker.js
@@ -22,12 +24,12 @@ zp25's demo
 |   +-- 404.js
 |   +-- index.js
 |   +-- wrap.js
-+-- config.js
-+-- server.js
++-- config.json
 +-- writeFiles.js
 ~~~
 
 ## config.json
+
 页面配置
 
 分类，`style, script`保留字，不要用做分类名
@@ -75,11 +77,13 @@ zp25's demo
   ]
 }
 ~~~
+
 在`pages/html5`目录新建`canvas`目录，添加`index.js, style.scss, scripts.js`并编辑
 
 运行`npm run writeFiles`导出html文件
 
 ## 缓存和service worker
+
 缓存
 
 + index.html，不定期更新，例如添加或删除demo，使用`no-cache`总询问是否更新

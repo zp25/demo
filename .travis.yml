@@ -4,9 +4,10 @@ node_js:
 cache: npm
 script:
   - npm run build
+  - npm test
 deploy:
   provider: script
   script: npm run deploy
   skip_cleanup: true
   on:
-    branch: now
+    branch: master
