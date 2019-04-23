@@ -4,7 +4,7 @@ const {
   link,
   style,
   script,
-} = require('demo-public');
+} = require('../../../templates');
 
 module.exports = templater`
   <div id="app" class="container">

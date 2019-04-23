@@ -4,7 +4,7 @@ const {
   link,
   style,
   script,
-} = require('demo-public');
+} = require('../../../templates');
 
 const COLUMN = 27;
 const LIST = [

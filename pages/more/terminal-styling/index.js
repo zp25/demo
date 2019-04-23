@@ -3,7 +3,7 @@ const {
   header,
   link,
   style,
-} = require('demo-public');
+} = require('../../../templates');
 
 module.exports = templater`
   <div id="app" class="container">

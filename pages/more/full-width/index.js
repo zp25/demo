@@ -5,7 +5,7 @@ const {
   link,
   style,
   script,
-} = require('demo-public');
+} = require('../../../templates');
 
 const lorem = loremIpsum({
   count: 5,

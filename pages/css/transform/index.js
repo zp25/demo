@@ -4,7 +4,7 @@ const {
   link,
   style,
   script,
-} = require('demo-public');
+} = require('../../../templates');
 
 const cube = () => {
   const arr = [

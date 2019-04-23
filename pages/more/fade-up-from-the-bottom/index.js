@@ -4,7 +4,7 @@ const {
   link,
   style,
   script,
-} = require('demo-public');
+} = require('../../../templates');
 
 const list = () => {
   const arr = [...new Array(7).keys()];

@@ -24,6 +24,7 @@ node_modules/
 .tmp/
 assets/
 dist/
+docs/
 
 app/*.html
 app/html/
