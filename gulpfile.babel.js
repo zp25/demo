@@ -1,9 +1,11 @@
+/* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
+
 import path from 'path';
 import gulp from 'gulp';
-import rimraf from 'rimraf';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import browserSync from 'browser-sync';
+import dotenv from 'dotenv';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import log from 'fancy-log';
 import browserify from 'browserify';
@@ -11,67 +13,59 @@ import babelify from 'babelify';
 import watchify from 'watchify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
-import es from 'event-stream';
+import merge from 'merge-stream';
 import globby from 'globby';
 import {
-  HTMLMINIFIER,
-  PATHS,
-} from './constants';
+  SRC,
+  OUTPUT,
+  TEMP,
+} from './gulpConfig/constants';
+import html from './gulpConfig/html';
+import {
+  images,
+  tmpWebp,
+  webp,
+} from './gulpConfig/images';
+import {
+  lint,
+  stylelint,
+} from './gulpConfig/lints';
+import {
+  clean,
+  cleanCache,
+} from './gulpConfig/utils';
+import { name } from './package.json';
 
-const $ = gulpLoadPlugins({
-  rename: {
-    'gulp-rev-replace': 'replace',
-  },
-});
+dotenv.config({ silent: true });
+
+const $ = gulpLoadPlugins();
+const BS = browserSync.create();
 const pwd = process.cwd();
 
-const BS = browserSync.create();
-
-// Lint
-const lint = () => gulp.src(PATHS.scripts.src)
-  .pipe($.eslint())
-  .pipe($.eslint.format())
-  .pipe($.if(!BS.active, $.eslint.failOnError()));
-
-const stylelint = () => gulp.src([PATHS.styles.src, PATHS.styles.watch])
-  .pipe($.stylelint({
-    failAfterError: false,
-    reporters: [
-      {
-        formatter: 'verbose',
-        console: true,
-      },
-    ],
-    syntax: 'scss',
-  }));
-
-// Image Optimazation
-const makeHashKey = entry => file => [file.contents.toString('utf8'), entry].join('');
-
-const images = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.imagemin({
-    progressive: true,
-    interlaced: true,
-    multipass: true,
-  }), {
-    key: makeHashKey('images'),
-  }))
-  .pipe(gulp.dest(PATHS.images.dest))
-  .pipe($.size({ title: 'images' }));
-
-const tmpWebp = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(PATHS.images.tmp))
-  .pipe(BS.stream({ once: true }));
-
-const webp = () => gulp.src(PATHS.images.src)
-  .pipe($.cache($.webp({ quality: 75 }), { key: makeHashKey('webp') }))
-  .pipe(gulp.dest(PATHS.images.dest))
-  .pipe($.size({ title: 'webp' }));
+const {
+  assets,
+  images: imagePath,
+  copy: copyPath,
+  includePaths,
+  scripts: scriptsPath,
+} = {
+  assets: ['.tmp', 'app', 'app/public', 'app/html', 'node_modules'],
+  images: 'app/images/**/*',
+  copy: ['app/public/*', '!app/public', '!app/*.html', '!app/html'],
+  // gulp-sass includePaths
+  includePaths: [
+    // 'node_modules/normalize.css',
+    'node_modules/zp-ui',
+  ],
+  scripts: [
+    'app/scripts/**/*.js',
+    'pages/**/script.js',
+  ],
+};
 
 // Copy
-const copy = () => gulp.src(PATHS.copy)
-  .pipe(gulp.dest('dist'))
+const copy = () => gulp.src(copyPath)
+  .pipe(gulp.dest(OUTPUT))
   .pipe($.size({ title: 'copy' }));
 
 // Styles
@@ -80,20 +74,22 @@ function tmpSass() {
     autoprefixer(),
   ];
 
-  return gulp.src(PATHS.styles.src)
-    .pipe($.newer(PATHS.styles.tmp))
+  return gulp.src('app/**/*.{scss,css}', { base: SRC })
+    .pipe($.newer(TEMP))
     .pipe($.sourcemaps.init())
-      .pipe($.sassGlob())
-      .pipe(
-        $.sass({
-          includePaths: PATHS.styles.includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
+    // sourcemap start
+    .pipe($.sassGlob())
+    .pipe(
+      $.sass({
+        includePaths,
+        precision: 10,
+      })
+        .on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    // sourcemap end
     .pipe($.sourcemaps.write())
-    .pipe(gulp.dest(PATHS.styles.tmp))
+    .pipe(gulp.dest(TEMP))
     .pipe(BS.stream({ once: true }));
 }
 
@@ -103,26 +99,28 @@ function sass() {
     cssnano(),
   ];
 
-  return gulp.src(PATHS.styles.src)
+  return gulp.src('app/**/*.{scss,css}', { base: SRC })
     .pipe($.sourcemaps.init())
-      .pipe($.sassGlob())
-      .pipe(
-        $.sass({
-          includePaths: PATHS.styles.includePaths,
-          precision: 10,
-        })
-        .on('error', $.sass.logError)
-      )
-      .pipe($.postcss(processors))
-      .pipe($.size({ title: 'styles', showFiles: true }))
-      .pipe($.rev())
+    // sourcemap start
+    .pipe($.sassGlob())
+    .pipe(
+      $.sass({
+        includePaths,
+        precision: 10,
+      })
+        .on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    .pipe($.size({ title: 'styles', showFiles: true }))
+    .pipe($.rev())
+    // sourcemap end
     .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(PATHS.styles.dest))
+    .pipe(gulp.dest(OUTPUT))
     .pipe($.rev.manifest({
       base: process.cwd(),
       merge: true,
     }))
-    .pipe(gulp.dest(PATHS.root));
+    .pipe(gulp.dest(pwd));
 }
 
 // Scripts
@@ -139,143 +137,150 @@ const rename = (entry) => {
   };
 };
 
-const development = basename => b => b.bundle()
+const development = b => filename => b.bundle()
   .on('error', log.bind(log, 'Browserify Error'))
-  .pipe(source(`${basename}.js`))
-  .pipe(gulp.dest(PATHS.scripts.tmp))
-  .pipe(BS.stream({ once: true }));
+  .pipe(source(filename))
+  .pipe(gulp.dest(TEMP));
 
-const production = basename => b => b.bundle()
-  .on('error', log.bind(log, 'Browserify Error'))
-  .pipe(source(`${basename}.js`))
-  .pipe(buffer())
-  .pipe($.sourcemaps.init({ loadMaps: true }))
-    .pipe($.uglify({
-      // preserveComments: 'license',
-      compress: {
-        global_defs: {
-          'DEV': false,
-        },
-      },
-    }))
-    .pipe($.size({ title: 'scripts', showFiles: true }))
-    .pipe($.rev())
-  .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(PATHS.scripts.dest));
+const tmpBundle = (done) => {
+  const tasks = globby.sync(scriptsPath).map((entry) => {
+    const { basename } = rename(entry);
+    const filename = `scripts/${basename}.js`;
 
-const tmpScript = (done) => {
-  globby(PATHS.scripts.src).then((entries) => {
-    const tasks = entries.map((entry) => {
-      const { basename } = rename(entry);
-
-      const b = browserify({
-        entries: entry,
-        cache: {},
-        packageCache: {},
-        transform: [babelify],
-        plugin: [watchify],
-        // apply source maps
-        debug: true,
-      });
-
-      // 只有执行bundle()后watchify才能监听update事件
-      b.on('update', () => development(basename)(b));
-      // watchify监听log事件，输出内容X bytes written (Y seconds)，fancy-log添加时间
-      b.on('log', log);
-
-      return development(basename)(b);
+    const b = browserify({
+      entries: entry,
+      cache: {},
+      packageCache: {},
+      transform: [babelify],
+      plugin: [watchify],
+      // apply source maps
+      debug: true,
     });
 
-    es.merge(tasks).on('end', done);
+    // 只有执行bundle()后watchify才能监听update事件
+    b.on('update', () => (
+      development(b)(filename).pipe(BS.stream({ once: true }))
+    ));
+    // watchify监听log事件，输出内容X bytes written (Y seconds)，fancy-log添加时间
+    b.on('log', log);
+
+    return development(b)(filename);
   });
+
+  const streams = merge(...tasks);
+
+  if (streams.isEmpty) {
+    done();
+    return undefined;
+  }
+
+  return streams;
 };
 
-const script = (done) => {
-  globby(PATHS.scripts.src).then((entries) => {
-    const tasks = entries.map((entry) => {
-      const { basename } = rename(entry);
+const bundle = (entry) => {
+  const { basename } = rename(entry);
 
-      const b = browserify({
-        entries: entry,
-        cache: {},
-        packageCache: {},
-        transform: [babelify],
-        // apply source maps
-        debug: true,
-      });
-
-      return production(basename)(b);
+  const task = () => {
+    const b = browserify({
+      entries: entry,
+      cache: {},
+      packageCache: {},
+      transform: [babelify],
+      // apply source maps
+      debug: true,
     });
 
-    const manifest = gulp.src(PATHS.manifest);
-
-    es.merge(tasks.concat(manifest))
+    return b.bundle()
+      .on('error', log.bind(log, 'Browserify Error'))
+      .pipe(source(`scripts/${basename}.js`))
+      .pipe(buffer())
+      .pipe($.sourcemaps.init({ loadMaps: true }))
+      // sourcemap start
+      .pipe($.uglify({
+        // preserveComments: 'license',
+        compress: {
+          global_defs: {
+            DEV: false,
+          },
+        },
+      }))
+      .pipe($.size({ title: `bundle:${basename}` }))
+      .pipe($.rev())
+      // sourcemap end
+      .pipe($.sourcemaps.write('.'))
+      .pipe(gulp.dest(OUTPUT))
       .pipe($.rev.manifest({
         base: pwd,
         merge: true,
       }))
-      .pipe(gulp.dest(PATHS.root))
-      .on('end', done);
-  });
-};
+      .pipe(gulp.dest(pwd));
+  };
 
-// HTML
-const html = () => gulp.src(PATHS.html.src)
-  .pipe($.useref({
-    searchPath: PATHS.assets,
-  }))
-  .pipe($.replace({
-    manifest: gulp.src(PATHS.manifest),
-  }))
-  .pipe($.inlineSource({
-    rootpath: PATHS.html.dest,
-    compress: false,
-  }))
-  .pipe($.if('*.html', $.htmlmin(HTMLMINIFIER)))
-  .pipe($.if('*.html', $.size({ title: 'html', showFiles: true })))
-  .pipe(gulp.dest(PATHS.html.dest));
+  task.displayName = `bundle:${basename}`;
 
-// Serve
-function serve() {
-  BS.init({
-    notify: false,
-    logPrefix: 'demo',
-    server: {
-      baseDir: PATHS.assets,
-    },
-    port: 8088,
-  });
-
-  gulp.watch(PATHS.html.src).on('change', BS.reload);
-  gulp.watch(PATHS.images.src, tmpWebp);
-
-  gulp.watch([PATHS.styles.src, PATHS.styles.watch], gulp.parallel(stylelint, tmpSass));
-
-  gulp.watch(PATHS.scripts.lint, lint);
-}
-
-// Clean output directory
-const clean = (done) => {
-  rimraf(`{${PATHS.clean.join(',')}}`, done);
+  return task;
 };
 
 // Tasks
-gulp.task('clean:all', clean);
-gulp.task('clean:cache', done => $.cache.clearAll(done));
+gulp.task('tmpWebp', tmpWebp(BS)(imagePath));
 
-// Build production files, the default task
-gulp.task('default',
-  gulp.series(
-    'clean:all', lint,
-    gulp.parallel(script, stylelint, sass, images, webp, copy),
-    html,
-  )
-);
+gulp.task('lint', lint(BS, ['pages/**/*.js', 'templates/**/*.js']));
+gulp.task('stylelint', stylelint(['pages/**/*.{scss,css}']));
+
+function server() {
+  BS.init({
+    notify: false,
+    logPrefix: name,
+    server: {
+      baseDir: assets,
+    },
+    port: process.env.PORT || 3000,
+  });
+
+  gulp.watch('app/**/*.html').on('change', BS.reload);
+  gulp.watch(imagePath, gulp.parallel('tmpWebp'));
+  gulp.watch([
+    'app/**/*.{css,scss}',
+    'pages/**/*.{scss,css}',
+  ], gulp.parallel('stylelint', tmpSass));
+
+  gulp.watch([
+    'app/**/*.js',
+    'pages/**/*.js',
+    'templates/**/*.js',
+  ], gulp.parallel('lint'));
+}
 
 // run scripts, sass first and run browserSync before watch
-gulp.task('serve',
-  gulp.series(
-    gulp.parallel(tmpScript, tmpSass, tmpWebp),
-    serve,
-  )
-);
+gulp.task('serve', gulp.series(
+  gulp.parallel(
+    'tmpWebp',
+    tmpSass,
+    tmpBundle,
+  ),
+  server,
+));
+
+gulp.task('clean:all', clean);
+gulp.task('clean:cache', cleanCache);
+
+const bundleList = globby.sync(scriptsPath).map(entry => bundle(entry));
+
+// Build production files, the default task
+gulp.task('default', gulp.series(
+  'clean:all',
+  'lint',
+  ...bundleList,
+  gulp.parallel(
+    'stylelint',
+    sass,
+    images(imagePath),
+    webp(imagePath),
+    copy,
+  ),
+  html({
+    base: `${SRC}/html`,
+    searchPath: assets,
+    cleanCss: ['normalize.css'],
+  }),
+));

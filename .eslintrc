@@ -2,6 +2,9 @@
   "root": true,
   "env": {
     "browser": true,
+    "worker": true,
+    "serviceworker": true,
+    "mocha": true,
     "es6": true
   },
   "globals": {
@@ -11,7 +14,8 @@
   },
   "rules": {
     "no-param-reassign": ["error", { "props": false }],
-    "no-cond-assign": ["error", "except-parens"]
+    "no-cond-assign": ["error", "except-parens"],
+    "no-restricted-globals": 0
   },
   "extends": "airbnb-base"
 }

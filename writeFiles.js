@@ -17,14 +17,14 @@ const writeFile = page => new Promise((resolve, reject) => {
     ...rest
   } = page;
 
-  const input = `./pages/${template}`;
-  const output = `./app/html/${file}`;
+  const input = path.resolve(__dirname, 'pages', template);
+  const output = path.resolve(__dirname, 'app/html', file);
 
   // 规范路径
   const { style, script } = rest;
   const data = Object.assign({}, rest, {
-    style: style ? path.resolve('pages/', template, 'style.scss') : false,
-    script: script ? path.resolve('pages/', template, 'script.js') : false,
+    style: style ? path.resolve(input, 'style.scss') : false,
+    script: script ? path.resolve(input, 'script.js') : false,
   });
 
   // 注意wrap必须使用templaterAsync，其它可使用templater，例如index, 404
@@ -52,14 +52,13 @@ const writeFiles = ({
   error,
   ...contents
 }) => {
-  let spread = [];
-  [...Object.entries(contents)].forEach(([key, group]) => {
-    const newGroup = group.map(d => Object.assign({}, d, {
-      template: path.join(key, d.template),
-    }));
-
-    spread = spread.concat(newGroup);
-  });
+  const spread = Object.entries(contents).reduce((prev, [key, group]) => (
+    prev.concat(
+      group.map(d => Object.assign({}, d, {
+        template: path.join(key, d.template),
+      })),
+    )
+  ), []);
 
   const pages = [
     Object.assign({}, index, contents),
@@ -95,8 +94,8 @@ ensureExists('app/html', 0o755, (err) => {
   }
 
   writeFiles(config).then((data) => {
-    console.log(`total: ${data.length} files\ndone!`);
+    console.log(`total: ${data.length} files\ndone!`); // eslint-disable-line no-console
   }).catch((writeErr) => {
-    console.log(writeErr);
+    console.log(writeErr); // eslint-disable-line no-console
   });
 });
