@@ -27,11 +27,11 @@ const thead = () => {
   // charcode
   const start = 65;
 
-  const head = [...new Array(COLUMN).keys()].reduce((prev, d, index) => (
-    index === 0 ?
-      '<th class="th"></th>' :
-      `${prev}<th class="th">${String.fromCharCode(start + index - 1)}</th>`
-  ), '');
+  const head = [...new Array(COLUMN).keys()]
+    .reduce((prev, d, index) => (index === 0
+      ? '<th class="th"></th>'
+      : `${prev}<th class="th">${String.fromCharCode(start + index - 1)}</th>`
+    ), '');
 
   return `<tr class="tr">${head}</tr>`;
 };
@@ -41,7 +41,7 @@ const tr = (nick, fill) => {
     `${prev}<td class="td">${index === 0 ? nick : fill}</td>`
   ), '');
 
-  return `<tr class="tr">${row}</tr>`
+  return `<tr class="tr">${row}</tr>`;
 };
 
 const tbody = () => (

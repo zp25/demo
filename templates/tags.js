@@ -1,4 +1,4 @@
-const escapeHTML = require('zp-lib').escapeHTML;
+const { escapeHTML } = require('zp-lib');
 
 /**
  * pre标签
@@ -17,7 +17,7 @@ exports.preTag = (code, className = 'code') => (
  * @return {string}
  * @ignore
  */
-exports.styleTag = (src) => (
+exports.styleTag = src => (
   `<link rel="stylesheet" href="${src}" media="all">`
 );
 
@@ -28,9 +28,9 @@ exports.styleTag = (src) => (
  * @ignore
  */
 exports.scriptTag = (src, inline = false) => (
-  inline ?
-    `<script type="text/javascript">${src}</script>` :
-    `<script type="text/javascript" src="${src}"></script>`
+  inline
+    ? `<script type="text/javascript">${src}</script>`
+    : `<script type="text/javascript" src="${src}"></script>`
 );
 
 /**

@@ -3,18 +3,18 @@ const chaiAsPromised = require('chai-as-promised');
 const style = require('../templates/style');
 
 chai.use(chaiAsPromised);
-const should = chai.should();
+const { expect } = chai;
 
 describe('style', () => {
   it('设置displayName属性', () => {
-    style.displayName.should.equal('style');
+    expect(style.displayName).to.equal('style');
   });
 
   it('若未传入参数，返回空string', () => {
-    style().should.equal('');
+    expect(style()).to.equal('');
   });
 
-  it('返回Promise，不存在文件reject', () => {
-    style('empty').should.eventually.rejected;
-  });
+  it('返回Promise，不存在文件reject', () => (
+    expect(style('empty')).to.eventually.be.rejected
+  ));
 });

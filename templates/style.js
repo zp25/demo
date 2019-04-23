@@ -19,7 +19,7 @@ const style = (fname) => {
       }
 
       resolve(preTag(data, 'styles'));
-    })
+    });
   });
 };
 

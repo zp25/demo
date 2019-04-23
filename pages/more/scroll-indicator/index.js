@@ -1,4 +1,6 @@
-const loremIpsum = require('lorem-ipsum').loremIpsum;
+/* eslint import/no-extraneous-dependencies: ["error", { "peerDependencies": true }] */
+
+const { loremIpsum } = require('lorem-ipsum');
 const { templaterAsync: templater } = require('zp-lib');
 const {
   header,

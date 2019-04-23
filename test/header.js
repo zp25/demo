@@ -1,12 +1,12 @@
-const should = require('chai').should();
+const { expect } = require('chai');
 const header = require('../templates/header');
 
 describe('header', () => {
   it('设置displayName属性', () => {
-    header.displayName.should.equal('header');
+    expect(header.displayName).to.equal('header');
   });
 
   it('返回string', () => {
-    header().should.be.a('string');
+    expect(header()).to.be.a('string');
   });
 });

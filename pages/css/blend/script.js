@@ -4,7 +4,7 @@ const blendObserver = () => {
   const t = document.querySelector('#background-blend-mode');
 
   return {
-    update: ({ value }) => {
+    update({ value }) {
       t.style.setProperty('--blend-background-blend-mode', value);
     },
   };
@@ -13,7 +13,7 @@ const blendObserver = () => {
 const handler = blend => ({ target }) => {
   const { value } = target;
 
-  blend.update({ value });
+  blend.setState({ value });
 };
 
 document.addEventListener('DOMContentLoaded', () => {

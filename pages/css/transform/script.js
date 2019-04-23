@@ -58,7 +58,7 @@ const selectObserver = () => {
     /**
      * 模式更改的样式设定
      */
-    update: ({ mode }) => {
+    update({ mode }) {
       const box2d = $('.box--2d');
       const form2d = $('.form--2d');
       const box3d = $('.box--3d');
@@ -82,7 +82,7 @@ const selectObserver = () => {
 };
 
 const form2dObserver = () => ({
-  update: ({ label, value }) => {
+  update({ label, value }) {
     const result = value + MAP[label].unit;
 
     // 修改
@@ -92,7 +92,7 @@ const form2dObserver = () => ({
 });
 
 const form3dObserver = () => ({
-  update: ({ label: tmpLabel, group, value }) => {
+  update({ label: tmpLabel, group, value }) {
     let suffix = '';
     let label = tmpLabel;
 
@@ -116,7 +116,7 @@ const createHandler = ({ select, form2d, form3d }) => ({
   switchMode: ({ target }) => {
     const { value } = target;
 
-    select.update({ mode: value });
+    select.setState({ mode: value });
   },
 
   /**
@@ -125,7 +125,7 @@ const createHandler = ({ select, form2d, form3d }) => ({
   setValue2D: ({ target }) => {
     const { value } = target;
 
-    form2d.update({
+    form2d.setState({
       label: target.getAttribute('id'),
       value,
     });
@@ -140,7 +140,7 @@ const createHandler = ({ select, form2d, form3d }) => ({
       dataset: { group },
     } = target;
 
-    form3d.update({
+    form3d.setState({
       label: target.getAttribute('id'),
       group,
       value,
@@ -164,5 +164,5 @@ document.addEventListener('DOMContentLoaded', () => {
   $('.form--3d').addEventListener('change', handler.setValue3D, false);
 
   // init
-  select.update({ mode: '2d' });
+  select.setState({ mode: '2d' });
 }, false);
