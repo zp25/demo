@@ -15,7 +15,7 @@
     "prejsdoc": "rimraf docs/*",
     "jsdoc": "jsdoc -r -c jsdoc.json -d docs",
     "open": "open docs/index.html",
-    "deploy": "now ./dist -A ../now.json --token=$NOW_TOKEN --target production"
+    "deploy": "now ./dist -A ../now.json --token=$NOW_TOKEN"
   },
   "repository": {
     "type": "git",
@@ -60,7 +60,7 @@
     "gulp": "^4.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-cache": "^1.1.1",
-    "gulp-clean-css": "^4.0.0",
+    "gulp-clean-css": "^4.2.0",
     "gulp-eslint": "^5.0.0",
     "gulp-filter": "^5.1.0",
     "gulp-htmlmin": "^5.0.1",
@@ -92,7 +92,7 @@
     "serve": "^11.0.0",
     "sinon": "^7.3.2",
     "stylelint": "^10.0.1",
-    "stylelint-config-sass-guidelines": "^5.4.0",
+    "stylelint-config-sass-guidelines": "^6.0.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "watchify": "^3.11.1"

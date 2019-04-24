@@ -1,4 +1,20 @@
 {
   "version": 2,
-  "alias": "demo.zp25.ninja"
+  "name": "demo",
+  "target": "production",
+  "alias": "demo.zp25.ninja",
+  "routes": [
+    {
+      "src": "/(scripts|styles)/.+",
+      "headers": {
+        "cache-control": "public, s-maxage=5184000, max-age=86400"
+      }
+    },
+    {
+      "src": "/images/.+",
+      "headers": {
+        "cache-control": "public, s-maxage=5184000, max-age=86400"
+      }
+    }
+  ]
 }
