@@ -15,11 +15,12 @@
   "scripts/main.js": "scripts/main-23fbe1f297.js",
   "scripts/notification.js": "scripts/notification-5bb9ad59d1.js",
   "scripts/page-visibility.js": "scripts/page-visibility-5936b56fbc.js",
+  "scripts/particles.js": "scripts/particles-470eb081e0.js",
   "scripts/qrcode.js": "scripts/qrcode-3bd956727c.js",
   "scripts/responsive-textarea.js": "scripts/responsive-textarea-e2f6fb6d06.js",
   "scripts/transform.js": "scripts/transform-b75e753da7.js",
   "scripts/vibration.js": "scripts/vibration-ae11673d83.js",
   "scripts/waapi.js": "scripts/waapi-24657dde44.js",
   "styles/main.css": "styles/main-e2a4733608.css",
-  "styles/pages.css": "styles/pages-8c9ee3108f.css"
+  "styles/pages.css": "styles/pages-04b56c6dad.css"
 }

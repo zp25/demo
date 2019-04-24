@@ -1,0 +1,17 @@
+#simulating-mouse-movement {
+  position: relative;
+  height: 50vh;
+  border: 1px solid var(--lightgrey);
+  overflow: hidden;
+
+  .particle {
+    position: absolute;
+    top: calc(var(--mm-particle-top, 0) * 1px);
+    left: calc(var(--mm-particle-left, 0) * 1px);
+    width: calc(var(--mm-particle-size, 0) * 1px);
+    height: calc(var(--mm-particle-size, 0) * 1px);
+    background-color: var(--mm-particle-color, #fff);
+    border-radius: 100%;
+    pointer-events: none;
+  }
+}

@@ -10,7 +10,7 @@
     "link": [
       {
         "title": "Service Worker Sample: Custom Offline Page",
-        "href": "https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker/custom-offline-page"
+        "href": "//github.com/GoogleChrome/samples/tree/gh-pages/service-worker/custom-offline-page"
       }
     ],
     "file": "404.html"
@@ -21,7 +21,7 @@
     "link": [
       {
         "title": "Service Worker Sample: Custom Offline Page",
-        "href": "https://github.com/GoogleChrome/samples/tree/gh-pages/service-worker/custom-offline-page"
+        "href": "//github.com/GoogleChrome/samples/tree/gh-pages/service-worker/custom-offline-page"
       }
     ],
     "file": "error.html"
@@ -40,7 +40,7 @@
       "link": [
         {
           "title": "Styling &amp; Customizing File Inputs the Smart Way",
-          "href": "http://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/"
+          "href": "//tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/"
         }
       ],
       "style": true,
@@ -98,12 +98,12 @@
       "template": "drag-drop",
       "link": [
         {
-          "title": "http://www.w3schools.com/html/html5_draganddrop.asp",
-          "href": "http://www.w3schools.com/html/html5_draganddrop.asp"
+          "title": "//www.w3schools.com/html/html5_draganddrop.asp",
+          "href": "//www.w3schools.com/html/html5_draganddrop.asp"
         },
         {
-          "title": "http://html5demos.com/drag",
-          "href": "http://html5demos.com/drag"
+          "title": "//html5demos.com/drag",
+          "href": "//html5demos.com/drag"
         }
       ],
       "style": true,
@@ -116,7 +116,7 @@
       "link": [
         {
           "title": "Let’s talk about the Web Animations API",
-          "href": "http://danielcwilson.com/blog/2015/07/animations-intro/"
+          "href": "//danielcwilson.com/blog/2015/07/animations-intro/"
         }
       ],
       "style": true,
@@ -145,7 +145,7 @@
       "link": [
         {
           "title": "Angled Edges with CSS Masks and Transforms",
-          "href": "https://viget.com/inspire/angled-edges-with-css-masks-and-transforms"
+          "href": "//viget.com/inspire/angled-edges-with-css-masks-and-transforms"
         }
       ],
       "style": true,
@@ -157,7 +157,7 @@
       "link": [
         {
           "title": "Designing Flexible, Maintainable Pie Charts With CSS and SVG",
-          "href": "http://www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/"
+          "href": "//www.smashingmagazine.com/2015/07/designing-simple-pie-charts-with-css/"
         }
       ],
       "style": true,
@@ -169,7 +169,7 @@
       "link": [
         {
           "title": "Flex 布局教程：实例篇",
-          "href": "http://www.ruanyifeng.com/blog/2015/07/flex-examples.html"
+          "href": "//www.ruanyifeng.com/blog/2015/07/flex-examples.html"
         }
       ],
       "style": true,
@@ -181,7 +181,7 @@
       "link": [
         {
           "title": "The Shapes of CSS - CSS Tricks",
-          "href": "https://css-tricks.com/examples/ShapesOfCSS/"
+          "href": "//css-tricks.com/examples/ShapesOfCSS/"
         }
       ],
       "file": "css-shapes.html"
@@ -192,7 +192,7 @@
       "link": [
         {
           "title": "Building A Circular Navigation with CSS Clip Paths - CSS Tricks",
-          "href": "https://css-tricks.com/building-a-circular-navigation-with-css-clip-paths/"
+          "href": "//css-tricks.com/building-a-circular-navigation-with-css-clip-paths/"
         }
       ],
       "style": true,
@@ -205,7 +205,7 @@
       "link": [
         {
           "title": "filter",
-          "href": "https://css-tricks.com/almanac/properties/f/filter/"
+          "href": "//css-tricks.com/almanac/properties/f/filter/"
         }
       ],
       "style": true,
@@ -217,7 +217,7 @@
       "link": [
         {
           "title": "Image diffing using CSS",
-          "href": "http://franklinta.com/2014/11/30/image-diffing-using-css/"
+          "href": "//franklinta.com/2014/11/30/image-diffing-using-css/"
         }
       ],
       "style": true,
@@ -235,11 +235,11 @@
       "link": [
         {
           "title": "Reverse Text Color Based on Background Color Automatically in CSS",
-          "href": "https://css-tricks.com/reverse-text-color-mix-blend-mode"
+          "href": "//css-tricks.com/reverse-text-color-mix-blend-mode"
         },
         {
           "title": "background-blend-mode",
-          "href": "https://developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode"
+          "href": "//developer.mozilla.org/en-US/docs/Web/CSS/background-blend-mode"
         }
       ],
       "style": true,
@@ -258,11 +258,11 @@
       "link": [
         {
           "title": "Thinking Ahead: CSS Scroll Snap Points",
-          "href": "http://blog.teamtreehouse.com/css-scroll-snap-points"
+          "href": "//blog.teamtreehouse.com/css-scroll-snap-points"
         },
         {
           "title": "Introducing CSS Scroll Snap Points",
-          "href": "https://css-tricks.com/introducing-css-scroll-snap-points/"
+          "href": "//css-tricks.com/introducing-css-scroll-snap-points/"
         }
       ],
       "style": true,
@@ -291,7 +291,7 @@
       "link": [
         {
           "title": "Creating a QR Code step by step",
-          "href": "https://www.nayuki.io/page/creating-a-qr-code-step-by-step"
+          "href": "//www.nayuki.io/page/creating-a-qr-code-step-by-step"
         }
       ],
       "file": "qrcode.html"
@@ -303,7 +303,7 @@
       "link": [
         {
           "title": "Creating Scroll-based Animations using jQuery and CSS3",
-          "href": "http://www.sitepoint.com/scroll-based-animations-jquery-css3/"
+          "href": "//www.sitepoint.com/scroll-based-animations-jquery-css3/"
         }
       ],
       "script": true,
@@ -321,11 +321,11 @@
       "link": [
         {
           "title": "Emoji Toggles!",
-          "href": "https://css-tricks.com/emoji-toggles/"
+          "href": "//css-tricks.com/emoji-toggles/"
         },
         {
           "title": "Emoji Unicode Tables",
-          "href": "http://apps.timwhitlock.info/emoji/tables/unicode"
+          "href": "//apps.timwhitlock.info/emoji/tables/unicode"
         }
       ],
       "style": true,
@@ -337,11 +337,11 @@
       "link": [
         {
           "title": "Roll Your Own Copy to Clipboard Feature in 20 Lines of JavaScript",
-          "href": "http://www.sitepoint.com/javascript-copy-to-clipboard/"
+          "href": "//www.sitepoint.com/javascript-copy-to-clipboard/"
         },
         {
           "title": "clipboard.js",
-          "href": "https://zenorocha.github.io/clipboard.js/"
+          "href": "//zenorocha.github.io/clipboard.js/"
         }
       ],
       "style": true,
@@ -354,15 +354,15 @@
       "link": [
         {
           "title": "Molten Leading in CSS",
-          "href": "https://css-tricks.com/molten-leading-css/"
+          "href": "//css-tricks.com/molten-leading-css/"
         },
         {
           "title": "Molten leading (or, fluid line-height)",
-          "href": "http://nicewebtype.com/notes/2012/02/03/molten-leading-or-fluid-line-height/"
+          "href": "//nicewebtype.com/notes/2012/02/03/molten-leading-or-fluid-line-height/"
         },
         {
           "title": "Precise control over responsive typography",
-          "href": "http://madebymike.com.au/writing/precise-control-responsive-typography/"
+          "href": "//madebymike.com.au/writing/precise-control-responsive-typography/"
         }
       ],
       "style": true,
@@ -374,7 +374,7 @@
       "link": [
         {
           "title": "Full Width Containers in Limited Width Parents",
-          "href": "https://css-tricks.com/full-width-containers-limited-width-parents/"
+          "href": "//css-tricks.com/full-width-containers-limited-width-parents/"
         }
       ],
       "style": true,
@@ -386,11 +386,11 @@
       "link": [
         {
           "title": "Use Cases for Fixed Backgrounds in CSS",
-          "href": "https://css-tricks.com/use-cases-fixed-backgrounds-css/"
+          "href": "//css-tricks.com/use-cases-fixed-backgrounds-css/"
         },
         {
           "title": "Zooming Background Images",
-          "href": "https://css-tricks.com/zooming-background-images/"
+          "href": "//css-tricks.com/zooming-background-images/"
         }
       ],
       "style": true,
@@ -402,11 +402,11 @@
       "link": [
         {
           "title": "Fun with Viewport Units",
-          "href": "https://css-tricks.com/fun-viewport-units/"
+          "href": "//css-tricks.com/fun-viewport-units/"
         },
         {
           "title": "Scroll Indicator",
-          "href": "https://codepen.io/MadeByMike/pen/ZOrEmr"
+          "href": "//codepen.io/MadeByMike/pen/ZOrEmr"
         }
       ],
       "style": true,
@@ -418,7 +418,7 @@
       "link": [
         {
           "title": "An Idea for a Simple Responsive Spreadsheet",
-          "href": "https://css-tricks.com/idea-simple-responsive-spreadsheet/"
+          "href": "//css-tricks.com/idea-simple-responsive-spreadsheet/"
         }
       ],
       "file": "responsive-spreadsheet.html"
@@ -429,7 +429,7 @@
       "link": [
         {
           "title": "div模拟textarea文本域轻松实现高度自适应",
-          "href": "http://www.zhangxinxu.com/wordpress/2010/12/div-textarea-height-auto/"
+          "href": "//www.zhangxinxu.com/wordpress/2010/12/div-textarea-height-auto/"
         }
       ],
       "file": "responsive-textarea.html"
@@ -440,11 +440,32 @@
       "link": [
         {
           "title": "Old Timey Terminal Styling",
-          "href": "https://css-tricks.com/old-timey-terminal-styling/"
+          "href": "//css-tricks.com/old-timey-terminal-styling/"
         }
       ],
       "style": true,
       "file": "terminal-styling.html"
+    },
+    {
+      "name": "Particles",
+      "template": "particles",
+      "link": [
+        {
+          "title": "Simulating Mouse Movement",
+          "href": "//css-tricks.com/simulating-mouse-movement/"
+        },
+        {
+          "title": "Particles (on move)",
+          "href": "//codepen.io/Mamboleoo/pen/c208f44cd08c23e548ff088c1647ab0e"
+        },
+        {
+          "title": "NOISE!",
+          "href": "//github.com/josephg/noisejs"
+        }
+      ],
+      "style": true,
+      "script": true,
+      "file": "particles.html"
     },
     {
       "draft": true,
@@ -453,7 +474,7 @@
       "link": [
         {
           "title": "Vertical text with CSS 3 Writing Modes",
-          "href": "http://generatedcontent.org/post/45384206019/writing-modes"
+          "href": "//generatedcontent.org/post/45384206019/writing-modes"
         }
       ],
       "file": "text.html"
@@ -465,7 +486,7 @@
       "link": [
         {
           "title": "The “Blur Up” Technique for Loading Background Images",
-          "href": "https://css-tricks.com/the-blur-up-technique-for-loading-background-images/"
+          "href": "//css-tricks.com/the-blur-up-technique-for-loading-background-images/"
         }
       ],
       "file": "bg.html"
@@ -477,7 +498,7 @@
       "link": [
         {
           "title": "Creating Wavescroll",
-          "href": "https://css-tricks.com/creating-wavescroll/"
+          "href": "//css-tricks.com/creating-wavescroll/"
         }
       ],
       "file": "wavescroll.html"
@@ -489,7 +510,7 @@
       "link": [
         {
           "title": "Direction Aware Hover Effects",
-          "href": "https://css-tricks.com/direction-aware-hover-effects/"
+          "href": "//css-tricks.com/direction-aware-hover-effects/"
         }
       ],
       "file": "hover-effects.html"
