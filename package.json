@@ -10,7 +10,7 @@
     "gulp": "gulp",
     "prebuild": "rimraf app/html/",
     "build": "npm run copyindex && npm run gulp",
-    "serve": "serve -l 3001",
+    "serve": "serve -l 3011",
     "test": "nyc mocha --harmony --check-leaks",
     "prejsdoc": "rimraf docs/*",
     "jsdoc": "jsdoc -r -c jsdoc.json -d docs",

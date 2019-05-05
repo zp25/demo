@@ -234,7 +234,7 @@ function server() {
     server: {
       baseDir: assets,
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3010,
   });
 
   gulp.watch('app/**/*.html').on('change', BS.reload);
