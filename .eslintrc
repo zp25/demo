@@ -13,6 +13,7 @@
     "QRCode": false
   },
   "rules": {
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
     "no-param-reassign": ["error", { "props": false }],
     "no-cond-assign": ["error", "except-parens"],
     "no-restricted-globals": 0

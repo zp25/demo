@@ -9,7 +9,7 @@
 
   .box {
     color: color(white);
-    font-size: fontSize(bolder);
+    font-size: torem(20px);
 
     &.box--2d {
       --transform-translate-x: 0;

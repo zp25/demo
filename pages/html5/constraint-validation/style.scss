@@ -15,7 +15,7 @@
       top: 0;
       left: 0;
       color: var(--color-main);
-      font-size: fontSize(bold);
+      font-size: torem(16px);
       line-height: torem(32px);
       transition: 0.2s ease-out;
     }
@@ -37,7 +37,7 @@
     .helper {
       display: block;
       color: var(--color-error);
-      font-size: fontSize(lighter);
+      font-size: torem(12px);
       line-height: torem(12px);
       opacity: 0;
       transition: 0.2s ease-out;
@@ -46,7 +46,7 @@
     &.focus {
       .label {
         color: var(--color-focus);
-        font-size: fontSize(lighter);
+        font-size: torem(12px);
         line-height: torem(16px);
         transform: translateY(torem(-16px));
       }
@@ -73,7 +73,7 @@
     .submit {
       height: torem(36px);
       color: color(white);
-      font-size: fontSize();
+      font-size: torem(14px);
       line-height: torem(36px);
       background-color: var(--color-focus);
       border: 0;

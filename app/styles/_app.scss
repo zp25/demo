@@ -18,7 +18,7 @@
 
 #app {
   color: var(--black);
-  font-size: fontSize();
+  font-size: torem(14px);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -29,12 +29,12 @@
   padding: torem(10px) 0;
 
   .title {
-    font-size: fontSize(34px);
+    font-size: torem(34px);
     margin: 0;
 
     &::after {
       content: '';
-      font-size: fontSize(bolder);
+      font-size: torem(20px);
       font-weight: normal;
       vertical-align: middle;
     }
