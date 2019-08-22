@@ -470,6 +470,18 @@
       "file": "particles.html"
     },
     {
+      "name": "Animated Favicon",
+      "template": "favicon",
+      "link": [
+        {
+          "title": "The Making of an Animated Favicon",
+          "href": "//css-tricks.com/the-making-of-an-animated-favicon/"
+        }
+      ],
+      "script": true,
+      "file": "favicon.html"
+    },
+    {
       "draft": true,
       "name": "Text",
       "template": "text.js",
