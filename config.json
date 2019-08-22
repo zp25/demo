@@ -432,6 +432,8 @@
           "href": "//www.zhangxinxu.com/wordpress/2010/12/div-textarea-height-auto/"
         }
       ],
+      "style": true,
+      "script": true,
       "file": "responsive-textarea.html"
     },
     {
