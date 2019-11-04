@@ -1,7 +1,7 @@
 {
   "scripts/battery-status.js": "scripts/battery-status-3970d4a757.js",
-  "scripts/blend.js": "scripts/blend-9e8aafe27d.js",
-  "scripts/canvas.js": "scripts/canvas-5bd7dd3f87.js",
+  "scripts/blend.js": "scripts/blend-3d7ca6f4f1.js",
+  "scripts/canvas.js": "scripts/canvas-1b00c9add7.js",
   "scripts/clip-path.js": "scripts/clip-path-4e467f9911.js",
   "scripts/constraint-validation.js": "scripts/constraint-validation-ef5ff55245.js",
   "scripts/copy-to-clipboard.js": "scripts/copy-to-clipboard-9964a14af6.js",
@@ -19,9 +19,9 @@
   "scripts/particles.js": "scripts/particles-9f3582468f.js",
   "scripts/qrcode.js": "scripts/qrcode-3bd956727c.js",
   "scripts/responsive-textarea.js": "scripts/responsive-textarea-0bbc8265a9.js",
-  "scripts/transform.js": "scripts/transform-87464a447a.js",
+  "scripts/transform.js": "scripts/transform-2851f0c3f1.js",
   "scripts/vibration.js": "scripts/vibration-ae11673d83.js",
-  "scripts/waapi.js": "scripts/waapi-8c391c0ce5.js",
-  "styles/main.css": "styles/main-29f781cecc.css",
-  "styles/pages.css": "styles/pages-6c8124c8b7.css"
+  "scripts/waapi.js": "scripts/waapi-6ea20ae4b6.js",
+  "styles/main.css": "styles/main-367803b93a.css",
+  "styles/pages.css": "styles/pages-00ad66250a.css"
 }
