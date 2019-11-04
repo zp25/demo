@@ -266,7 +266,8 @@ class DrawTetris extends Tetris {
    */
   static tetrisAct(canvas, lct) {
     canvas.onclick = () => {
-      window.open(`http://${lct}.rensidiaochaotian.com/`);
+      // window.open(`http://${lct}.rensidiaochaotian.com/`);
+      console.log(lct);
     };
 
     canvas.style.cursor = 'pointer';
