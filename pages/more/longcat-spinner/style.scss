@@ -1,0 +1,185 @@
+.longcat-spinner {
+  @include flexbox(row, nowrap, space-around, center);
+
+  .gilly {
+    --face: #ccc;
+
+    @extend %longcat-spinner;
+
+    background-color: #2c4763;
+  }
+
+  .qian {
+    --main: #80757b;
+    --face: #80757b;
+    --shadow: #5d5d60;
+    --ears: #5d5d60;
+    --nose: #5d5d60;
+    --mouth: #5d5d60;
+    --belly: #5d5d60;
+    // --eyes: #000;
+
+    @extend %longcat-spinner;
+
+    background-color: #e6e6e6;
+  }
+}
+
+@keyframes loop {
+  from {
+    transform: rotate(0) translateX(6em);
+  }
+
+  to {
+    transform: rotate(-1turn) translateX(6em);
+  }
+}
+
+%longcat-spinner {
+  $angleSpan: 40deg;
+  $dur: 2s;
+  $delayInc: $dur / 100;
+  $segments: 30;
+
+  $negAngleHalf: -$angleSpan / 2;
+  $angleInc: $angleSpan / $segments;
+
+  position: relative;
+  font-size: torem(16px);
+  width: 16em;
+  height: 16em;
+  margin: auto;
+
+  .segment {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3em;
+    height: 2em;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(
+        90deg,
+        var(--main, #fff) 20%,
+        var(--belly, #e6e6e6) 20% 80%,
+        var(--main, #fff) 80%
+      );
+      border-radius: 0.25em;
+      animation: loop $dur cubic-bezier(0.6, 0, 0.4, 1) infinite;
+      will-change: transform;
+    }
+
+    &:first-of-type {
+      width: 4em;
+      height: 4em;
+      z-index: 1;
+
+      &::before {
+        background-image:
+          // mouth
+          radial-gradient(0.9em 0.8em at 1.5em 2.65em, var(--main, #fff) 48%, transparent 50%),
+          radial-gradient(1em 0.8em at 1.6em 2.75em, var(--mouth, #ccc) 48%, transparent 50%),
+          radial-gradient(0.9em 0.8em at 2.5em 2.65em, var(--main, #fff) 48%, transparent 50%),
+          radial-gradient(1em 0.8em at 2.4em 2.75em, var(--mouth, #ccc) 48%, transparent 50%),
+          // nose
+          radial-gradient(0.75em 0.75em at 50% 2.5em, var(--nose, #e59999) 48%, transparent 50%),
+          // head
+          radial-gradient(4em 3em at 50% 2em, var(--main, #fff) 48%, transparent 50%),
+          radial-gradient(4em 3em at 50% 2.2em, var(--shadow, #ccc) 48%, transparent 50%),
+          // ears
+          radial-gradient(
+            1em 3em at 3.25em 1.5em,
+            var(--ears, #e59999) 39%,
+            var(--face, #e6e6e6) 40% 49%,
+            transparent 50%
+          ),
+          radial-gradient(
+            1em 3em at 0.75em 1.5em,
+            var(--ears, #e59999) 39%,
+            var(--face, #e6e6e6) 40% 49%,
+            transparent 50%
+          ),
+          // paws
+          radial-gradient(1em 2em at 0.5em 2.8em, var(--main, #fff) 48%, transparent 50%),
+          radial-gradient(1em 2em at 0.5em 3em, var(--shadow, #ccc) 48%, transparent 50%),
+          radial-gradient(1em 2em at 3.5em 2.8em, var(--main, #fff) 48%, transparent 50%),
+          radial-gradient(1em 2em at 3.5em 3em, var(--shadow, #ccc) 48%, transparent 50%);
+        background-repeat: no-repeat;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-image:
+          // eyes
+          radial-gradient(0.25em 0.25em at 1.25em 1.6em, #fff 48%, transparent 50%),
+          radial-gradient(0.75em 0.75em at 1.25em 1.75em, var(--eyes, #000) 48%, transparent 50%),
+          radial-gradient(0.25em 0.25em at 2.75em 1.6em, #fff 48%, transparent 50%),
+          radial-gradient(0.75em 0.75em at 2.75em 1.75em, var(--eyes, #000) 48%, transparent 50%),
+          // face
+          radial-gradient(4.8em 4.8em at 0 0, var(--face, #fff) 48%, transparent 50%),
+          radial-gradient(4.8em 4.8em at 100% 0, var(--face, #fff) 48%, transparent 50%);
+        clip-path: ellipse(2em 1.5em);
+        animation: loop $dur cubic-bezier(0.6, 0, 0.4, 1) infinite;
+        will-change: transform;
+      }
+    }
+
+    &:last-of-type {
+      width: 3em;
+      height: 4em;
+
+      &::before {
+        background:
+          // body
+          linear-gradient(
+            90deg,
+            var(--main, #fff) 20%,
+            var(--belly, #e6e6e6) 20% 80%,
+            var(--main, #fff) 80%
+          ) 0 1.5em / 3em 0.5em,
+          radial-gradient(
+            3em 2em at top center,
+            var(--belly, #e6e6e6) 30%,
+            var(--main, #fff) 31% 48%,
+            transparent 50%
+          ) 0 2em /  3em 2em,
+          // paws
+          radial-gradient(
+            1em 4em at 0.5em 0,
+            var(--main, #fff) 48%,
+            transparent 50%
+          ) 0 2em / 3em 2em,
+          radial-gradient(
+            1em 4em at 2.5em 0,
+            var(--main, #fff) 48%,
+            transparent 50%
+          ) 0 2em / 3em 2em;
+        background-repeat: no-repeat;
+      }
+    }
+
+    @for $s from 1 through $segments {
+      $rotateBy: $angleSpan / $segments * ($s - 1);
+
+      &:nth-of-type(#{$s}) {
+        transform: translate(-50%, -50%) rotate($negAngleHalf + $rotateBy);
+
+        &::before,
+        &::after {
+          animation-delay: $delayInc * ($s - 1);
+          transform: translateX(6em);
+        }
+      }
+    }
+  }
+}

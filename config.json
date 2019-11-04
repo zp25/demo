@@ -482,6 +482,18 @@
       "file": "favicon.html"
     },
     {
+      "name": "Longcat Spinner",
+      "template": "longcat-spinner",
+      "link": [
+        {
+          "title": "Longcat Spinner",
+          "href": "//codepen.io/jkantner/pen/jOONyoO"
+        }
+      ],
+      "style": true,
+      "file": "longcat-spinner.html"
+    },
+    {
       "draft": true,
       "name": "Text",
       "template": "text.js",
