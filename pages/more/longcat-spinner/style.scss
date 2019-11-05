@@ -1,5 +1,5 @@
 .longcat-spinner {
-  @include flexbox(row, nowrap, space-around, center);
+  @include flexbox(row, wrap, space-around, center);
 
   .gilly {
     --face: #ccc;
@@ -50,7 +50,9 @@
       background-image: linear-gradient(
         90deg,
         var(--main, #fff) 20%,
-        var(--belly, #e6e6e6) 20% 80%,
+        // var(--belly, #e6e6e6) 20% 80%,
+        var(--belly, #e6e6e6) 20%,
+        var(--belly, #e6e6e6) 80%,
         var(--main, #fff) 80%
       );
       border-radius: 0.25em;
@@ -79,13 +81,17 @@
           radial-gradient(
             1em 3em at 3.25em 1.5em,
             var(--ears, #e59999) 39%,
-            var(--face, #e6e6e6) 40% 49%,
+            // var(--face, #e6e6e6) 40% 49%,
+            var(--face, #e6e6e6) 40%,
+            var(--face, #e6e6e6) 49%,
             transparent 50%
           ),
           radial-gradient(
             1em 3em at 0.75em 1.5em,
             var(--ears, #e59999) 39%,
-            var(--face, #e6e6e6) 40% 49%,
+            // var(--face, #e6e6e6) 40% 49%,
+            var(--face, #e6e6e6) 40%,
+            var(--face, #e6e6e6) 49%,
             transparent 50%
           ),
           // paws
@@ -129,13 +135,17 @@
           linear-gradient(
             90deg,
             var(--main, #fff) 20%,
-            var(--belly, #e6e6e6) 20% 80%,
+            // var(--belly, #e6e6e6) 20% 80%,
+            var(--belly, #e6e6e6) 20%,
+            var(--belly, #e6e6e6) 80%,
             var(--main, #fff) 80%
           ) 0 1.5em / 3em 0.5em,
           radial-gradient(
             3em 2em at top center,
             var(--belly, #e6e6e6) 30%,
-            var(--main, #fff) 31% 48%,
+            // var(--main, #fff) 31% 48%,
+            var(--main, #fff) 31%,
+            var(--main, #fff) 48%,
             transparent 50%
           ) 0 2em /  3em 2em,
           // paws
