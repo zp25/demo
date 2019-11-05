@@ -4,8 +4,6 @@
   .gilly {
     --face: #ccc;
 
-    @extend %longcat-spinner;
-
     background-color: #2c4763;
   }
 
@@ -19,23 +17,11 @@
     --belly: #5d5d60;
     // --eyes: #000;
 
-    @extend %longcat-spinner;
-
     background-color: #e6e6e6;
   }
 }
 
-@keyframes loop {
-  from {
-    transform: rotate(0) translateX(6em);
-  }
-
-  to {
-    transform: rotate(-1turn) translateX(6em);
-  }
-}
-
-%longcat-spinner {
+.cat {
   $angleSpan: 40deg;
   $dur: 2s;
   $delayInc: $dur / 100;
@@ -48,9 +34,8 @@
   font-size: torem(16px);
   width: 16em;
   height: 16em;
-  margin: auto;
 
-  .segment {
+  &__segment {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -181,5 +166,15 @@
         }
       }
     }
+  }
+}
+
+@keyframes loop {
+  from {
+    transform: rotate(0) translateX(6em);
+  }
+
+  to {
+    transform: rotate(-1turn) translateX(6em);
   }
 }
