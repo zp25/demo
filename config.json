@@ -292,9 +292,26 @@
         {
           "title": "Creating a QR Code step by step",
           "href": "//www.nayuki.io/page/creating-a-qr-code-step-by-step"
+        },
+        {
+          "title": "node-qrcode",
+          "href": "https://github.com/soldair/node-qrcode"
         }
       ],
       "file": "qrcode.html"
+    },
+    {
+      "name": "jwt",
+      "template": "jwt",
+      "style": true,
+      "script": true,
+      "link": [
+        {
+          "title": "jwt-decode",
+          "href": "https://github.com/auth0/jwt-decode"
+        }
+      ],
+      "file": "jwt.html"
     },
     {
       "name": "Fade up from the bottom",
