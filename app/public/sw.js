@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.6';
+const CACHE_VERSION = '2019-12-15-v1';
 const CURRENT_CACHES = {
   offline: `offline-${CACHE_VERSION}`,
 };

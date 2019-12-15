@@ -1,7 +1,7 @@
 /**
  * 摄像头操作
  */
-function getUserMedia() {
+function getUserMedia(video) {
   if (!navigator.mediaDevices) {
     alert('Error! Use FF36+'); // eslint-disable-line no-alert
     return;
@@ -29,8 +29,6 @@ function getUserMedia() {
   });
 
   // use
-  const video = document.querySelector('.video');
-
   navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
     // Older browsers may not have srcObject
     if ('srcObject' in video) {
@@ -60,6 +58,59 @@ function getUserMedia() {
   };
 }
 
+/**
+ * Picture-in-Picture
+ */
+function readyPip(video) {
+  const control = document.querySelector('.pip');
+
+  if (!('pictureInPictureEnabled' in document)) {
+    control.classList.add('pip--disabled');
+    return;
+  }
+
+  control.onclick = async () => {
+    console.log(document.pictureInPictureElement);
+
+    try {
+      if (video !== document.pictureInPictureElement) {
+        await video.requestPictureInPicture();
+      } else {
+        await document.exitPictureInPicture();
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  control.textContent = '进入Picture-in-Picture';
+
+  // info
+  let pipWindow = null;
+
+  const log = (e) => {
+    console.log(`> Window size ${e.target.width}x${e.target.height}`);
+  };
+
+  video.addEventListener('enterpictureinpicture', (e) => {
+    pipWindow = e.pictureInPictureWindow;
+    log({ target: pipWindow });
+
+    pipWindow.addEventListener('resize', log);
+
+    control.textContent = '退出Picture-in-Picture';
+  });
+
+  video.addEventListener('leavepictureinpicture', () => {
+    control.textContent = '进入Picture-in-Picture';
+    pipWindow.removeEventListener('resize', log);
+  });
+}
+
 window.onload = () => {
-  getUserMedia();
+  const video = document.querySelector('.video');
+
+  getUserMedia(video);
+
+  readyPip(video);
 };

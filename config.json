@@ -48,8 +48,14 @@
       "file": "file-api.html"
     },
     {
-      "name": "GetUserMedia API",
+      "name": "GetUserMedia API & Picture-in-Picture",
       "template": "getusermedia",
+      "link": [
+        {
+          "title": "Picture-in-Picture Sample",
+          "href": "//googlechrome.github.io/samples/picture-in-picture/"
+        }
+      ],
       "style": true,
       "script": true,
       "file": "getusermedia.html"

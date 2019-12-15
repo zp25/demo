@@ -31,6 +31,8 @@ module.exports = templater`
         <div class="getusermedia">
           <ul class="detail"></ul>
           <button type="button" class="btn snap">截图</button>
+          <button type="button" class="btn pip">Picture-in-Picture</button>
+
           <canvas class="canvas" width="320" height="240"></canvas>
         </div>
       </section>
