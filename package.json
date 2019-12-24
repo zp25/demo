@@ -15,7 +15,7 @@
     "prejsdoc": "rimraf docs/*",
     "jsdoc": "jsdoc -r -c jsdoc.json -d docs",
     "open": "open docs/index.html",
-    "deploy": "now ./dist -A ../now.json --token=$NOW_TOKEN"
+    "deploy": "now --prod -A ../now.json --token=$NOW_TOKEN ./dist"
   },
   "husky": {
     "hooks": {

@@ -1,20 +1,28 @@
 {
   "version": 2,
   "name": "demo",
-  "target": "production",
   "alias": "demo.zp25.ninja",
-  "routes": [
+  "public": false,
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "headers": [
     {
-      "src": "/(scripts|styles)/.+",
-      "headers": {
-        "cache-control": "public, s-maxage=5184000, max-age=86400"
-      }
+      "source": "/(scripts|styles)/.+",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, s-maxage=5184000, max-age=86400"
+        }
+      ]
     },
     {
-      "src": "/images/.+",
-      "headers": {
-        "cache-control": "public, s-maxage=5184000, max-age=86400"
-      }
+      "source": "/images/.+",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, s-maxage=5184000, max-age=86400"
+        }
+      ]
     }
   ]
 }
