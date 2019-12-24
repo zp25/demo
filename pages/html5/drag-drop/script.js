@@ -1,4 +1,6 @@
-const STOREKEY = 'dragAndDrop';
+import { storage } from 'zp-lib';
+
+const store = storage.proxy('dragAndDrop');
 
 // 默认序列
 const LIST = [
@@ -51,18 +53,14 @@ const DragNDrop = {
     e.dataTransfer.effectAllowed = 'move';
     e.dataTransfer.setData('from', e.target.dataset.id);
   },
-  // 容器
-  dragenter: (e) => {
-    e.dataTransfer.dropEffect = 'move';
-
-    e.preventDefault();
-    e.stopPropagation();
-  },
+  /**
+   * 拖动追踪
+   * @param {Object} e - 事件对象
+   */
   dragover: (e) => {
-    e.dataTransfer.dropEffect = 'move';
-
     e.preventDefault();
-    e.stopPropagation();
+
+    e.dataTransfer.dropEffect = 'move';
   },
   /**
    * 释放拖动元素
@@ -71,6 +69,8 @@ const DragNDrop = {
    * @param {Element} e.currentTarget - 目标box元素
    */
   drop: (e) => {
+    e.preventDefault();
+
     const frag = document.createDocumentFragment();
     const fromAnchor = document.querySelector(`.item--${e.dataTransfer.getData('from')}`);
     const fromBox = fromAnchor.parentElement;
@@ -79,9 +79,6 @@ const DragNDrop = {
     frag.appendChild(fromAnchor);
     fromBox.appendChild(e.target);
     e.currentTarget.appendChild(frag);
-
-    e.preventDefault();
-    e.stopPropagation();
   },
 };
 
@@ -89,15 +86,20 @@ const DragNDrop = {
  * 绑定事件
  */
 function attachEvents() {
+  const {
+    dragstart,
+    dragover,
+    drop,
+  } = DragNDrop;
+
   Array.from(document.querySelectorAll('.box')).forEach((item) => {
-    item.addEventListener('dragenter', DragNDrop.dragenter, false);
-    item.addEventListener('dragover', DragNDrop.dragover, false);
-    item.addEventListener('drop', DragNDrop.drop, false);
+    item.addEventListener('dragover', dragover, false);
+    item.addEventListener('drop', drop, false);
   });
 
   Array.from(document.querySelectorAll('.item')).forEach((item) => {
     item.onclick = (e) => { e.preventDefault(); };
-    item.addEventListener('dragstart', DragNDrop.dragstart, false);
+    item.addEventListener('dragstart', dragstart, false);
   });
 }
 
@@ -105,12 +107,11 @@ function attachEvents() {
  * 新建可移动元素
  */
 function buildItems() {
-  const data = JSON.parse(localStorage.getItem(STOREKEY)) || LIST;
+  const { data = LIST } = store;
   const frag = document.createDocumentFragment();
 
-  data.forEach((item, index) => {
+  data.forEach(({ id, name }, index) => {
     const box = index + 1;
-    const { id, name } = item;
 
     const list = document.createElement('li');
     const anchor = document.createElement('a');
@@ -150,5 +151,5 @@ window.addEventListener('beforeunload', () => {
     };
   });
 
-  localStorage.setItem(STOREKEY, JSON.stringify(arr));
+  store.data = arr;
 }, false);

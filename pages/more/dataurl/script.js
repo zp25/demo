@@ -2,10 +2,9 @@
  * 图片进入drop zone时触发的事件
  */
 function dragenter(e) {
-  e.target.classList.add('file-control__drop--hover');
-
   e.preventDefault();
-  e.stopPropagation();
+
+  e.target.classList.add('file-control__drop--hover');
 }
 
 /**
@@ -13,17 +12,15 @@ function dragenter(e) {
  */
 function dragover(e) {
   e.preventDefault();
-  e.stopPropagation();
 }
 
 /**
  * 图片移出drop zone时触发的事件
  */
 function dragleave(e) {
-  e.target.classList.remove('file-control__drop--hover');
-
   e.preventDefault();
-  e.stopPropagation();
+
+  e.target.classList.remove('file-control__drop--hover');
 }
 
 /**
@@ -41,12 +38,10 @@ function handler(file, worker) {
  * 通过drag & drop选取图片
  */
 const drop = worker => (e) => {
-  e.target.classList.remove('file-control__drop--hover');
-
-  handler(e.dataTransfer.files[0], worker);
-
   e.preventDefault();
-  e.stopPropagation();
+
+  e.target.classList.remove('file-control__drop--hover');
+  handler(e.dataTransfer.files[0], worker);
 };
 
 /**
