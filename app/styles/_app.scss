@@ -74,9 +74,25 @@
   }
 }
 
+// @link https://codersblock.com/blog/using-css-to-control-text-selection/
 .code {
   padding: torem(20px) 0;
   overflow: hidden;
+
+  .styles,
+  .scripts {
+    user-select: all;
+
+    &:focus {
+      animation: selectcode 100ms step-end forwards;
+    }
+  }
+}
+
+@keyframes selectcode {
+  to {
+    user-select: text;
+  }
 }
 
 .nav {

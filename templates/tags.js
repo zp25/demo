@@ -8,7 +8,7 @@ const { escapeHTML } = require('zp-lib');
  * @ignore
  */
 exports.preTag = (code, className = 'code') => (
-  `<pre class="${className}">${escapeHTML(code)}</pre>`
+  `<pre class="${className}" tabindex="0">${escapeHTML(code)}</pre>`
 );
 
 /**

@@ -98,3 +98,7 @@ service worker
 + 其它静态资源，可跟随service worker更新，Cache falling back to the network
 
 首次访问即可离线，cache添加`index.html`，首页使用的scripts/styles文件名有hash不容易写入sw.js，但有较长browser cache缓存时间，sw.js可通过browser cache获取
+
+## 资源
+
++ [Smaller HTML Payloads with Service Workers](https://philipwalton.com/articles/smaller-html-payloads-with-service-workers/ "Smaller HTML Payloads with Service Workers")
