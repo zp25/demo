@@ -28,3 +28,5 @@ docs/
 
 app/*.html
 app/html/
+
+.now

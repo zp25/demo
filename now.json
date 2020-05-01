@@ -7,7 +7,7 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/scripts",
+      "source": "/scripts/(.*)",
       "headers": [
         {
           "key": "cache-control",
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "source": "/styles",
+      "source": "/styles/(.*)",
       "headers": [
         {
           "key": "cache-control",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "source": "/images",
+      "source": "/images/(.*)",
       "headers": [
         {
           "key": "cache-control",
