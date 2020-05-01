@@ -7,20 +7,29 @@
   "trailingSlash": false,
   "headers": [
     {
-      "source": "/(scripts|styles)/.+",
+      "source": "/scripts",
       "headers": [
         {
           "key": "cache-control",
-          "value": "public, s-maxage=5184000, max-age=86400"
+          "value": "private, max-age=2592000"
         }
       ]
     },
     {
-      "source": "/images/.+",
+      "source": "/styles",
       "headers": [
         {
           "key": "cache-control",
-          "value": "public, s-maxage=5184000, max-age=86400"
+          "value": "public, s-maxage=2592000, max-age=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/images",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, s-maxage=2592000, max-age=2592000"
         }
       ]
     }
