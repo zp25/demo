@@ -93,7 +93,7 @@
     "rimraf": "^3.0.0",
     "serve": "^11.2.0",
     "sinon": "^8.0.1",
-    "stylelint": "^12.0.0",
+    "stylelint": "^15.10.1",
     "stylelint-config-sass-guidelines": "^6.2.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
